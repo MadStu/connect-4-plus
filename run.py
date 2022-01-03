@@ -1,7 +1,7 @@
 from os import system, name
 from time import sleep
 
-delay_time = 0.3
+delay_time = 0.001
 
 def clear():
     """
@@ -99,6 +99,105 @@ def game_board():
     #print("                              Computer's Turn")
     print("")
     enter_column_number()
+    animation_sample()
+
+
+def animation_sample():
+    clear()
+    logo()
+    print("             1   2   3   4   5   6   7  ")
+    print("                     O                  ")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("")
+
+    sleep(0.6)
+    clear()
+    logo()
+
+    print("             1   2   3   4   5   6   7  ")
+    print("                                        ")
+    print("           | . | . | O | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("")
+
+    sleep(0.2)
+    clear()
+    logo()
+
+    print("             1   2   3   4   5   6   7  ")
+    print("                                        ")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | O | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("")
+
+    sleep(0.2)
+    clear()
+    logo()
+
+    print("             1   2   3   4   5   6   7  ")
+    print("                                        ")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | O | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("")
+
+    sleep(0.2)
+    clear()
+    logo()
+
+    print("             1   2   3   4   5   6   7  ")
+    print("                                        ")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | O | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("")
+
+    sleep(0.2)
+    clear()
+    logo()
+
+    print("             1   2   3   4   5   6   7  ")
+    print("                                        ")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | O | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("")
+
+    sleep(0.2)
+    clear()
+    logo()
+
+    print("             1   2   3   4   5   6   7  ")
+    print("                                        ")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | O | . | . | . | . |")
+    print("")
 
 
 def enter_column_number():
@@ -107,12 +206,9 @@ def enter_column_number():
     number and checks that there's space left in that column
     """
     column_choice = input("   Enter your column choice...\n")
-    print(f"You entered column number {column_choice}")
 
 
 clear()
 logo()
 welcome()
 #game_board()
-
-print("\n\n\n")
