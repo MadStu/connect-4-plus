@@ -103,6 +103,7 @@ def game_board():
 
 
 def animation_sample():
+    drop_speed = 0.05
     clear()
     logo()
     print("             1   2   3   4   5   6   7  ")
@@ -129,7 +130,7 @@ def animation_sample():
     print("           | . | . | . | . | . | . | . |")
     print("")
 
-    sleep(0.2)
+    sleep(drop_speed)
     clear()
     logo()
 
@@ -143,7 +144,7 @@ def animation_sample():
     print("           | . | . | . | . | . | . | . |")
     print("")
 
-    sleep(0.2)
+    sleep(drop_speed)
     clear()
     logo()
 
@@ -157,7 +158,7 @@ def animation_sample():
     print("           | . | . | . | . | . | . | . |")
     print("")
 
-    sleep(0.2)
+    sleep(drop_speed)
     clear()
     logo()
 
@@ -171,7 +172,7 @@ def animation_sample():
     print("           | . | . | . | . | . | . | . |")
     print("")
 
-    sleep(0.2)
+    sleep(drop_speed)
     clear()
     logo()
 
@@ -185,7 +186,7 @@ def animation_sample():
     print("           | . | . | . | . | . | . | . |")
     print("")
 
-    sleep(0.2)
+    sleep(drop_speed)
     clear()
     logo()
 
