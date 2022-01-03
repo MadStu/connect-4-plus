@@ -1,11 +1,11 @@
 from os import system, name
 from time import sleep
 
+delay_time = 0.3
 
 def clear():
     """
     Clear the Screen to help keep the game board clean and easy to read
-    Sourced from: https://www.geeksforgeeks.org/clear-screen-python/
     """
     # for windows
     if name == 'nt':
@@ -20,67 +20,99 @@ def logo():
     Print's the Connect 4 logo text
     """
     print("""\
- _____                             _       ___ 
-/  __ \                           | |     /   |
-| /  \/ ___  _ __  _ __   ___  ___| |_   / /| |
-| |    / _ \| '_ \| '_ \ / _ \/ __| __| / /_| |
-| \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
- \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
-    """)
+   _____                             _       ___ 
+  /  __ \                           | |     /   |
+  | /  \/ ___  _ __  _ __   ___  ___| |_   / /| |
+  | |    / _ \| '_ \| '_ \ / _ \/ __| __| / /_| |
+  | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
+   \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
+      """)
 
 
 def welcome():
     """
     Display the welcome text and games rules
     """
-    sleep(0.3)
+    sleep(delay_time)
 
-    print(" WELCOME to my little python game of Connect 4.\n")
-    sleep(1)
+    print("   WELCOME to my little python game of Connect 4.\n")
+    sleep(delay_time)
 
-    print(" The game is easy, you take turns with the")
-    print(" computer to place your discs which fall into")
-    print(" each column, in this game you'll play with X's")
-    print(" and O's. You'll be O and the computer will be")
-    print(" the X.\n")
+    print("   The game is easy, you take turns with the")
+    print("   computer to place your discs which fall into")
+    print("   each column, in this game you'll play with X's")
+    print("   and O's. You'll be O and the computer will be X.\n")
 
-    sleep(2)
-    input(" Press Enter to continue...\n")
+    sleep(delay_time)
+    input("   Press Enter to continue...\n")
     clear()
     logo()
 
-    sleep(0.3)
-    print("           1   2   3   4   5   6   7  ")
-    print("                                      ")
-    print("         | . | . | . | . | . | . | . |")
-    print("         | . | . | . | . | . | . | . |\n")
-    sleep(0.3)
-    print(" Each column is numbered from left-right, 1-7.")
-    print(" You'll need to enter a number between 1 and 7")
-    print(" and the game will place your O in that column\n")
+    sleep(delay_time)
+    print("             1   2   3   4   5   6   7  ")
+    print("                                        ")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |\n")
+    sleep(delay_time)
+    print("   Each column is numbered from left-right, 1-7.")
+    print("   You'll need to enter a number between 1 and 7")
+    print("   to choose which column to drop your disc into.\n")
 
-    sleep(2)
-    input(" Press Enter to continue...\n")
+    sleep(delay_time)
+    input("   Press Enter to continue...\n")
     clear()
     logo()
 
-    sleep(0.3)
-    print("           1   2   3   4   5   6   7  ")
-    print("                                      ")
-    print("         | . | . | . | . | . | . | O |")
-    print("         | . | . | . | . | . | O | X |")
-    print("         | O | X | . | . | O | X | O |")
-    print("         | X | X | X | O | X | O | O |\n")
-    sleep(0.3)
-    print(" When you get 4 in a row, like shown above or")
-    print(" in any other direction, you win the game!\n")
+    sleep(delay_time)
+    print("             1   2   3   4   5   6   7  ")
+    print("                                        ")
+    print("           | . | . | . | . | . | . | O |")
+    print("           | . | . | . | . | . | O | X |")
+    print("           | O | X | . | . | O | X | O |")
+    print("           | X | X | X | O | X | O | O |\n")
+    sleep(delay_time)
+    print("   When you get 4 in a row like shown above or")
+    print("   in any other direction, you win the game!\n")
 
-    sleep(2)
-    input(" Press Enter to start playing!...\n")
+    sleep(delay_time)
+    input("   Press Enter to start playing!...\n")
+    game_board()
+
+
+def game_board():
+    """
+    Print's the main gameboard
+    """
+    clear()
+    logo()
+    sleep(delay_time)
+    print("             1   2   3   4   5   6   7  ")
+    print("                                        ")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("           | . | . | . | . | . | . | . |")
+    print("")
+    print("                                    Your Turn")
+    #print("                              Computer's Turn")
+    print("")
+    enter_column_number()
+
+
+def enter_column_number():
+    """
+    Let's the user enter their column choice, checks it's a
+    number and checks that there's space left in that column
+    """
+    column_choice = input("   Enter your column choice...\n")
+    print(f"You entered column number {column_choice}")
 
 
 clear()
 logo()
 welcome()
+#game_board()
 
 print("\n\n\n")
