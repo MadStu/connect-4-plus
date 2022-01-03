@@ -29,3 +29,10 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 -----
 Happy coding!
+
+
+https://online.visual-paradigm.com/
+
+https://www.geeksforgeeks.org/clear-screen-python/
+
+https://patorjk.com/software/taag/#p=display&f=Doom&t=Connect%204
