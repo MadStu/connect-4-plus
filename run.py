@@ -1,5 +1,6 @@
 from os import system, name
 from time import sleep
+import random
 
 delay_time = 0.15
 drop_delay = 0.07
@@ -48,6 +49,7 @@ def logo():
   | |    / _ \| '_ \| '_ \ / _ \/ __| __| / /_| |
   | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
    \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
+                            Code by Stuart Raynor
       """)
 
 
@@ -109,6 +111,7 @@ def drop_disc(column):
     Animates the dropping of the player disc
     Updates the board data with current disc locations
     """
+    global player_turn
     if player_turn:
         disc = "O"
     else:
@@ -130,7 +133,14 @@ def drop_disc(column):
             sleep(drop_delay)
             board_data[column][i] = "."
         i += 1
-    enter_column_number()
+    if disc == "O":
+        player_turn = False
+        game_board()
+        computer_turn()
+    else:
+        player_turn = True
+        game_board()
+        enter_column_number()
 
 
 def game_board():
@@ -163,7 +173,7 @@ def enter_column_number():
     """
     column_choice = 0
     column_full = True
-    while column_choice not in range(1,8) or column_full == True:
+    while column_choice not in range(1,8) or column_full:
         try:
             column_choice = int(input("   Enter your column choice...\n"))
         except ValueError:
@@ -184,7 +194,22 @@ def enter_column_number():
                 game_board()
             else:
                 column_full = False
+    drop_disc(column_choice)
 
+
+def computer_turn():
+    """
+    Checks who's turn it is, takes the computer turn or passes
+    control back to the user
+    """
+    column_choice = random.randint(0, 6) + 1
+    print("My choice is", column_choice)
+    sleep(1)
+    while board_data[column_choice-1][1] != ".":
+        print("I cant choose", column_choice)
+        column_choice = random.randint(0, 6) + 1
+        sleep(1)
+    sleep(delay_time)
     drop_disc(column_choice)
 
 
