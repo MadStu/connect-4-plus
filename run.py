@@ -1,9 +1,10 @@
 from os import system, name
 from time import sleep
 
-delay_time = 0.001
+delay_time = 0.01
 
 board_data = []
+player_turn = True
 
 def reset_board_data():
     """
@@ -96,9 +97,10 @@ def welcome():
 
     sleep(delay_time)
     input("   Press Enter to start playing!...\n")
-    
+
     reset_board_data()
     game_board()
+    enter_column_number()
 
 
 def game_board():
@@ -108,11 +110,6 @@ def game_board():
     clear()
     logo()
     sleep(delay_time)
-    drop_speed = 0.1
-    
-    sleep(drop_speed)
-    clear()
-    logo()
 
     print("             1   2   3   4   5   6   7  ")
     print(f"             {board_data[0][0]}   {board_data[1][0]}   {board_data[2][0]}   {board_data[3][0]}   {board_data[4][0]}   {board_data[5][0]}   {board_data[6][0]} ")
@@ -123,10 +120,11 @@ def game_board():
     print(f"           | {board_data[0][5]} | {board_data[1][5]} | {board_data[2][5]} | {board_data[3][5]} | {board_data[4][5]} | {board_data[5][5]} | {board_data[6][5]} |")
     print(f"           | {board_data[0][6]} | {board_data[1][6]} | {board_data[2][6]} | {board_data[3][6]} | {board_data[4][6]} | {board_data[5][6]} | {board_data[6][6]} |")
     print("")
-    print("                                    Your Turn")
-    #print("                              Computer's Turn")
+    if player_turn:
+        print("                                    Your Turn")
+    else:
+        print("                              Computer's Turn")
     print("")
-    enter_column_number()
 
 
 def enter_column_number():
@@ -134,7 +132,22 @@ def enter_column_number():
     Let's the user enter their column choice, checks it's a
     number and checks that there's space left in that column
     """
-    column_choice = input("   Enter your column choice...\n")
+    column_choice = 0
+    while column_choice not in range(1,8):
+        try:
+            column_choice = int(input("   Enter your column choice...\n"))
+        except ValueError:
+            print("   Not a number")
+            sleep(1)
+            game_board()
+        finally:
+            if column_choice not in range(1,8):
+                print("   Please only enter a number between 1 and 7")
+                sleep(1)
+                game_board()
+            
+            
+    print("This is number:", column_choice)
 
 
 clear()
