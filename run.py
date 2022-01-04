@@ -3,6 +3,26 @@ from time import sleep
 
 delay_time = 0.001
 
+board_data = []
+
+def reset_board_data():
+    """
+    Reset's the board for a new game
+    """
+    i = 0
+    while i <= 6:
+        ii = 0
+        temp_list = []
+        while ii <= 6:
+            if ii == 0:
+                temp_list.append(" ")
+            else:
+                temp_list.append(".")
+            ii += 1
+        board_data.append(temp_list)
+        i += 1
+
+
 def clear():
     """
     Clear the Screen to help keep the game board clean and easy to read
@@ -76,6 +96,8 @@ def welcome():
 
     sleep(delay_time)
     input("   Press Enter to start playing!...\n")
+    
+    reset_board_data()
     game_board()
 
 
@@ -86,119 +108,25 @@ def game_board():
     clear()
     logo()
     sleep(delay_time)
+    drop_speed = 0.1
+    
+    sleep(drop_speed)
+    clear()
+    logo()
+
     print("             1   2   3   4   5   6   7  ")
-    print("                                        ")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
+    print(f"             {board_data[0][0]}   {board_data[1][0]}   {board_data[2][0]}   {board_data[3][0]}   {board_data[4][0]}   {board_data[5][0]}   {board_data[6][0]} ")
+    print(f"           | {board_data[0][1]} | {board_data[1][1]} | {board_data[2][1]} | {board_data[3][1]} | {board_data[4][1]} | {board_data[5][1]} | {board_data[6][1]} |")
+    print(f"           | {board_data[0][2]} | {board_data[1][2]} | {board_data[2][2]} | {board_data[3][2]} | {board_data[4][2]} | {board_data[5][2]} | {board_data[6][2]} |")
+    print(f"           | {board_data[0][3]} | {board_data[1][3]} | {board_data[2][3]} | {board_data[3][3]} | {board_data[4][3]} | {board_data[5][3]} | {board_data[6][3]} |")
+    print(f"           | {board_data[0][4]} | {board_data[1][4]} | {board_data[2][4]} | {board_data[3][4]} | {board_data[4][4]} | {board_data[5][4]} | {board_data[6][4]} |")
+    print(f"           | {board_data[0][5]} | {board_data[1][5]} | {board_data[2][5]} | {board_data[3][5]} | {board_data[4][5]} | {board_data[5][5]} | {board_data[6][5]} |")
+    print(f"           | {board_data[0][6]} | {board_data[1][6]} | {board_data[2][6]} | {board_data[3][6]} | {board_data[4][6]} | {board_data[5][6]} | {board_data[6][6]} |")
     print("")
     print("                                    Your Turn")
     #print("                              Computer's Turn")
     print("")
     enter_column_number()
-    animation_sample()
-
-
-def animation_sample():
-    drop_speed = 0.05
-    clear()
-    logo()
-    print("             1   2   3   4   5   6   7  ")
-    print("                     O                  ")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("")
-
-    sleep(0.6)
-    clear()
-    logo()
-
-    print("             1   2   3   4   5   6   7  ")
-    print("                                        ")
-    print("           | . | . | O | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("")
-
-    sleep(drop_speed)
-    clear()
-    logo()
-
-    print("             1   2   3   4   5   6   7  ")
-    print("                                        ")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | O | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("")
-
-    sleep(drop_speed)
-    clear()
-    logo()
-
-    print("             1   2   3   4   5   6   7  ")
-    print("                                        ")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | O | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("")
-
-    sleep(drop_speed)
-    clear()
-    logo()
-
-    print("             1   2   3   4   5   6   7  ")
-    print("                                        ")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | O | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("")
-
-    sleep(drop_speed)
-    clear()
-    logo()
-
-    print("             1   2   3   4   5   6   7  ")
-    print("                                        ")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | O | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("")
-
-    sleep(drop_speed)
-    clear()
-    logo()
-
-    print("             1   2   3   4   5   6   7  ")
-    print("                                        ")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | O | . | . | . | . |")
-    print("")
 
 
 def enter_column_number():
