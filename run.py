@@ -12,6 +12,9 @@ def reset_board_data():
     """
     Reset's the board for a new game
     """
+    global board_data
+    board_data = []
+
     i = 0
     while i <= 6:
         ii = 0
@@ -49,7 +52,7 @@ def logo():
   | |    / _ \| '_ \| '_ \ / _ \/ __| __| / /_| |
   | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
    \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
-                            Code by Stuart Raynor
+                            
       """)
 
 
@@ -221,33 +224,65 @@ def check_winner(disc):
     Check if there's any winning lines of 4
     Original code from https://github.com/justinvallely/Python-Connect-4/blob/master/connect4.py
     """
-    boardheight = 7
-    boardwidth = 7
+    board_height = 7
+    board_width = 7
     #check horizontal spaces
-    for y in range(1, boardheight):
-        for x in range(boardwidth - 3):
+    for y in range(1, board_height):
+        for x in range(board_width - 3):
             if board_data[x][y] == disc and board_data[x+1][y] == disc and board_data[x+2][y] == disc and board_data[x+3][y] == disc:
                 return True
 
     #check vertical spaces
-    for x in range(boardwidth):
-        for y in range(1, (boardheight - 3)):
+    for x in range(board_width):
+        for y in range(1, (board_height - 3)):
             if board_data[x][y] == disc and board_data[x][y+1] == disc and board_data[x][y+2] == disc and board_data[x][y+3] == disc:
                 return True
 
     #check / diagonal spaces
-    for x in range(boardwidth - 3):
-        for y in range(4, boardheight):
+    for x in range(board_width - 3):
+        for y in range(4, board_height):
             if board_data[x][y] == disc and board_data[x+1][y-1] == disc and board_data[x+2][y-2] == disc and board_data[x+3][y-3] == disc:
                 return True
 
     #check \ diagonal spaces
-    for x in range(boardwidth - 3):
-        for y in range(1, (boardheight - 3)):
+    for x in range(board_width - 3):
+        for y in range(1, (board_height - 3)):
             if board_data[x][y] == disc and board_data[x+1][y+1] == disc and board_data[x+2][y+2] == disc and board_data[x+3][y+3] == disc:
                 return True
 
     return False
+
+
+def we_have_a_winner():
+    """
+    We have a winner!
+    """
+    print("   WE HAVE A WINNER!!")
+    if player_turn:
+        print("   You've beaten the computer!\n")
+    else:
+        print("   You didn't win this time :(\n")
+    
+    valid_input = False
+    while valid_input == False:
+        sleep(1)
+        game_board()
+        play_again = input("   Would you like to play again? y/n\n")
+        print(play_again.lower())
+        sleep(1)
+        if play_again.lower() == "y":
+            print("   OK, resetting game...")
+            sleep(1)
+            valid_input = True
+            reset_board_data()
+            game_board()
+            enter_column_number()
+        elif play_again.lower() == "n":
+            print("   OK, Thank you for playing. Come back soon!! :)\n")
+            valid_input = True
+            quit()
+        else:
+            print("   Not a valid input.")
 
 
 clear()
