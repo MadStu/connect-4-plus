@@ -133,14 +133,17 @@ def drop_disc(column):
             sleep(drop_delay)
             board_data[column][i] = "."
         i += 1
-    if disc == "O":
-        player_turn = False
-        game_board()
-        computer_turn()
+    if check_winner(disc):
+        we_have_a_winner()
     else:
-        player_turn = True
-        game_board()
-        enter_column_number()
+        if player_turn:
+            player_turn = False
+            game_board()
+            computer_turn()
+        else:
+            player_turn = True
+            game_board()
+            enter_column_number()
 
 
 def game_board():
@@ -203,14 +206,48 @@ def computer_turn():
     control back to the user
     """
     column_choice = random.randint(0, 6) + 1
-    print("My choice is", column_choice)
-    sleep(1)
+    #print("My choice is", column_choice)
+    #sleep(1)
     while board_data[column_choice-1][1] != ".":
-        print("I cant choose", column_choice)
+        #print("I cant choose", column_choice)
         column_choice = random.randint(0, 6) + 1
-        sleep(1)
+        #sleep(1)
     sleep(delay_time)
     drop_disc(column_choice)
+
+
+def check_winner(disc):
+    """
+    Check if there's any winning lines of 4
+    Original code from https://github.com/justinvallely/Python-Connect-4/blob/master/connect4.py
+    """
+    boardheight = 7
+    boardwidth = 7
+    #check horizontal spaces
+    for y in range(1, boardheight):
+        for x in range(boardwidth - 3):
+            if board_data[x][y] == disc and board_data[x+1][y] == disc and board_data[x+2][y] == disc and board_data[x+3][y] == disc:
+                return True
+
+    #check vertical spaces
+    for x in range(boardwidth):
+        for y in range(1, (boardheight - 3)):
+            if board_data[x][y] == disc and board_data[x][y+1] == disc and board_data[x][y+2] == disc and board_data[x][y+3] == disc:
+                return True
+
+    #check / diagonal spaces
+    for x in range(boardwidth - 3):
+        for y in range(4, boardheight):
+            if board_data[x][y] == disc and board_data[x+1][y-1] == disc and board_data[x+2][y-2] == disc and board_data[x+3][y-3] == disc:
+                return True
+
+    #check \ diagonal spaces
+    for x in range(boardwidth - 3):
+        for y in range(1, (boardheight - 3)):
+            if board_data[x][y] == disc and board_data[x+1][y+1] == disc and board_data[x+2][y+2] == disc and board_data[x+3][y+3] == disc:
+                return True
+
+    return False
 
 
 clear()
