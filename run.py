@@ -10,7 +10,7 @@ player_turn = True
 
 def reset_board_data():
     """
-    Reset's the board for a new game
+    Resets the board for a new game
     """
     global board_data
     board_data = []
@@ -208,13 +208,9 @@ def computer_turn():
     Checks who's turn it is, takes the computer turn or passes
     control back to the user
     """
-    column_choice = random.randint(0, 6) + 1
-    #print("My choice is", column_choice)
-    #sleep(1)
+    column_choice = random.randint(1, 7)
     while board_data[column_choice-1][1] != ".":
-        #print("I cant choose", column_choice)
-        column_choice = random.randint(0, 6) + 1
-        #sleep(1)
+        column_choice = random.randint(1, 7)
     sleep(delay_time)
     drop_disc(column_choice)
 
