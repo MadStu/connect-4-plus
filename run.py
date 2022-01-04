@@ -1,7 +1,8 @@
 from os import system, name
 from time import sleep
 
-delay_time = 0.01
+delay_time = 0.15
+drop_delay = 0.07
 
 board_data = []
 player_turn = True
@@ -112,7 +113,6 @@ def drop_disc(column):
         disc = "O"
     else:
         disc = "X"
-    drop_delay = 0.07
     column -= 1
     i = 0
     bottom = 6
@@ -162,7 +162,8 @@ def enter_column_number():
     number and checks that there's space left in that column
     """
     column_choice = 0
-    while column_choice not in range(1,8):
+    column_full = True
+    while column_choice not in range(1,8) or column_full == True:
         try:
             column_choice = int(input("   Enter your column choice...\n"))
         except ValueError:
@@ -170,11 +171,20 @@ def enter_column_number():
             sleep(1)
             game_board()
         finally:
-            if column_choice not in range(1,8):
+            if column_choice == 999: #Easy quit for dev purposes
+                print("Thanks for playing")
+                quit()
+            elif column_choice not in range(1,8):
                 print("   Please only enter a number between 1 and 7")
                 sleep(1)
                 game_board()
-            
+            elif board_data[column_choice-1][1] != ".":
+                print("   That column is full")
+                sleep(1)
+                game_board()
+            else:
+                column_full = False
+
     drop_disc(column_choice)
 
 
