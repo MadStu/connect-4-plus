@@ -103,13 +103,40 @@ def welcome():
     enter_column_number()
 
 
+def drop_disc(column):
+    """
+    Animates the dropping of the player disc
+    Updates the board data with disc locations
+    """
+    if player_turn:
+        disc = "O"
+    else:
+        disc = "X"
+    drop_delay = 0.07
+    column -= 1
+    i = 0
+    bottom = 6
+    while i <= bottom:
+        board_data[column][i] = disc
+        game_board()
+        if i == 0:
+            sleep(0.6)
+            board_data[column][i] = " "
+        elif i == bottom:
+            sleep(drop_delay)
+        else:
+            sleep(drop_delay)
+            board_data[column][i] = "."
+        i += 1
+    enter_column_number()
+
+
 def game_board():
     """
     Print's the main gameboard
     """
     clear()
     logo()
-    sleep(delay_time)
 
     print("             1   2   3   4   5   6   7  ")
     print(f"             {board_data[0][0]}   {board_data[1][0]}   {board_data[2][0]}   {board_data[3][0]}   {board_data[4][0]}   {board_data[5][0]}   {board_data[6][0]} ")
@@ -146,11 +173,9 @@ def enter_column_number():
                 sleep(1)
                 game_board()
             
-            
-    print("This is number:", column_choice)
+    drop_disc(column_choice)
 
 
 clear()
 logo()
 welcome()
-#game_board()
