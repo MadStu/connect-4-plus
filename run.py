@@ -106,7 +106,7 @@ def welcome():
 def drop_disc(column):
     """
     Animates the dropping of the player disc
-    Updates the board data with disc locations
+    Updates the board data with current disc locations
     """
     if player_turn:
         disc = "O"
@@ -116,6 +116,8 @@ def drop_disc(column):
     column -= 1
     i = 0
     bottom = 6
+    while board_data[column][bottom] != ".":
+        bottom -=1
     while i <= bottom:
         board_data[column][i] = disc
         game_board()
