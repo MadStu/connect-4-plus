@@ -36,7 +36,6 @@ def clear():
     """
     Clear the Screen to help keep the game board clean and easy to read
     """
-    print("\033[1;32;40m ")
     # for windows
     if name == 'nt':
         _ = system('cls')
@@ -97,10 +96,10 @@ def welcome():
     sleep(delay_time)
     print("             1   2   3   4   5   6   7  ")
     print("                                        ")
-    print("           | . | . | . | . | . | . |\033[1;31;40m O \033[1;32;40m|")
-    print("           | . | . | . | . | . |\033[1;31;40m O \033[1;32;40m| X |")
-    print("           | O | X | . | . |\033[1;31;40m O \033[1;32;40m| X | O |")
-    print("           | X | X | X |\033[1;31;40m O \033[1;32;40m| X | O | O |\n")
+    print("           | . | . | . | . | . | . | O |")
+    print("           | . | . | . | . | . | O | X |")
+    print("           | O | X | . | . | O | X | O |")
+    print("           | X | X | X | O | X | O | O |\n")
     sleep(delay_time)
     print("   When you get 4 in a row like shown above or")
     print("   in any other direction, you win the game!\n")
@@ -127,7 +126,7 @@ def drop_disc(column):
     i = 0
     bottom = 6
     while board_data[column][bottom] != ".":
-        bottom -= 1
+        bottom -=1
     while i <= bottom:
         board_data[column][i] = disc
         game_board()
@@ -163,20 +162,13 @@ def game_board():
     logo()
 
     print("             1   2   3   4   5   6   7  ")
-    print(
-        f"             {board_data[0][0]}   {board_data[1][0]}   {board_data[2][0]}   {board_data[3][0]}   {board_data[4][0]}   {board_data[5][0]}   {board_data[6][0]} ")
-    print(
-        f"           | {board_data[0][1]} | {board_data[1][1]} | {board_data[2][1]} | {board_data[3][1]} | {board_data[4][1]} | {board_data[5][1]} | {board_data[6][1]} |")
-    print(
-        f"           | {board_data[0][2]} | {board_data[1][2]} | {board_data[2][2]} | {board_data[3][2]} | {board_data[4][2]} | {board_data[5][2]} | {board_data[6][2]} |")
-    print(
-        f"           | {board_data[0][3]} | {board_data[1][3]} | {board_data[2][3]} | {board_data[3][3]} | {board_data[4][3]} | {board_data[5][3]} | {board_data[6][3]} |")
-    print(
-        f"           | {board_data[0][4]} | {board_data[1][4]} | {board_data[2][4]} | {board_data[3][4]} | {board_data[4][4]} | {board_data[5][4]} | {board_data[6][4]} |")
-    print(
-        f"           | {board_data[0][5]} | {board_data[1][5]} | {board_data[2][5]} | {board_data[3][5]} | {board_data[4][5]} | {board_data[5][5]} | {board_data[6][5]} |")
-    print(
-        f"           | {board_data[0][6]} | {board_data[1][6]} | {board_data[2][6]} | {board_data[3][6]} | {board_data[4][6]} | {board_data[5][6]} | {board_data[6][6]} |")
+    print(f"             {board_data[0][0]}   {board_data[1][0]}   {board_data[2][0]}   {board_data[3][0]}   {board_data[4][0]}   {board_data[5][0]}   {board_data[6][0]} ")
+    print(f"           | {board_data[0][1]} | {board_data[1][1]} | {board_data[2][1]} | {board_data[3][1]} | {board_data[4][1]} | {board_data[5][1]} | {board_data[6][1]} |")
+    print(f"           | {board_data[0][2]} | {board_data[1][2]} | {board_data[2][2]} | {board_data[3][2]} | {board_data[4][2]} | {board_data[5][2]} | {board_data[6][2]} |")
+    print(f"           | {board_data[0][3]} | {board_data[1][3]} | {board_data[2][3]} | {board_data[3][3]} | {board_data[4][3]} | {board_data[5][3]} | {board_data[6][3]} |")
+    print(f"           | {board_data[0][4]} | {board_data[1][4]} | {board_data[2][4]} | {board_data[3][4]} | {board_data[4][4]} | {board_data[5][4]} | {board_data[6][4]} |")
+    print(f"           | {board_data[0][5]} | {board_data[1][5]} | {board_data[2][5]} | {board_data[3][5]} | {board_data[4][5]} | {board_data[5][5]} | {board_data[6][5]} |")
+    print(f"           | {board_data[0][6]} | {board_data[1][6]} | {board_data[2][6]} | {board_data[3][6]} | {board_data[4][6]} | {board_data[5][6]} | {board_data[6][6]} |")
     print("")
     if player_turn:
         print("                                    Your Turn")
@@ -193,7 +185,7 @@ def enter_column_number():
     global disc_count
     column_choice = 0
     column_full = True
-    while column_choice not in range(1, 8) or column_full:
+    while column_choice not in range(1,8) or column_full:
         try:
             column_choice = int(input("   Enter your column choice...\n"))
         except ValueError:
@@ -201,13 +193,13 @@ def enter_column_number():
             sleep(1)
             game_board()
         finally:
-            if column_choice == 999:  # Easy quit for dev purposes
+            if column_choice == 999: #Easy quit for dev purposes
                 print("Thanks for playing")
                 quit()
-            elif column_choice == 2222:  # disc count to 40 for dev purposes
+            elif column_choice == 2222: # disc count to 40 for dev purposes
                 disc_count = 40
                 game_board()
-            elif column_choice not in range(1, 8):
+            elif column_choice not in range(1,8):
                 print("   Please only enter a number between 1 and 7")
                 sleep(1)
                 game_board()
@@ -242,25 +234,25 @@ def check_winner(disc):
     board_height = 7
     board_width = 7
 
-    # check horizontal spaces
+    #check horizontal spaces
     for y in range(1, board_height):
         for x in range(board_width - 3):
             if board_data[x][y] == disc and board_data[x+1][y] == disc and board_data[x+2][y] == disc and board_data[x+3][y] == disc:
                 return True
 
-    # check vertical spaces
+    #check vertical spaces
     for x in range(board_width):
         for y in range(1, (board_height - 3)):
             if board_data[x][y] == disc and board_data[x][y+1] == disc and board_data[x][y+2] == disc and board_data[x][y+3] == disc:
                 return True
 
-    # check / diagonal spaces
+    #check / diagonal spaces
     for x in range(board_width - 3):
         for y in range(4, board_height):
             if board_data[x][y] == disc and board_data[x+1][y-1] == disc and board_data[x+2][y-2] == disc and board_data[x+3][y-3] == disc:
                 return True
 
-    # check \ diagonal spaces
+    #check \ diagonal spaces
     for x in range(board_width - 3):
         for y in range(1, (board_height - 3)):
             if board_data[x][y] == disc and board_data[x+1][y+1] == disc and board_data[x+2][y+2] == disc and board_data[x+3][y+3] == disc:
