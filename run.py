@@ -141,6 +141,7 @@ def drop_disc(column):
             board_data[column][i] = "."
         i += 1
     if check_winner(disc):
+        game_board()
         we_have_a_winner()
     else:
         if player_turn:
@@ -254,24 +255,40 @@ def check_winner(disc):
     for y in range(1, board_height):
         for x in range(board_width - 3):
             if board_data[x][y] == disc and board_data[x+1][y] == disc and board_data[x+2][y] == disc and board_data[x+3][y] == disc:
+                board_data[x][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x+1][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x+2][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x+3][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
                 return True
 
     # check vertical spaces
     for x in range(board_width):
         for y in range(1, (board_height - 3)):
             if board_data[x][y] == disc and board_data[x][y+1] == disc and board_data[x][y+2] == disc and board_data[x][y+3] == disc:
+                board_data[x][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x][y+1] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x][y+2] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x][y+3] = "\033[1;31;40m" + disc + "\033[1;32;40m"
                 return True
 
     # check / diagonal spaces
     for x in range(board_width - 3):
         for y in range(4, board_height):
             if board_data[x][y] == disc and board_data[x+1][y-1] == disc and board_data[x+2][y-2] == disc and board_data[x+3][y-3] == disc:
+                board_data[x][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x+1][y-1] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x+2][y-2] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x+3][y-3] = "\033[1;31;40m" + disc + "\033[1;32;40m"
                 return True
 
     # check \ diagonal spaces
     for x in range(board_width - 3):
         for y in range(1, (board_height - 3)):
             if board_data[x][y] == disc and board_data[x+1][y+1] == disc and board_data[x+2][y+2] == disc and board_data[x+3][y+3] == disc:
+                board_data[x][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x+1][y+1] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x+2][y+2] = "\033[1;31;40m" + disc + "\033[1;32;40m"
+                board_data[x+3][y+3] = "\033[1;31;40m" + disc + "\033[1;32;40m"
                 return True
 
     return False
