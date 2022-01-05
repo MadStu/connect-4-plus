@@ -2,7 +2,7 @@ from os import system, name
 from time import sleep
 import random
 
-DELAY_TIME = 0.6
+DELAY_TIME = 0.5
 DROP_SPEED = 0.06
 
 
@@ -13,9 +13,11 @@ def reset_board_db():
     global disc_count
     global board_db
     global player_turn
+    global winner
 
     board_db = []
     player_turn = True
+    winner = False
     disc_count = 0
 
     i = 0
@@ -36,7 +38,7 @@ def clear():
     """
     Clear the Screen to help keep the game board clean and easy to read
     """
-    print("\033[1;32;40m ")
+    print("\033[1;32;48m ")
     # for windows
     if name == 'nt':
         _ = system('cls')
@@ -97,10 +99,10 @@ def welcome():
     sleep(DELAY_TIME)
     print("             1   2   3   4   5   6   7  ")
     print("                                        ")
-    print("           | . | . | . | . | . | . | \033[1;31;40mO\033[1;32;40m |")
-    print("           | . | . | . | . | . | \033[1;31;40mO\033[1;32;40m | X |")
-    print("           | O | X | . | . | \033[1;31;40mO\033[1;32;40m | X | O |")
-    print("           | X | X | X | \033[1;31;40mO\033[1;32;40m | X | O | O |")
+    print("           | . | . | . | . | . | . | \033[1;31;48mO\033[1;32;48m |")
+    print("           | . | . | . | . | . | \033[1;31;48mO\033[1;32;48m | X |")
+    print("           | O | X | . | . | \033[1;31;48mO\033[1;32;48m | X | O |")
+    print("           | X | X | X | \033[1;31;48mO\033[1;32;48m | X | O | O |")
     print("")
     sleep(DELAY_TIME)
     print("   When you get 4 in a row like shown above or")
@@ -120,6 +122,7 @@ def drop_disc(column):
     Updates the board data with current disc locations
     """
     global player_turn
+    global winner
     if player_turn:
         disc = "O"
     else:
@@ -142,6 +145,7 @@ def drop_disc(column):
             board_db[column][i] = "."
         i += 1
     if check_winner(disc):
+        winner = True
         game_board()
         we_have_a_winner()
     else:
@@ -189,9 +193,15 @@ def game_board():
         i += 1
     print("")
     if player_turn:
-        print("                                    Your Turn")
+        if winner:
+            print("                                    You WON!!")
+        else:
+            print("                                    Your Turn")
     else:
-        print("                              Computer's Turn")
+        if winner:
+            print("                                 Computer Won")
+        else:
+            print("                              Computer's Turn")
     print("")
 
 
@@ -254,10 +264,10 @@ def check_winner(disc):
         for x in range(board_width - 3):
             if board_db[x][y] == disc and board_db[x+1][y] == disc:
                 if board_db[x+2][y] == disc and board_db[x+3][y] == disc:
-                    board_db[x][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x+1][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x+2][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x+3][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+1][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+2][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+3][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
     # check vertical spaces
@@ -265,10 +275,10 @@ def check_winner(disc):
         for y in range(1, (board_height - 3)):
             if board_db[x][y] == disc and board_db[x][y+1] == disc:
                 if board_db[x][y+2] == disc and board_db[x][y+3] == disc:
-                    board_db[x][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x][y+1] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x][y+2] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x][y+3] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
     # check / diagonal spaces
@@ -276,10 +286,10 @@ def check_winner(disc):
         for y in range(4, board_height):
             if board_db[x][y] == disc and board_db[x+1][y-1] == disc:
                 if board_db[x+2][y-2] == disc and board_db[x+3][y-3] == disc:
-                    board_db[x][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x+1][y-1] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x+2][y-2] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x+3][y-3] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+1][y-1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+2][y-2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+3][y-3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
     # check \ diagonal spaces
@@ -287,10 +297,10 @@ def check_winner(disc):
         for y in range(1, (board_height - 3)):
             if board_db[x][y] == disc and board_db[x+1][y+1] == disc:
                 if board_db[x+2][y+2] == disc and board_db[x+3][y+3] == disc:
-                    board_db[x][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x+1][y+1] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x+2][y+2] = "\033[1;31;40m"+disc+"\033[1;32;40m"
-                    board_db[x+3][y+3] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+1][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+2][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+3][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
     return False
