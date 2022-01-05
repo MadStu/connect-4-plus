@@ -6,15 +6,15 @@ delay_time = 0.15
 drop_delay = 0.07
 
 
-def reset_board_data():
+def reset_bd_data():
     """
     Resets the board for a new game
     """
     global disc_count
-    global board_data
+    global bd_data
     global player_turn
 
-    board_data = []
+    bd_data = []
     player_turn = True
     disc_count = 0
 
@@ -28,7 +28,7 @@ def reset_board_data():
             else:
                 temp_list.append(".")
             ii += 1
-        board_data.append(temp_list)
+        bd_data.append(temp_list)
         i += 1
 
 
@@ -50,13 +50,13 @@ def logo():
     Print's the Connect 4 logo text
     """
     print("""\
-   _____                             _       ___ 
+   _____                             _       ___
   /  __ \                           | |     /   |
   | /  \/ ___  _ __  _ __   ___  ___| |_   / /| |
   | |    / _ \| '_ \| '_ \ / _ \/ __| __| / /_| |
   | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
    \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
-                            
+
       """)
 
 
@@ -100,7 +100,8 @@ def welcome():
     print("           | . | . | . | . | . | . |\033[1;31;40m O \033[1;32;40m|")
     print("           | . | . | . | . | . |\033[1;31;40m O \033[1;32;40m| X |")
     print("           | O | X | . | . |\033[1;31;40m O \033[1;32;40m| X | O |")
-    print("           | X | X | X |\033[1;31;40m O \033[1;32;40m| X | O | O |\n")
+    print("           | X | X | X |\033[1;31;40m O \033[1;32;40m| X | O | O |")
+    print("")
     sleep(delay_time)
     print("   When you get 4 in a row like shown above or")
     print("   in any other direction, you win the game!\n")
@@ -108,7 +109,7 @@ def welcome():
     sleep(delay_time)
     input("   Press Enter to start playing!...\n")
 
-    reset_board_data()
+    reset_bd_data()
     game_board()
     enter_column_number()
 
@@ -126,19 +127,19 @@ def drop_disc(column):
     column -= 1
     i = 0
     bottom = 6
-    while board_data[column][bottom] != ".":
+    while bd_data[column][bottom] != ".":
         bottom -= 1
     while i <= bottom:
-        board_data[column][i] = disc
+        bd_data[column][i] = disc
         game_board()
         if i == 0:
             sleep(0.6)
-            board_data[column][i] = " "
+            bd_data[column][i] = " "
         elif i == bottom:
             sleep(drop_delay)
         else:
             sleep(drop_delay)
-            board_data[column][i] = "."
+            bd_data[column][i] = "."
         i += 1
     if check_winner(disc):
         game_board()
@@ -178,7 +179,7 @@ def game_board():
                 board_line = board_line + space
             else:
                 board_line = board_line + wall
-            board_line = board_line + board_data[ii][i]
+            board_line = board_line + bd_data[ii][i]
             ii += 1
         if i == 0:
             board_line = board_line + space
@@ -199,7 +200,6 @@ def enter_column_number():
     Let's the user enter their column choice, checks it's a
     number and checks that there's space left in that column
     """
-    global disc_count
     column_choice = 0
     column_full = True
     while column_choice not in range(1, 8) or column_full:
@@ -213,14 +213,11 @@ def enter_column_number():
             if column_choice == 999:  # Easy quit for dev purposes
                 print("Thanks for playing")
                 quit()
-            elif column_choice == 2222:  # disc count to 40 for dev purposes
-                disc_count = 40
-                game_board()
             elif column_choice not in range(1, 8):
                 print("   Please only enter a number between 1 and 7")
                 sleep(1)
                 game_board()
-            elif board_data[column_choice-1][1] != ".":
+            elif bd_data[column_choice-1][1] != ".":
                 print("   That column is full")
                 sleep(1)
                 game_board()
@@ -235,7 +232,7 @@ def computer_turn():
     control back to the user
     """
     column_choice = random.randint(1, 7)
-    while board_data[column_choice-1][1] != ".":
+    while bd_data[column_choice-1][1] != ".":
         column_choice = random.randint(1, 7)
     sleep(delay_time)
     drop_disc(column_choice)
@@ -245,7 +242,7 @@ def check_winner(disc):
     """
     Check if there's any winning lines of 4
 
-    The following modified code was originally from 
+    The following modified code was originally from
     https://github.com/justinvallely/Python-Connect-4/
     """
     board_height = 7
@@ -254,42 +251,46 @@ def check_winner(disc):
     # check horizontal spaces
     for y in range(1, board_height):
         for x in range(board_width - 3):
-            if board_data[x][y] == disc and board_data[x+1][y] == disc and board_data[x+2][y] == disc and board_data[x+3][y] == disc:
-                board_data[x][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x+1][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x+2][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x+3][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                return True
+            if bd_data[x][y] == disc and bd_data[x+1][y] == disc:
+                if bd_data[x+2][y] == disc and bd_data[x+3][y] == disc:
+                    bd_data[x][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x+1][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x+2][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x+3][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    return True
 
     # check vertical spaces
     for x in range(board_width):
         for y in range(1, (board_height - 3)):
-            if board_data[x][y] == disc and board_data[x][y+1] == disc and board_data[x][y+2] == disc and board_data[x][y+3] == disc:
-                board_data[x][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x][y+1] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x][y+2] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x][y+3] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                return True
+            if bd_data[x][y] == disc and bd_data[x][y+1] == disc:
+                if bd_data[x][y+2] == disc and bd_data[x][y+3] == disc:
+                    bd_data[x][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x][y+1] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x][y+2] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x][y+3] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    return True
 
     # check / diagonal spaces
     for x in range(board_width - 3):
         for y in range(4, board_height):
-            if board_data[x][y] == disc and board_data[x+1][y-1] == disc and board_data[x+2][y-2] == disc and board_data[x+3][y-3] == disc:
-                board_data[x][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x+1][y-1] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x+2][y-2] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x+3][y-3] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                return True
+            if bd_data[x][y] == disc and bd_data[x+1][y-1] == disc:
+                if bd_data[x+2][y-2] == disc and bd_data[x+3][y-3] == disc:
+                    bd_data[x][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x+1][y-1] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x+2][y-2] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x+3][y-3] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    return True
 
     # check \ diagonal spaces
     for x in range(board_width - 3):
         for y in range(1, (board_height - 3)):
-            if board_data[x][y] == disc and board_data[x+1][y+1] == disc and board_data[x+2][y+2] == disc and board_data[x+3][y+3] == disc:
-                board_data[x][y] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x+1][y+1] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x+2][y+2] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                board_data[x+3][y+3] = "\033[1;31;40m" + disc + "\033[1;32;40m"
-                return True
+            if bd_data[x][y] == disc and bd_data[x+1][y+1] == disc:
+                if bd_data[x+2][y+2] == disc and bd_data[x+3][y+3] == disc:
+                    bd_data[x][y] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x+1][y+1] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x+2][y+2] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    bd_data[x+3][y+3] = "\033[1;31;40m"+disc+"\033[1;32;40m"
+                    return True
 
     return False
 
@@ -313,7 +314,7 @@ def play_again():
     Ask if they want to play again and check their input is valid
     """
     valid_input = False
-    while valid_input == False:
+    while valid_input is False:
         sleep(1)
         game_board()
         play_again = input("   Would you like to play again? y/n\n")
@@ -321,7 +322,7 @@ def play_again():
             print("   OK, resetting game...")
             sleep(1)
             valid_input = True
-            reset_board_data()
+            reset_bd_data()
             game_board()
             enter_column_number()
         elif play_again.lower() == "n":
