@@ -2,7 +2,7 @@ from os import system, name
 from time import sleep
 import random
 
-DELAY_TIME = 0.5
+DELAY_TIME = 0.4
 DROP_SPEED = 0.06
 
 
@@ -51,7 +51,7 @@ def logo():
     """
     Prints the Connect 4 logo text
     """
-    print("""\
+    print("""\033[0;32;48m
    _____                             _       ___
   /  __ \                           | |     /   |
   | /  \/ ___  _ __  _ __   ___  ___| |_   / /| |
@@ -59,7 +59,7 @@ def logo():
   | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
    \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
 
-      """)
+    \033[1;32;48m""")
 
 
 def welcome():
