@@ -121,12 +121,7 @@ def drop_disc(column):
     Animates the dropping of the player disc
     Updates the board data with current disc locations
     """
-    global player_turn
-    global winner
-    if player_turn:
-        disc = "O"
-    else:
-        disc = "X"
+    disc = "O" if player_turn else "X"
     column -= 1
     i = 0
     bottom = 6
@@ -144,6 +139,16 @@ def drop_disc(column):
             sleep(DROP_SPEED)
             board_db[column][i] = "."
         i += 1
+    next_turn(disc)
+
+
+def next_turn(disc):
+    """
+    Check for winner, if not, swap the player turn, check for draw
+    """
+    global player_turn
+    global winner
+
     if check_winner(disc):
         winner = True
         game_board()
@@ -171,7 +176,6 @@ def game_board():
     margin = "          "
     space = "   "
     wall = " | "
-
     print("             1   2   3   4   5   6   7  ")
 
     i = 0
@@ -179,30 +183,30 @@ def game_board():
         ii = 0
         board_line = margin
         while ii < 7:
-            if i == 0:
-                board_line = board_line + space
-            else:
-                board_line = board_line + wall
-            board_line = board_line + board_db[ii][i]
+            board_line += space if i == 0 else wall
+            board_line += board_db[ii][i]
             ii += 1
-        if i == 0:
-            board_line = board_line + space
-        else:
-            board_line = board_line + wall
+        board_line += space if i == 0 else wall
         print(board_line)
         i += 1
-    print("")
+    game_status()
+
+
+def game_status():
+    """
+    Prints the status of the game
+    """
+    status = "\n                              "
+    user_winn = "      You WON!!\n"
+    user_turn = "      Your Turn\n"
+    comp_winn = "   Computer Won\n"
+    comp_turn = "Computer's Turn\n"
+
     if player_turn:
-        if winner:
-            print("                                    You WON!!")
-        else:
-            print("                                    Your Turn")
+        status += user_winn if winner else user_turn
     else:
-        if winner:
-            print("                                 Computer Won")
-        else:
-            print("                              Computer's Turn")
-    print("")
+        status += comp_winn if winner else comp_turn
+    print(status)
 
 
 def enter_column_number():
@@ -238,8 +242,7 @@ def enter_column_number():
 
 def computer_turn():
     """
-    Checks who's turn it is, takes the computer turn or passes
-    control back to the user
+    Chooses a random column and checks to see if that column is available
     """
     column_choice = random.randint(1, 7)
     while board_db[column_choice-1][1] != ".":
@@ -253,7 +256,7 @@ def check_winner(disc):
     Checks if there's any winning lines of 4
     Changes the colour of the winning discs
 
-    The following modified code was originally from
+    The following code has been modified but was originally from line 69 of
     https://github.com/justinvallely/Python-Connect-4/
     """
     board_height = 7
