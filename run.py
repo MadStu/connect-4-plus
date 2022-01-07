@@ -8,29 +8,26 @@ DROP_SPEED = 0.06
 
 def reset_board_db():
     """
-    Resets the board for a new game
+    Resets the working data and game board for a new game
     """
     global disc_count
     global board_db
     global player_turn
     global winner
 
-    board_db = []
     player_turn = True
     winner = False
     disc_count = 0
+    board_db = []
 
     i = 0
     while i <= 6:
         ii = 0
-        temp_list = []
+        _ = []
         while ii <= 6:
-            if ii == 0:
-                temp_list.append(" ")
-            else:
-                temp_list.append(".")
+            _.append(" ") if ii == 0 else _.append(".")
             ii += 1
-        board_db.append(temp_list)
+        board_db.append(_)
         i += 1
 
 
@@ -39,12 +36,7 @@ def clear():
     Clear the Screen to help keep the game board clean and easy to read
     """
     print("\033[1;32;48m ")
-    # for windows
-    if name == 'nt':
-        _ = system('cls')
-    # for mac and linux(here, os.name is 'posix')
-    else:
-        _ = system('clear')
+    _ = system('cls') if name == 'nt' else system('clear')
 
 
 def logo():
@@ -314,12 +306,14 @@ def we_have_a_winner():
     We have a winner!
     Tell the player who won
     """
-    print("   WE HAVE A WINNER!!")
-    if player_turn:
-        print("   You've beaten the computer!\n")
-    else:
-        print("   You didn't win this time :(\n")
-    sleep(DELAY_TIME*3)
+    win_text = "   WE HAVE A WINNER!!\n"
+    user_win = "   You've beaten the computer!\n"
+    comp_win = "   You didn't win this time :(\n"
+
+    win_text += user_win if player_turn else comp_win
+
+    print(win_text)
+    sleep(DELAY_TIME*4)
     play_again()
 
 
@@ -328,7 +322,7 @@ def play_again():
     Ask if they want to play again and check their input is valid
     """
     valid_input = False
-    while valid_input is False:
+    while not valid_input:
         sleep(DELAY_TIME)
         game_board()
         play_again = input("   Would you like to play again? y/n\n")
