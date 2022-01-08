@@ -6,7 +6,7 @@ import random
 BOARD_HEIGHT = 7
 BOARD_WIDTH = 7
 
-DELAY_TIME = 0.001
+DELAY_TIME = 0.4
 DROP_SPEED = 0.06
 
 
@@ -54,7 +54,7 @@ def logo():
   | |    / _ \| '_ \| '_ \ / _ \/ __| __| / /_| |
   | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
    \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
-
+                                 By Stuart Raynor
     \033[1;32;48m""")
 
 
@@ -64,7 +64,7 @@ def welcome():
     """
     sleep(DELAY_TIME)
 
-    print("   WELCOME to my little python game of Connect 4.\n")
+    print("   WELCOME to the fun game of Connect 4!\n")
     sleep(DELAY_TIME)
 
     print("   The game is easy, you take turns with the")
@@ -78,14 +78,14 @@ def welcome():
     logo()
 
     sleep(DELAY_TIME)
-    print("             1   2   3   4   5   6   7  ")
-    print("                                        ")
-    print("           | . | . | . | . | . | . | . |")
-    print("           | . | . | . | . | . | . | . |\n")
+    print("            1   2   3   4   5   6   7  ")
+    print("                                       ")
+    print("          | . | . | . | . | . | . | . |")
+    print("          | . | . | . | . | . | . | . |\n")
     sleep(DELAY_TIME)
-    print("   Each column is numbered from left-right, 1-7.")
-    print("   You'll need to enter a number between 1 and 7")
-    print("   to choose which column to drop your disc into.\n")
+    print("   Each column is numbered from left-right.")
+    print("   You'll need to enter a column number in which")
+    print("   to drop your disc.\n")
 
     sleep(DELAY_TIME)
     input("   Press Enter to continue...\n")
@@ -93,12 +93,12 @@ def welcome():
     logo()
 
     sleep(DELAY_TIME)
-    print("             1   2   3   4   5   6   7  ")
-    print("                                        ")
-    print("           | . | . | . | . | . | . | \033[1;31;48mO\033[1;32;48m |")
-    print("           | . | . | . | . | . | \033[1;31;48mO\033[1;32;48m | X |")
-    print("           | O | X | . | . | \033[1;31;48mO\033[1;32;48m | X | O |")
-    print("           | X | X | X | \033[1;31;48mO\033[1;32;48m | X | O | O |")
+    print("            1   2   3   4   5   6   7  ")
+    print("                                       ")
+    print("          | . | . | . | . | . | . | \033[1;31;48mO\033[1;32;48m |")
+    print("          | . | . | . | . | . | \033[1;31;48mO\033[1;32;48m | X |")
+    print("          | O | X | . | . | \033[1;31;48mO\033[1;32;48m | X | O |")
+    print("          | X | X | X | \033[1;31;48mO\033[1;32;48m | X | O | O |")
     print("")
     sleep(DELAY_TIME)
     print("   When you get 4 in a row like shown above or")
@@ -169,15 +169,19 @@ def game_board():
     clear()
     logo()
 
-    margin = "          "
-    space = "   "
+    space = " "
+    three_spaces = space * 3
     wall = " | "
+    margin = three_spaces * 3
+
+    if BOARD_WIDTH > 7:
+        margin = ((7-(BOARD_WIDTH - 7)) * space)
 
     # Print the column numbers
-    board_line = margin + space
+    board_line = margin + three_spaces
     i = 1
     while i <= BOARD_WIDTH:
-        board_line += str(i) + space
+        board_line += (str(i) + three_spaces) if i < 10 else (str(i) + space + space)
         i += 1
     print(board_line)
 
@@ -187,10 +191,10 @@ def game_board():
         ii = 0
         board_line = margin
         while ii < BOARD_WIDTH:
-            board_line += space if i == 0 else wall
+            board_line += three_spaces if i == 0 else wall
             board_line += board_db[ii][i]
             ii += 1
-        board_line += space if i == 0 else wall
+        board_line += three_spaces if i == 0 else wall
         print(board_line)
         i += 1
     game_status()
