@@ -10,13 +10,13 @@ BOARD_WIDTH = 12
 game_width = BOARD_WIDTH
 
 # Delay time of items being shown
-DELAY_TIME = 0.2
+DELAY_TIME = 0.15
 
 # Speed which the disc drops down
 DROP_SPEED = 0.05
 
 # Each game won increases their level
-game_level = 9
+game_level = 1
 winner = False
 
 
@@ -86,6 +86,8 @@ def welcome():
     """
     Display the welcome text and games rules
     """
+    clear()
+    logo()
     sleep(DELAY_TIME)
 
     print("   WELCOME to the fun game of Connect 4!\n")
@@ -416,19 +418,17 @@ def play_again():
     """
     Ask if they want to play again and check their input is valid
     """
-    global game_level
-    global game_width
-
     sleep(DELAY_TIME)
     game_board()
 
     # Reset game level after they've won the game
-    if game_level >= BOARD_WIDTH - 2:
+    if game_level >= BOARD_WIDTH - 2 and winner:
         top_level()
-        game_level = 0
-        game_width = BOARD_WIDTH + 1
+        input_text = "play again"
+    else:
+        input_text = "continue playing"
 
-    play_again = input("   Press Enter to continue playing or type 'N' to quit\n")
+    play_again = input(f"   Press Enter to {input_text} or type 'N' to quit\n")
 
     if play_again.lower() == "n":
         # Player wants to end the game so quit
@@ -457,6 +457,7 @@ def check_draw():
     if disc_count >= board_max:
         # Game's a draw so handle that
         print("   No winners this time :(\n")
+        print("             Try again!\n")
         sleep(DELAY_TIME*3)
         play_again()
 
@@ -466,15 +467,18 @@ def top_level():
     When player reaches top level they are told they've won the game
     and everything is reset
     """
-    game_won = "        YOU BEAT THE GAME!!!\n"
-    game_won += "   VERY well done! I'm impressed!"
+    global game_level
+    global game_width
+
+    game_won = "               YOU BEAT THE GAME!!!\n"
+    game_won += "          VERY well done! I'm impressed!"
     print(game_won)
 
-    sleep(4)
+    sleep(10)
+    game_board()
     winner = False
-    #play_again()
+    game_level = 0
+    game_width = BOARD_WIDTH + 1
 
 
-clear()
-logo()
 welcome()
