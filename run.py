@@ -4,7 +4,7 @@ import random
 
 # Board starting grid size. Height includes the blank space above
 BOARD_HEIGHT = 7
-BOARD_WIDTH = 13
+BOARD_WIDTH = 12
 
 # The working variable of BOARD_WIDTH
 game_width = BOARD_WIDTH
@@ -210,10 +210,10 @@ def game_board():
     space = " "
     three_spaces = space * 3
     wall = " | "
-    margin_len = 9
+    margin_len = 17
 
     # Determine the margin width based on number of columns
-    for i in range(game_width - 7):
+    for i in range(game_width - 1):
         margin_len -= 2 if i % 2 == 0 else 1
 
     # Make sure the margin is never less than 0 spaces wide
@@ -413,31 +413,22 @@ def play_again():
     """
     Ask if they want to play again and check their input is valid
     """
-    valid_input = False
+    sleep(DELAY_TIME)
+    game_board()
+    play_again = input("   Press Enter to continue playing or type 'N' to quit\n")
 
-    while not valid_input:
+    if play_again.lower() == "n":
+        # Player wants to end the game so quit
+        print("   OK, Thank you for playing. Come back soon!! :)\n")
+        quit()
+
+    else:
+        # Player wants to play again so reset and start the game
+        print("   OK, resetting game...")
         sleep(DELAY_TIME)
+        reset_board_db()
         game_board()
-        play_again = input("   Would you like to play again? y/n\n")
-
-        if play_again.lower() == "y":
-            # Player wants to play again so reset and start the game
-            print("   OK, resetting game...")
-            sleep(DELAY_TIME)
-            valid_input = True
-            reset_board_db()
-            game_board()
-            enter_column_number()
-
-        elif play_again.lower() == "n":
-            # Player wants to end the game so quit
-            print("   OK, Thank you for playing. Come back soon!! :)\n")
-            valid_input = True
-            quit()
-
-        else:
-            # Player didn't enter y or n so keep them in the while loop
-            print("   Not a valid input.")
+        enter_column_number()
 
 
 def check_draw():
