@@ -4,7 +4,7 @@ import random
 
 # Board grid size. Height including the blank space above
 BOARD_HEIGHT = 7
-BOARD_WIDTH = 12
+BOARD_WIDTH = 7
 
 DELAY_TIME = 0.04
 DROP_SPEED = 0.06
@@ -119,17 +119,25 @@ def drop_disc(column):
     """
     disc = "O" if player_turn else "X"
     column -= 1
-    i = 0
     bottom = BOARD_HEIGHT - 1
+
+    # Finds the the next available square to determine the bottom
     while board_db[column][bottom] != ".":
         bottom -= 1
+    
+    # Places disc in the next square down and refreshes the board
+    i = 0
     while i <= bottom:
         board_db[column][i] = disc
         game_board()
+
+        # Determines if it's blank space or a . to replace where
+        # the disc has just been
         if i == 0:
             sleep(DELAY_TIME)
             board_db[column][i] = " "
         elif i == bottom:
+            # Disc has reached the bottom
             sleep(DROP_SPEED)
         else:
             sleep(DROP_SPEED)
@@ -191,19 +199,17 @@ def game_board():
     print(board_line)
 
     # Print the columns
-    i = 0
-    while i < BOARD_HEIGHT:
-        ii = 0
+    for i in range(BOARD_HEIGHT):
         board_line = margin
-        while ii < BOARD_WIDTH:
+        for ii in range(BOARD_WIDTH):
 
             # Print the walls in the main area. None for the top
             board_line += three_spaces if i == 0 else wall
             board_line += board_db[ii][i]
-            ii += 1
+        
+        # Prints walls or spaces depending which line is processing
         board_line += three_spaces if i == 0 else wall
         print(board_line)
-        i += 1
     game_status()
 
 
