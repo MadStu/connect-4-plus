@@ -251,6 +251,12 @@ def enter_column_number():
                 # Easy quit game code for dev purposes
                 print("Thanks for playing")
                 quit()
+            elif column_choice == 42:
+                # Easter egg! Because I like the book
+                print("   Answer to the Ultimate Question of Life,")
+                print("               The Universe, and Everything\n")
+                sleep(DELAY_TIME*7)
+                game_board()
             elif column_choice not in range(1, column_range):
                 # Handle when input number not an available column
                 warn = "Please only enter a number between 1 and"
