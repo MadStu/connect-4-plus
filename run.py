@@ -10,13 +10,13 @@ BOARD_WIDTH = 12
 game_width = BOARD_WIDTH
 
 # Delay time of items being shown
-DELAY_TIME = 0.03
+DELAY_TIME = 0.2
 
 # Speed which the disc drops down
-DROP_SPEED = 0.005
+DROP_SPEED = 0.05
 
 # Each game won increases their level
-game_level = 1
+game_level = 9
 winner = False
 
 
@@ -251,7 +251,8 @@ def game_status():
     """
     Prints the status of the game
     """
-    status = f"\n        Level: {game_level}              "
+    space = "           " if game_level < 10 else "          "
+    status = f"\n       Level: {game_level}{space}"
     user_winn = "      You WON!!\n"
     user_turn = "      Your Turn\n"
     comp_winn = "   Computer Won\n"
@@ -404,8 +405,10 @@ def we_have_a_winner():
 
     win_text += user_win if player_turn else comp_win
 
-    print(win_text)
-    sleep(DELAY_TIME*4)
+    if game_level < (BOARD_WIDTH - 2):
+        print(win_text)
+        sleep(DELAY_TIME*4)
+
     play_again()
 
 
@@ -413,8 +416,18 @@ def play_again():
     """
     Ask if they want to play again and check their input is valid
     """
+    global game_level
+    global game_width
+
     sleep(DELAY_TIME)
     game_board()
+
+    # Reset game level after they've won the game
+    if game_level >= BOARD_WIDTH - 2:
+        top_level()
+        game_level = 0
+        game_width = BOARD_WIDTH + 1
+
     play_again = input("   Press Enter to continue playing or type 'N' to quit\n")
 
     if play_again.lower() == "n":
@@ -446,6 +459,20 @@ def check_draw():
         print("   No winners this time :(\n")
         sleep(DELAY_TIME*3)
         play_again()
+
+
+def top_level():
+    """
+    When player reaches top level they are told they've won the game
+    and everything is reset
+    """
+    game_won = "        YOU BEAT THE GAME!!!\n"
+    game_won += "   VERY well done! I'm impressed!"
+    print(game_won)
+
+    sleep(4)
+    winner = False
+    #play_again()
 
 
 clear()
