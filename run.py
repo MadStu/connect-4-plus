@@ -24,15 +24,11 @@ def reset_board_db():
     disc_count = 0
     board_db = []
 
-    i = 0
-    while i < BOARD_WIDTH:
-        ii = 0
+    for i in range(BOARD_WIDTH):
         temp_board = []
-        while ii < BOARD_HEIGHT:
+        for ii in range(BOARD_HEIGHT):
             temp_board.append(" ") if ii == 0 else temp_board.append(".")
-            ii += 1
         board_db.append(temp_board)
-        i += 1
 
 
 def clear():
@@ -124,15 +120,13 @@ def drop_disc(column):
     # Finds the the next available square to determine the bottom
     while board_db[column][bottom] != ".":
         bottom -= 1
-    
+
     # Places disc in the next square down and refreshes the board
-    i = 0
-    while i <= bottom:
+    for i in range(bottom + 1):
         board_db[column][i] = disc
         game_board()
 
-        # Determines if it's blank space or a . to replace where
-        # the disc has just been
+        # Determines if it's blank space or a . to replace
         if i == 0:
             sleep(DELAY_TIME)
             board_db[column][i] = " "
@@ -142,7 +136,6 @@ def drop_disc(column):
         else:
             sleep(DROP_SPEED)
             board_db[column][i] = "."
-        i += 1
     next_turn(disc)
 
 
@@ -247,7 +240,8 @@ def enter_column_number():
             sleep(DELAY_TIME*2)
             game_board()
         finally:
-            if column_choice == 999:  # Easy quit for dev purposes
+            if column_choice == 999:
+                # Easy quit game code for dev purposes
                 print("Thanks for playing")
                 quit()
             elif column_choice not in range(1, column_range):
