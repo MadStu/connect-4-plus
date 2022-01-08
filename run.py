@@ -2,33 +2,56 @@ from os import system, name
 from time import sleep
 import random
 
-# Board grid size. Height including the blank space above
+# Board starting grid size. Height includes the blank space above
 BOARD_HEIGHT = 7
-BOARD_WIDTH = 7
+BOARD_WIDTH = 13
+
+# The working variable of BOARD_WIDTH
+game_width = BOARD_WIDTH
 
 # Delay time of items being shown
-DELAY_TIME = 0.3
+DELAY_TIME = 0.03
 
 # Speed which the disc drops down
-DROP_SPEED = 0.05
+DROP_SPEED = 0.005
+
+# Each game won increases their level
+game_level = 1
+winner = False
 
 
 def reset_board_db():
     """
     Resets the working data and game board for a new game
+    Increase or reset game level and board width
     """
     global player_turn
     global winner
     global disc_count
     global board_db
+    global game_level
+    global game_width
 
+    # Reset game level and board width
+    if winner:
+        if player_turn:
+            #Player has won!
+            game_level += 1
+            game_width -= 1
+
+        else:
+            #Computer has won :(
+            game_level = 1
+            game_width = BOARD_WIDTH
+
+    # Reset Everything else
     player_turn = True
     winner = False
     disc_count = 0
     board_db = []
 
     # Add blank data into the board_db column by column
-    for i in range(BOARD_WIDTH):
+    for i in range(game_width):
         temp_board = []
         for ii in range(BOARD_HEIGHT):
             temp_board.append(" ") if ii == 0 else temp_board.append(".")
@@ -190,7 +213,7 @@ def game_board():
     margin_len = 9
 
     # Determine the margin width based on number of columns
-    for i in range(BOARD_WIDTH - 7):
+    for i in range(game_width - 7):
         margin_len -= 2 if i % 2 == 0 else 1
 
     # Make sure the margin is never less than 0 spaces wide
@@ -199,7 +222,7 @@ def game_board():
     # Print the column numbers
     board_line = margin + three_spaces
 
-    for i in range(1, BOARD_WIDTH + 1):
+    for i in range(1, game_width + 1):
         if i < 10:
             board_line += (str(i) + three_spaces)
 
@@ -213,7 +236,7 @@ def game_board():
         board_line = margin
 
         # Print the walls in the main area. None for the top
-        for ii in range(BOARD_WIDTH):
+        for ii in range(game_width):
             board_line += three_spaces if i == 0 else wall
             board_line += board_db[ii][i]
 
@@ -228,7 +251,7 @@ def game_status():
     """
     Prints the status of the game
     """
-    status = "\n                              "
+    status = f"\n        Level: {game_level}              "
     user_winn = "      You WON!!\n"
     user_turn = "      Your Turn\n"
     comp_winn = "   Computer Won\n"
@@ -251,7 +274,7 @@ def enter_column_number():
     """
     column_choice = 0
     column_full = True
-    column_range = BOARD_WIDTH + 1
+    column_range = game_width + 1
 
     while column_choice not in range(1, column_range) or column_full:
         try:
@@ -280,7 +303,7 @@ def enter_column_number():
             elif column_choice not in range(1, column_range):
                 # Handle when input number not an available column
                 warn = "Please only enter a number between 1 and"
-                print("   ", warn, BOARD_WIDTH)
+                print("   ", warn, game_width)
                 sleep(DELAY_TIME*4)
                 game_board()
 
@@ -301,11 +324,11 @@ def computer_turn():
     Chooses a random column and checks to see if that column is available
     """
     # Choose a random column
-    column_choice = random.randint(1, BOARD_WIDTH)
+    column_choice = random.randint(1, game_width)
 
     while board_db[column_choice-1][1] != ".":
         # The chosen column is full so choose again
-        column_choice = random.randint(1, BOARD_WIDTH)
+        column_choice = random.randint(1, game_width)
 
     sleep(DELAY_TIME)
     drop_disc(column_choice)
@@ -321,7 +344,7 @@ def check_winner(disc):
     """
     # Check horizontal spaces
     for y in range(1, BOARD_HEIGHT):
-        for x in range(BOARD_WIDTH - 3):
+        for x in range(game_width - 3):
             if board_db[x][y] == disc and board_db[x+1][y] == disc:
                 if board_db[x+2][y] == disc and board_db[x+3][y] == disc:
                     # Turn the disc RED
@@ -332,7 +355,7 @@ def check_winner(disc):
                     return True
 
     # Check vertical spaces
-    for x in range(BOARD_WIDTH):
+    for x in range(game_width):
         for y in range(1, (BOARD_HEIGHT - 3)):
             if board_db[x][y] == disc and board_db[x][y+1] == disc:
                 if board_db[x][y+2] == disc and board_db[x][y+3] == disc:
@@ -344,7 +367,7 @@ def check_winner(disc):
                     return True
 
     # Check / diagonal spaces
-    for x in range(BOARD_WIDTH - 3):
+    for x in range(game_width - 3):
         for y in range(4, BOARD_HEIGHT):
             if board_db[x][y] == disc and board_db[x+1][y-1] == disc:
                 if board_db[x+2][y-2] == disc and board_db[x+3][y-3] == disc:
@@ -356,7 +379,7 @@ def check_winner(disc):
                     return True
 
     # Check \ diagonal spaces
-    for x in range(BOARD_WIDTH - 3):
+    for x in range(game_width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
             if board_db[x][y] == disc and board_db[x+1][y+1] == disc:
                 if board_db[x+2][y+2] == disc and board_db[x+3][y+3] == disc:
@@ -373,7 +396,7 @@ def check_winner(disc):
 def we_have_a_winner():
     """
     We have a winner!
-    Tell the player who won
+    Tell the player who has won
     """
     win_text = "   WE HAVE A WINNER!!\n"
     user_win = "   You've beaten the computer!\n"
@@ -425,7 +448,7 @@ def check_draw():
     disc_count += 1
 
     # Calculate the max number of squares based on board size
-    board_max = (BOARD_HEIGHT-1) * BOARD_WIDTH
+    board_max = (BOARD_HEIGHT-1) * game_width
 
     if disc_count >= board_max:
         # Game's a draw so handle that
