@@ -4,9 +4,9 @@ import random
 
 # Board grid size. Height including the blank space above
 BOARD_HEIGHT = 7
-BOARD_WIDTH = 7
+BOARD_WIDTH = 12
 
-DELAY_TIME = 0.4
+DELAY_TIME = 0.04
 DROP_SPEED = 0.06
 
 
@@ -172,17 +172,22 @@ def game_board():
     space = " "
     three_spaces = space * 3
     wall = " | "
-    margin = three_spaces * 3
+    margin_len = 9
 
-    if BOARD_WIDTH > 7:
-        margin = ((7-(BOARD_WIDTH - 7)) * space)
+    # Determine the margin width based on number of columns
+    for i in range(BOARD_WIDTH - 7):
+        margin_len -= 2 if i % 2 == 0 else 1
+
+    # Make sure the margin is never less than 0 spaces wide
+    margin = space * margin_len if margin_len > 0 else ""
 
     # Print the column numbers
     board_line = margin + three_spaces
-    i = 1
-    while i <= BOARD_WIDTH:
-        board_line += (str(i) + three_spaces) if i < 10 else (str(i) + space + space)
-        i += 1
+    for i in range(1, BOARD_WIDTH + 1):
+        if i < 10:
+            board_line += (str(i) + three_spaces)
+        else:
+            board_line += (str(i) + space + space)
     print(board_line)
 
     # Print the columns
@@ -191,6 +196,8 @@ def game_board():
         ii = 0
         board_line = margin
         while ii < BOARD_WIDTH:
+
+            # Print the walls in the main area. None for the top
             board_line += three_spaces if i == 0 else wall
             board_line += board_db[ii][i]
             ii += 1
