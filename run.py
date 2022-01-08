@@ -2,7 +2,11 @@ from os import system, name
 from time import sleep
 import random
 
-DELAY_TIME = 0.4
+# Board grid size. Height including the blank space above
+BOARD_HEIGHT = 7
+BOARD_WIDTH = 7
+
+DELAY_TIME = 0.001
 DROP_SPEED = 0.06
 
 
@@ -21,13 +25,13 @@ def reset_board_db():
     board_db = []
 
     i = 0
-    while i <= 6:
+    while i < BOARD_WIDTH:
         ii = 0
-        _ = []
-        while ii <= 6:
-            _.append(" ") if ii == 0 else _.append(".")
+        temp_board = []
+        while ii < BOARD_HEIGHT:
+            temp_board.append(" ") if ii == 0 else temp_board.append(".")
             ii += 1
-        board_db.append(_)
+        board_db.append(temp_board)
         i += 1
 
 
@@ -116,7 +120,7 @@ def drop_disc(column):
     disc = "O" if player_turn else "X"
     column -= 1
     i = 0
-    bottom = 6
+    bottom = BOARD_HEIGHT - 1
     while board_db[column][bottom] != ".":
         bottom -= 1
     while i <= bottom:
@@ -168,13 +172,21 @@ def game_board():
     margin = "          "
     space = "   "
     wall = " | "
-    print("             1   2   3   4   5   6   7  ")
 
+    # Print the column numbers
+    board_line = margin + space
+    i = 1
+    while i <= BOARD_WIDTH:
+        board_line += str(i) + space
+        i += 1
+    print(board_line)
+
+    # Print the columns
     i = 0
-    while i < 7:
+    while i < BOARD_HEIGHT:
         ii = 0
         board_line = margin
-        while ii < 7:
+        while ii < BOARD_WIDTH:
             board_line += space if i == 0 else wall
             board_line += board_db[ii][i]
             ii += 1
@@ -208,7 +220,9 @@ def enter_column_number():
     """
     column_choice = 0
     column_full = True
-    while column_choice not in range(1, 8) or column_full:
+    column_range = BOARD_WIDTH + 1
+    
+    while column_choice not in range(1, column_range) or column_full:
         try:
             column_choice = int(input("   Enter your column choice...\n"))
         except ValueError:
@@ -219,8 +233,9 @@ def enter_column_number():
             if column_choice == 999:  # Easy quit for dev purposes
                 print("Thanks for playing")
                 quit()
-            elif column_choice not in range(1, 8):
-                print("   Please only enter a number between 1 and 7")
+            elif column_choice not in range(1, column_range):
+                warn = "Please only enter a number between 1 and"
+                print("   ", warn, BOARD_WIDTH)
                 sleep(DELAY_TIME*2)
                 game_board()
             elif board_db[column_choice-1][1] != ".":
@@ -236,9 +251,9 @@ def computer_turn():
     """
     Chooses a random column and checks to see if that column is available
     """
-    column_choice = random.randint(1, 7)
+    column_choice = random.randint(1, BOARD_WIDTH)
     while board_db[column_choice-1][1] != ".":
-        column_choice = random.randint(1, 7)
+        column_choice = random.randint(1, BOARD_WIDTH)
     sleep(DELAY_TIME)
     drop_disc(column_choice)
 
@@ -251,12 +266,9 @@ def check_winner(disc):
     The following code has been modified but was originally from line 69 of
     https://github.com/justinvallely/Python-Connect-4/
     """
-    board_height = 7
-    board_width = 7
-
     # check horizontal spaces
-    for y in range(1, board_height):
-        for x in range(board_width - 3):
+    for y in range(1, BOARD_HEIGHT):
+        for x in range(BOARD_WIDTH - 3):
             if board_db[x][y] == disc and board_db[x+1][y] == disc:
                 if board_db[x+2][y] == disc and board_db[x+3][y] == disc:
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
@@ -266,8 +278,8 @@ def check_winner(disc):
                     return True
 
     # check vertical spaces
-    for x in range(board_width):
-        for y in range(1, (board_height - 3)):
+    for x in range(BOARD_WIDTH):
+        for y in range(1, (BOARD_HEIGHT - 3)):
             if board_db[x][y] == disc and board_db[x][y+1] == disc:
                 if board_db[x][y+2] == disc and board_db[x][y+3] == disc:
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
@@ -277,8 +289,8 @@ def check_winner(disc):
                     return True
 
     # check / diagonal spaces
-    for x in range(board_width - 3):
-        for y in range(4, board_height):
+    for x in range(BOARD_WIDTH - 3):
+        for y in range(4, BOARD_HEIGHT):
             if board_db[x][y] == disc and board_db[x+1][y-1] == disc:
                 if board_db[x+2][y-2] == disc and board_db[x+3][y-3] == disc:
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
@@ -288,8 +300,8 @@ def check_winner(disc):
                     return True
 
     # check \ diagonal spaces
-    for x in range(board_width - 3):
-        for y in range(1, (board_height - 3)):
+    for x in range(BOARD_WIDTH - 3):
+        for y in range(1, (BOARD_HEIGHT - 3)):
             if board_db[x][y] == disc and board_db[x+1][y+1] == disc:
                 if board_db[x+2][y+2] == disc and board_db[x+3][y+3] == disc:
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
@@ -348,7 +360,8 @@ def check_draw():
     global disc_count
     disc_count += 1
 
-    if disc_count >= 42:
+    board_max = (BOARD_HEIGHT-1) * BOARD_WIDTH
+    if disc_count >= board_max:
         print("   No winners this time :(\n")
         sleep(DELAY_TIME*3)
         play_again()
