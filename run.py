@@ -4,10 +4,13 @@ import random
 
 # Board grid size. Height including the blank space above
 BOARD_HEIGHT = 7
-BOARD_WIDTH = 12
+BOARD_WIDTH = 7
 
-DELAY_TIME = 0.4
-DROP_SPEED = 0.06
+# Delay time of items being shown
+DELAY_TIME = 0.3
+
+# Speed which the disc drops down
+DROP_SPEED = 0.05
 
 
 def reset_board_db():
@@ -24,11 +27,12 @@ def reset_board_db():
     disc_count = 0
     board_db = []
 
-    # Add blank data into the board_db
+    # Add blank data into the board_db column by column
     for i in range(BOARD_WIDTH):
         temp_board = []
         for ii in range(BOARD_HEIGHT):
             temp_board.append(" ") if ii == 0 else temp_board.append(".")
+
         board_db.append(temp_board)
 
 
@@ -132,12 +136,15 @@ def drop_disc(column):
         if i == 0:
             sleep(DELAY_TIME)
             board_db[column][i] = " "
+
         elif i == bottom:
             # Disc has reached the bottom
             sleep(DROP_SPEED)
+
         else:
             sleep(DROP_SPEED)
             board_db[column][i] = "."
+
     next_turn(disc)
 
 
@@ -153,6 +160,7 @@ def next_turn(disc):
         winner = True
         game_board()
         we_have_a_winner()
+
     else:
         if player_turn:
             # The last turn was the players so change it
@@ -160,6 +168,7 @@ def next_turn(disc):
             check_draw()
             game_board()
             computer_turn()
+
         else:
             # The last turn was the computer's so change it
             player_turn = True
@@ -189,25 +198,29 @@ def game_board():
 
     # Print the column numbers
     board_line = margin + three_spaces
+
     for i in range(1, BOARD_WIDTH + 1):
         if i < 10:
             board_line += (str(i) + three_spaces)
+
         else:
             board_line += (str(i) + space + space)
+
     print(board_line)
 
     # Print the columns
     for i in range(BOARD_HEIGHT):
         board_line = margin
-        for ii in range(BOARD_WIDTH):
 
-            # Print the walls in the main area. None for the top
+        # Print the walls in the main area. None for the top
+        for ii in range(BOARD_WIDTH):
             board_line += three_spaces if i == 0 else wall
             board_line += board_db[ii][i]
 
         # Prints walls or spaces depending which line is processing
         board_line += three_spaces if i == 0 else wall
         print(board_line)
+
     game_status()
 
 
@@ -221,10 +234,13 @@ def game_status():
     comp_winn = "   Computer Won\n"
     comp_turn = "Computer's Turn\n"
 
+    # Put the status in order
     if player_turn:
         status += user_winn if winner else user_turn
+
     else:
         status += comp_winn if winner else comp_turn
+
     print(status)
 
 
@@ -241,35 +257,42 @@ def enter_column_number():
         try:
             # User inputs column number
             column_choice = int(input("   Enter your column choice...\n"))
+
         except ValueError:
             # Handle the error if it's not a number
             print("   Not a number")
             sleep(DELAY_TIME*2)
             game_board()
+
         finally:
             if column_choice == 999:
                 # Easy quit game code for dev purposes
                 print("Thanks for playing")
                 quit()
+
             elif column_choice == 42:
                 # Easter egg! Because I like the book
                 print("   Answer to the Ultimate Question of Life,")
                 print("               The Universe, and Everything\n")
-                sleep(DELAY_TIME*7)
+                sleep(DELAY_TIME*9)
                 game_board()
+
             elif column_choice not in range(1, column_range):
                 # Handle when input number not an available column
                 warn = "Please only enter a number between 1 and"
                 print("   ", warn, BOARD_WIDTH)
-                sleep(DELAY_TIME*2)
+                sleep(DELAY_TIME*4)
                 game_board()
+
             elif board_db[column_choice-1][1] != ".":
                 # Check to see if the column is full
                 print("   That column is full!")
                 sleep(DELAY_TIME*2)
                 game_board()
+
             else:
                 column_full = False
+
     drop_disc(column_choice)
 
 
@@ -279,9 +302,11 @@ def computer_turn():
     """
     # Choose a random column
     column_choice = random.randint(1, BOARD_WIDTH)
+
     while board_db[column_choice-1][1] != ".":
         # The chosen column is full so choose again
         column_choice = random.randint(1, BOARD_WIDTH)
+
     sleep(DELAY_TIME)
     drop_disc(column_choice)
 
@@ -366,10 +391,12 @@ def play_again():
     Ask if they want to play again and check their input is valid
     """
     valid_input = False
+
     while not valid_input:
         sleep(DELAY_TIME)
         game_board()
         play_again = input("   Would you like to play again? y/n\n")
+
         if play_again.lower() == "y":
             # Player wants to play again so reset and start the game
             print("   OK, resetting game...")
@@ -378,11 +405,13 @@ def play_again():
             reset_board_db()
             game_board()
             enter_column_number()
+
         elif play_again.lower() == "n":
             # Player wants to end the game so quit
             print("   OK, Thank you for playing. Come back soon!! :)\n")
             valid_input = True
             quit()
+
         else:
             # Player didn't enter y or n so keep them in the while loop
             print("   Not a valid input.")
