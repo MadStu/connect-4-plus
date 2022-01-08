@@ -32,15 +32,15 @@ def reset_board_db():
     global game_level
     global game_width
 
-    # Reset game level and board width
+    # Reset or adjust game level and board width
     if winner:
         if player_turn:
-            #Player has won!
+            # Player has won!
             game_level += 1
             game_width -= 1
 
         else:
-            #Computer has won :(
+            # Computer has won :(
             game_level = 1
             game_width = BOARD_WIDTH
 
@@ -71,8 +71,7 @@ def logo():
     """
     Prints the Connect 4 logo text
     """
-    print("""\033[0;32;48m
-   _____                             _       ___
+    print("""\033[0;32;48m   _____                             _       ___
   /  __ \                           | |     /   |
   | /  \/ ___  _ __  _ __   ___  ___| |_   / /| |
   | |    / _ \| '_ \| '_ \ / _ \/ __| __| / /_| |
@@ -159,7 +158,7 @@ def drop_disc(column):
 
         # Determines if it's blank space or a . to replace
         if i == 0:
-            sleep(DELAY_TIME)
+            sleep(DELAY_TIME*2)
             board_db[column][i] = " "
 
         elif i == bottom:
@@ -421,14 +420,17 @@ def play_again():
     sleep(DELAY_TIME)
     game_board()
 
+    input_text = "   Press Enter to "
+
     # Reset game level after they've won the game
     if game_level >= BOARD_WIDTH - 2 and winner:
         top_level()
-        input_text = "play again"
+        input_text += "play again"
     else:
-        input_text = "continue playing"
+        input_text += "continue playing"
 
-    play_again = input(f"   Press Enter to {input_text} or type 'N' to quit\n")
+    input_text += " \n   or type 'N' to quit\n"
+    play_again = input(input_text)
 
     if play_again.lower() == "n":
         # Player wants to end the game so quit
