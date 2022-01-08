@@ -4,7 +4,7 @@ import random
 
 # Board grid size. Height including the blank space above
 BOARD_HEIGHT = 7
-BOARD_WIDTH = 7
+BOARD_WIDTH = 12
 
 DELAY_TIME = 0.04
 DROP_SPEED = 0.06
@@ -14,16 +14,17 @@ def reset_board_db():
     """
     Resets the working data and game board for a new game
     """
-    global disc_count
-    global board_db
     global player_turn
     global winner
+    global disc_count
+    global board_db
 
     player_turn = True
     winner = False
     disc_count = 0
     board_db = []
 
+    # Add blank data into the board_db
     for i in range(BOARD_WIDTH):
         temp_board = []
         for ii in range(BOARD_HEIGHT):
@@ -103,6 +104,7 @@ def welcome():
     sleep(DELAY_TIME)
     input("   Press Enter to start playing!...\n")
 
+    # Begin the game!
     reset_board_db()
     game_board()
     enter_column_number()
@@ -147,16 +149,19 @@ def next_turn(disc):
     global winner
 
     if check_winner(disc):
+        # Game has a winner so handle that
         winner = True
         game_board()
         we_have_a_winner()
     else:
         if player_turn:
+            # The last turn was the players so change it
             player_turn = False
             check_draw()
             game_board()
             computer_turn()
         else:
+            # The last turn was the computer's so change it
             player_turn = True
             check_draw()
             game_board()
@@ -234,8 +239,10 @@ def enter_column_number():
     
     while column_choice not in range(1, column_range) or column_full:
         try:
+            # User inputs number
             column_choice = int(input("   Enter your column choice...\n"))
         except ValueError:
+            # Handle the error if it's not a number
             print("   Not a number")
             sleep(DELAY_TIME*2)
             game_board()
@@ -245,11 +252,13 @@ def enter_column_number():
                 print("Thanks for playing")
                 quit()
             elif column_choice not in range(1, column_range):
+                # Handle when input number not an available column
                 warn = "Please only enter a number between 1 and"
                 print("   ", warn, BOARD_WIDTH)
                 sleep(DELAY_TIME*2)
                 game_board()
             elif board_db[column_choice-1][1] != ".":
+                # Check to see if the column is full
                 print("   That column is full!")
                 sleep(DELAY_TIME*2)
                 game_board()
@@ -262,8 +271,10 @@ def computer_turn():
     """
     Chooses a random column and checks to see if that column is available
     """
+    # Choose a random column
     column_choice = random.randint(1, BOARD_WIDTH)
     while board_db[column_choice-1][1] != ".":
+        # The chosen column is full so choose again
         column_choice = random.randint(1, BOARD_WIDTH)
     sleep(DELAY_TIME)
     drop_disc(column_choice)
@@ -277,44 +288,48 @@ def check_winner(disc):
     The following code has been modified but was originally from line 69 of
     https://github.com/justinvallely/Python-Connect-4/
     """
-    # check horizontal spaces
+    # Check horizontal spaces
     for y in range(1, BOARD_HEIGHT):
         for x in range(BOARD_WIDTH - 3):
             if board_db[x][y] == disc and board_db[x+1][y] == disc:
                 if board_db[x+2][y] == disc and board_db[x+3][y] == disc:
+                    # Turn the disc RED
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+1][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+2][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+3][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
-    # check vertical spaces
+    # Check vertical spaces
     for x in range(BOARD_WIDTH):
         for y in range(1, (BOARD_HEIGHT - 3)):
             if board_db[x][y] == disc and board_db[x][y+1] == disc:
                 if board_db[x][y+2] == disc and board_db[x][y+3] == disc:
+                    # Turn the disc RED
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
-    # check / diagonal spaces
+    # Check / diagonal spaces
     for x in range(BOARD_WIDTH - 3):
         for y in range(4, BOARD_HEIGHT):
             if board_db[x][y] == disc and board_db[x+1][y-1] == disc:
                 if board_db[x+2][y-2] == disc and board_db[x+3][y-3] == disc:
+                    # Turn the disc RED
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+1][y-1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+2][y-2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+3][y-3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
-    # check \ diagonal spaces
+    # Check \ diagonal spaces
     for x in range(BOARD_WIDTH - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
             if board_db[x][y] == disc and board_db[x+1][y+1] == disc:
                 if board_db[x+2][y+2] == disc and board_db[x+3][y+3] == disc:
+                    # Turn the disc RED
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+1][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+2][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
@@ -350,6 +365,7 @@ def play_again():
         game_board()
         play_again = input("   Would you like to play again? y/n\n")
         if play_again.lower() == "y":
+            # Player wants to play again so reset and start the game
             print("   OK, resetting game...")
             sleep(DELAY_TIME)
             valid_input = True
@@ -357,10 +373,12 @@ def play_again():
             game_board()
             enter_column_number()
         elif play_again.lower() == "n":
+            # Player wants to end the game so quit
             print("   OK, Thank you for playing. Come back soon!! :)\n")
             valid_input = True
             quit()
         else:
+            # Player didn't enter y or n so keep them in the while loop
             print("   Not a valid input.")
 
 
@@ -371,8 +389,11 @@ def check_draw():
     global disc_count
     disc_count += 1
 
+    # Calculate the max number of squares based on board size
     board_max = (BOARD_HEIGHT-1) * BOARD_WIDTH
+
     if disc_count >= board_max:
+        # Game's a draw so handle that
         print("   No winners this time :(\n")
         sleep(DELAY_TIME*3)
         play_again()
