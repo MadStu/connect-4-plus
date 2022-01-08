@@ -6,7 +6,7 @@ import random
 BOARD_HEIGHT = 7
 BOARD_WIDTH = 12
 
-DELAY_TIME = 0.04
+DELAY_TIME = 0.4
 DROP_SPEED = 0.06
 
 
@@ -204,7 +204,7 @@ def game_board():
             # Print the walls in the main area. None for the top
             board_line += three_spaces if i == 0 else wall
             board_line += board_db[ii][i]
-        
+
         # Prints walls or spaces depending which line is processing
         board_line += three_spaces if i == 0 else wall
         print(board_line)
@@ -236,10 +236,10 @@ def enter_column_number():
     column_choice = 0
     column_full = True
     column_range = BOARD_WIDTH + 1
-    
+
     while column_choice not in range(1, column_range) or column_full:
         try:
-            # User inputs number
+            # User inputs column number
             column_choice = int(input("   Enter your column choice...\n"))
         except ValueError:
             # Handle the error if it's not a number
