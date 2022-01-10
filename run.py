@@ -211,11 +211,9 @@ def next_turn(disc):
     global player_turn
     global winner
     global next_comp_move
-    global got_3
 
     # Reset next computer move
     next_comp_move = 0
-    got_3 = False
 
     if check_winner("O") or check_winner("X"):
         # Game has a winner so handle that
@@ -369,6 +367,8 @@ def computer_turn():
     Chooses a random column or copies the players evry 3rd move
     Then checks to see if that column is available
     """
+    global got_3
+
     if next_comp_move > 0:
         # Go where was suggested
         column_choice = next_comp_move
@@ -381,6 +381,7 @@ def computer_turn():
         column_choice = random.randint(1, game_width)
 
     sleep(DELAY_TIME)
+    got_3 = False
     drop_disc(column_choice)
 
 
@@ -396,55 +397,6 @@ def check_winner(disc):
     """
     global got_3
 
-    # Check horizontal spaces
-    for y in range(1, BOARD_HEIGHT):
-        for x in range(game_width - 3):
-            if board_db[x+3][y] == disc and board_db[x+2][y] == disc:
-                if board_db[x+1][y] == disc and board_db[x][y] == disc:
-                    # Turn the winning discs RED
-                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+1][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+2][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+3][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    return True
-
-                elif board_db[x+1][y] == disc and board_db[x][y] == ".":
-                    got_3 = True and computer_next_move(x, y)
-
-                elif board_db[x+1][y] == "." and board_db[x][y] == disc:
-                    got_3 = True and computer_next_move(x+1, y)
-
-                elif board_db[x+1][y] == "." and board_db[x][y] == ".":
-                    hard_mode and not got_3 and computer_next_move(x+1, y)
-
-    # Check horizontal spaces from other direction
-    for y in range(1, BOARD_HEIGHT):
-        for x in range(game_width - 3):
-            if board_db[x][y] == disc and board_db[x+1][y] == disc:
-                if board_db[x+2][y] == disc and board_db[x+3][y] == ".":
-                    got_3 = True and computer_next_move(x+3, y)
-
-                elif board_db[x+2][y] == "." and board_db[x+3][y] == disc:
-                    got_3 = True and computer_next_move(x+2, y)
-
-                elif board_db[x+2][y] == "." and board_db[x+3][y] == ".":
-                    hard_mode and not got_3 and computer_next_move(x+2, y)
-
-    # Check vertical spaces
-    for x in range(game_width):
-        for y in range(1, (BOARD_HEIGHT - 3)):
-            if board_db[x][y+3] == disc and board_db[x][y+2] == disc:
-                if board_db[x][y+1] == disc and board_db[x][y] == disc:
-                    # Turn the winning discs RED
-                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    return True
-
-                elif board_db[x][y+1] == disc and board_db[x][y] == ".":
-                    got_3 = True and computer_next_move(x, y)
-
     # Check / diagonal spaces
     for x in range(game_width - 3):
         for y in range(4, BOARD_HEIGHT):
@@ -458,26 +410,32 @@ def check_winner(disc):
                     return True
 
                 elif board_db[x+1][y-1] == "." and board_db[x][y] == disc:
-                    got_3 = True and computer_next_move(x+1, y-1)
+                    got_3 = True
+                    computer_next_move(x+1, y-1)
 
                 elif board_db[x+1][y-1] == disc and board_db[x][y] == ".":
-                    got_3 = True and computer_next_move(x, y)
+                    got_3 = True
+                    computer_next_move(x, y)
 
                 elif board_db[x+1][y-1] == "." and board_db[x][y] == ".":
-                    hard_mode and not got_3 and computer_next_move(x+1, y-1)
+                    if hard_mode and got_3 != True: 
+                        computer_next_move(x+1, y-1)
 
     # Check / diagonal spaces from other direction
     for x in range(game_width - 3):
         for y in range(4, BOARD_HEIGHT):
             if board_db[x][y] == disc and board_db[x+1][y-1] == disc:
                 if board_db[x+2][y-2] == "." and board_db[x+3][y-3] == disc:
-                    got_3 = True and computer_next_move(x+2, y-2)
+                    got_3 = True
+                    computer_next_move(x+2, y-2)
 
                 elif board_db[x+2][y-2] == disc and board_db[x+3][y-3] == ".":
-                    got_3 = True and computer_next_move(x+3, y-3)
+                    got_3 = True
+                    computer_next_move(x+3, y-3)
 
                 elif board_db[x+2][y-2] == "." and board_db[x+3][y-3] == ".":
-                    hard_mode and not got_3 and computer_next_move(x+2, y-2)
+                    if hard_mode and got_3 != True: 
+                        computer_next_move(x+2, y-2)
 
     # Check \ diagonal spaces
     for x in range(game_width - 3):
@@ -492,26 +450,92 @@ def check_winner(disc):
                     return True
 
                 elif board_db[x+1][y+1] == "." and board_db[x][y] == disc:
-                    got_3 = True and computer_next_move(x+1, y+1)
+                    got_3 = True
+                    computer_next_move(x+1, y+1)
 
                 elif board_db[x+1][y+1] == disc and board_db[x][y] == ".":
-                    got_3 = True and computer_next_move(x, y)
+                    got_3 = True
+                    computer_next_move(x, y)
 
                 elif board_db[x+1][y+1] == "." and board_db[x][y] == ".":
-                    hard_mode and not got_3 and computer_next_move(x+1, y+1)
+                    if hard_mode and got_3 != True: 
+                        computer_next_move(x+1, y+1)
 
     # Check \ diagonal spaces from other direction
     for x in range(game_width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
             if board_db[x][y] == disc and board_db[x+1][y+1] == disc:
                 if board_db[x+2][y+2] == "." and board_db[x+3][y+3] == disc:
-                    got_3 = True and computer_next_move(x+2, y+2)
+                    got_3 = True
+                    computer_next_move(x+2, y+2)
 
                 elif board_db[x+2][y+2] == disc and board_db[x+3][y+3] == ".":
-                    got_3 = True and computer_next_move(x+3, y+3)
+                    got_3 = True
+                    computer_next_move(x+3, y+3)
 
                 elif board_db[x+2][y+2] == "." and board_db[x+3][y+3] == ".":
-                    hard_mode and not got_3 and computer_next_move(x+2, y+2)
+                    if hard_mode and got_3 != True: 
+                        computer_next_move(x+2, y+2)
+
+    # Check horizontal spaces
+    for y in range(1, BOARD_HEIGHT):
+        for x in range(game_width - 3):
+            if board_db[x+3][y] == disc and board_db[x+2][y] == disc:
+                if board_db[x+1][y] == disc and board_db[x][y] == disc:
+                    # Turn the winning discs RED
+                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+1][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+2][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x+3][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    return True
+
+                elif board_db[x+1][y] == disc and board_db[x][y] == ".":
+                    got_3 = True
+                    computer_next_move(x, y)
+
+                elif board_db[x+1][y] == "." and board_db[x][y] == disc:
+                    got_3 = True
+                    computer_next_move(x+1, y)
+
+                elif board_db[x+1][y] == "." and board_db[x][y] == ".":
+                    if hard_mode and got_3 != True: 
+                        computer_next_move(x+1, y)
+
+    # Check horizontal spaces from other direction
+    for y in range(1, BOARD_HEIGHT):
+        for x in range(game_width - 3):
+            if board_db[x][y] == disc and board_db[x+1][y] == disc:
+                if board_db[x+2][y] == disc and board_db[x+3][y] == ".":
+                    got_3 = True
+                    computer_next_move(x+3, y)
+
+                elif board_db[x+2][y] == "." and board_db[x+3][y] == disc:
+                    got_3 = True
+                    computer_next_move(x+2, y)
+
+                elif board_db[x+2][y] == "." and board_db[x+3][y] == ".":
+                    if hard_mode and got_3 != True: 
+                        computer_next_move(x+2, y)
+
+    # Check vertical spaces
+    for x in range(game_width):
+        for y in range(1, (BOARD_HEIGHT - 3)):
+            if board_db[x][y+3] == disc and board_db[x][y+2] == disc:
+                if board_db[x][y+1] == disc and board_db[x][y] == disc:
+                    # Turn the winning discs RED
+                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    board_db[x][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    return True
+
+                elif board_db[x][y+1] == disc and board_db[x][y] == ".":
+                    got_3 = True
+                    computer_next_move(x, y)
+
+                elif board_db[x][y+1] == "." and board_db[x][y] == ".":
+                    if hard_mode and got_3 != True: 
+                        computer_next_move(x, y+1)
 
     return False
 
