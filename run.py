@@ -353,6 +353,8 @@ def check_winner(disc):
     Checks if there's any winning lines of 4
     Changes the colour of the winning discs
 
+    Also checks for free spaces for the computer to stop player winning
+
     The following code has been modified but was originally from line 69 of
     https://github.com/justinvallely/Python-Connect-4/
     """
@@ -375,6 +377,18 @@ def check_winner(disc):
                 elif board_db[x+1][y] == "." and board_db[x][y] == disc:
                     # Tell computer to put next disc here
                     computer_next_move(x+1)
+
+    # Check horizontal spaces from other direction
+    for y in range(1, BOARD_HEIGHT):
+        for x in range(game_width - 3):
+            if board_db[x][y] == disc and board_db[x+1][y] == disc:
+                if board_db[x+2][y] == disc and board_db[x+3][y] == ".":
+                    # Tell computer to put next disc here
+                    computer_next_move(x+3)
+
+                elif board_db[x+2][y] == "." and board_db[x+3][y] == disc:
+                    # Tell computer to put next disc here
+                    computer_next_move(x+2)
 
     # Check vertical spaces
     for x in range(game_width):
@@ -412,6 +426,18 @@ def check_winner(disc):
                     # Tell computer to put next disc here
                     computer_next_move(x)
 
+    # Check / diagonal spaces from other direction
+    for x in range(game_width - 3):
+        for y in range(4, BOARD_HEIGHT):
+            if board_db[x][y] == disc and board_db[x+1][y-1] == disc:
+                if board_db[x+2][y-2] == "." and board_db[x+3][y-3] == disc:
+                    # Tell computer to put next disc here
+                    computer_next_move(x+2)
+
+                elif board_db[x+2][y-2] == disc and board_db[x+3][y-3] == ".":
+                    # Tell computer to put next disc here
+                    computer_next_move(x+3)
+
     # Check \ diagonal spaces
     for x in range(game_width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
@@ -431,6 +457,18 @@ def check_winner(disc):
                 elif board_db[x+1][y+1] == disc and board_db[x][y] == ".":
                     # Tell computer to put next disc here
                     computer_next_move(x)
+
+    # Check \ diagonal spaces from other direction
+    for x in range(game_width - 3):
+        for y in range(1, (BOARD_HEIGHT - 3)):
+            if board_db[x][y] == disc and board_db[x+1][y+1] == disc:
+                if board_db[x+2][y+2] == "." and board_db[x+3][y+3] == disc:
+                    # Tell computer to put next disc here
+                    computer_next_move(x+2)
+
+                elif board_db[x+2][y+2] == disc and board_db[x+3][y+3] == ".":
+                    # Tell computer to put next disc here
+                    computer_next_move(x+3)
 
     return False
 
