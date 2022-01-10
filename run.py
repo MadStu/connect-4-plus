@@ -393,6 +393,9 @@ def check_winner(disc):
                 elif board_db[x+1][y] == "." and board_db[x][y] == disc:
                     computer_next_move(x+1, y)
 
+                elif board_db[x+1][y] == "." and board_db[x][y] == ".":
+                    computer_next_move(x+1, y)
+
     # Check horizontal spaces from other direction
     for y in range(1, BOARD_HEIGHT):
         for x in range(game_width - 3):
@@ -401,6 +404,9 @@ def check_winner(disc):
                     computer_next_move(x+3, y)
 
                 elif board_db[x+2][y] == "." and board_db[x+3][y] == disc:
+                    computer_next_move(x+2, y)
+
+                elif board_db[x+2][y] == "." and board_db[x+3][y] == ".":
                     computer_next_move(x+2, y)
 
     # Check vertical spaces
@@ -436,6 +442,9 @@ def check_winner(disc):
                 elif board_db[x+1][y-1] == disc and board_db[x][y] == ".":
                     computer_next_move(x, y)
 
+                elif board_db[x+1][y-1] == "." and board_db[x][y] == ".":
+                    computer_next_move(x+1, y-1)
+
     # Check / diagonal spaces from other direction
     for x in range(game_width - 3):
         for y in range(4, BOARD_HEIGHT):
@@ -445,6 +454,9 @@ def check_winner(disc):
 
                 elif board_db[x+2][y-2] == disc and board_db[x+3][y-3] == ".":
                     computer_next_move(x+3, y-3)
+
+                elif board_db[x+2][y-2] == "." and board_db[x+3][y-3] == ".":
+                    computer_next_move(x+2, y-2)
 
     # Check \ diagonal spaces
     for x in range(game_width - 3):
@@ -464,6 +476,9 @@ def check_winner(disc):
                 elif board_db[x+1][y+1] == disc and board_db[x][y] == ".":
                     computer_next_move(x, y)
 
+                elif board_db[x+1][y+1] == "." and board_db[x][y] == ".":
+                    computer_next_move(x+1, y+1)
+
     # Check \ diagonal spaces from other direction
     for x in range(game_width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
@@ -473,6 +488,9 @@ def check_winner(disc):
 
                 elif board_db[x+2][y+2] == disc and board_db[x+3][y+3] == ".":
                     computer_next_move(x+3, y+3)
+
+                elif board_db[x+2][y+2] == "." and board_db[x+3][y+3] == ".":
+                    computer_next_move(x+2, y+2)
 
     return False
 
