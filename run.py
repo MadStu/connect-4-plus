@@ -331,7 +331,7 @@ def computer_turn():
     global next_comp_move
 
     if next_comp_move > 0:
-        # Go on top of the last player disc
+        # Go where was suggested
         column_choice = next_comp_move
     else:
         # Choose a random column
@@ -371,24 +371,43 @@ def check_winner(disc):
                     return True
 
                 elif board_db[x+1][y] == disc and board_db[x][y] == ".":
-                    # Tell computer to put next disc here
-                    computer_next_move(x)
+                    if y+1 < BOARD_HEIGHT:
+                        # Check if empty square under where we want disc
+                        if board_db[x][y+1] != ".":
+                            # Tell computer to put next disc here
+                            computer_next_move(x)
+                    else:
+                        computer_next_move(x)
 
                 elif board_db[x+1][y] == "." and board_db[x][y] == disc:
-                    # Tell computer to put next disc here
-                    computer_next_move(x+1)
+                    if y+1 < BOARD_HEIGHT:
+                        # Check if empty square under where we want disc
+                        if board_db[x+1][y+1] != ".":
+                            computer_next_move(x+1)
+                    else:
+                        computer_next_move(x+1)
 
     # Check horizontal spaces from other direction
     for y in range(1, BOARD_HEIGHT):
         for x in range(game_width - 3):
             if board_db[x][y] == disc and board_db[x+1][y] == disc:
                 if board_db[x+2][y] == disc and board_db[x+3][y] == ".":
-                    # Tell computer to put next disc here
-                    computer_next_move(x+3)
+                    if y+1 < BOARD_HEIGHT:
+                        # Check if empty square under where we want disc
+                        if board_db[x+3][y+1] != ".":
+                            # Tell computer to put next disc here
+                            computer_next_move(x+3)
+                    else:
+                        computer_next_move(x+3)
 
                 elif board_db[x+2][y] == "." and board_db[x+3][y] == disc:
-                    # Tell computer to put next disc here
-                    computer_next_move(x+2)
+                    if y+1 < BOARD_HEIGHT:
+                        # Check if empty square under where we want disc
+                        if board_db[x+2][y+1] != ".":
+                            # Tell computer to put next disc here
+                            computer_next_move(x+2)
+                    else:
+                        computer_next_move(x+2)
 
     # Check vertical spaces
     for x in range(game_width):
@@ -419,24 +438,35 @@ def check_winner(disc):
                     return True
 
                 elif board_db[x+1][y-1] == "." and board_db[x][y] == disc:
-                    # Tell computer to put next disc here
-                    computer_next_move(x+1)
+                    # Check if empty square under the next winning square
+                    if board_db[x+1][y] != ".":
+                        # Tell computer to put next disc here
+                        computer_next_move(x+1)
 
                 elif board_db[x+1][y-1] == disc and board_db[x][y] == ".":
-                    # Tell computer to put next disc here
-                    computer_next_move(x)
+                    if y+1 < BOARD_HEIGHT:
+                        # Check if empty square under the next winning square
+                        if board_db[x][y+1] != ".":
+                            # Tell computer to put next disc here
+                            computer_next_move(x)
+                    else:
+                        computer_next_move(x)
 
     # Check / diagonal spaces from other direction
     for x in range(game_width - 3):
         for y in range(4, BOARD_HEIGHT):
             if board_db[x][y] == disc and board_db[x+1][y-1] == disc:
                 if board_db[x+2][y-2] == "." and board_db[x+3][y-3] == disc:
-                    # Tell computer to put next disc here
-                    computer_next_move(x+2)
+                    # Check if empty square under the next winning square
+                    if board_db[x+2][y-1] != ".":
+                        # Tell computer to put next disc here
+                        computer_next_move(x+2)
 
                 elif board_db[x+2][y-2] == disc and board_db[x+3][y-3] == ".":
-                    # Tell computer to put next disc here
-                    computer_next_move(x+3)
+                    # Check if empty square under the next winning square
+                    if board_db[x+3][y-2] != ".":
+                        # Tell computer to put next disc here
+                        computer_next_move(x+3)
 
     # Check \ diagonal spaces
     for x in range(game_width - 3):
@@ -451,24 +481,44 @@ def check_winner(disc):
                     return True
 
                 elif board_db[x+1][y+1] == "." and board_db[x][y] == disc:
-                    # Tell computer to put next disc here
-                    computer_next_move(x+1)
+                    if y+2 < BOARD_HEIGHT:
+                        # Check if empty square under the next winning square
+                        if board_db[x+1][y+2] != ".":
+                            # Tell computer to put next disc here
+                            computer_next_move(x+1)
+                    else:
+                        computer_next_move(x+1)
 
                 elif board_db[x+1][y+1] == disc and board_db[x][y] == ".":
-                    # Tell computer to put next disc here
-                    computer_next_move(x)
+                    if y+1 < BOARD_HEIGHT:
+                        # Check if empty square under the next winning square
+                        if board_db[x][y+1] != ".":
+                            # Tell computer to put next disc here
+                            computer_next_move(x)
+                    else:
+                        computer_next_move(x)
 
     # Check \ diagonal spaces from other direction
     for x in range(game_width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
             if board_db[x][y] == disc and board_db[x+1][y+1] == disc:
                 if board_db[x+2][y+2] == "." and board_db[x+3][y+3] == disc:
-                    # Tell computer to put next disc here
-                    computer_next_move(x+2)
+                    if y+3 < BOARD_HEIGHT:
+                        # Check if empty square under the next winning square
+                        if board_db[x+2][y+3] != ".":
+                            # Tell computer to put next disc here
+                            computer_next_move(x+2)
+                    else:
+                        computer_next_move(x+2)
 
                 elif board_db[x+2][y+2] == disc and board_db[x+3][y+3] == ".":
-                    # Tell computer to put next disc here
-                    computer_next_move(x+3)
+                    if y+4 < BOARD_HEIGHT:
+                        # Check if empty square under the next winning square
+                        if board_db[x+3][y+4] != ".":
+                            # Tell computer to put next disc here
+                            computer_next_move(x+3)
+                    else:
+                        computer_next_move(x+3)
 
     return False
 
@@ -478,7 +528,6 @@ def computer_next_move(column):
     Tells the computer the next best place to go to beat the player
     """
     global next_comp_move
-
     next_comp_move = column + 1
 
 
