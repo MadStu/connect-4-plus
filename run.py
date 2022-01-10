@@ -18,6 +18,7 @@ DROP_SPEED = 0.05
 # Each game won increases their level
 game_level = 1
 winner = False
+player_turn = True
 next_comp_move = 0
 
 
@@ -105,10 +106,10 @@ def welcome():
     logo()
 
     sleep(DELAY_TIME)
-    print("            1   2   3   4   5   6   7  ")
+    print("   1   2   3   4   5   6   7   8   9   10  11  12")
     print("                                       ")
-    print("          | . | . | . | . | . | . | . |")
-    print("          | . | . | . | . | . | . | . |\n")
+    print(" | . | . | . | . | . | . | . | . | . | . | . | . |")
+    print(" | . | . | . | . | . | . | . | . | . | . | . | . |\n")
     sleep(DELAY_TIME)
     print("   Each column is numbered from left-right.")
     print("   You'll need to enter a column number in which")
@@ -120,16 +121,33 @@ def welcome():
     logo()
 
     sleep(DELAY_TIME)
-    print("            1   2   3   4   5   6   7  ")
+    disc_example = "\033[1;31;48mO\033[1;32;48m"
+    print("   1   2   3   4   5   6   7   8   9   10  11  12")
     print("                                       ")
-    print("          | . | . | . | . | . | . | \033[1;31;48mO\033[1;32;48m |")
-    print("          | . | . | . | . | . | \033[1;31;48mO\033[1;32;48m | X |")
-    print("          | O | X | . | . | \033[1;31;48mO\033[1;32;48m | X | O |")
-    print("          | X | X | X | \033[1;31;48mO\033[1;32;48m | X | O | O |")
+    print(f" | . | . | . | . | . | . | {disc_example} | . | . | . | . | . |")
+    print(f" | . | . | . | . | . | {disc_example} | X | . | X | . | . | . |")
+    print(f" | O | X | . | . | {disc_example} | X | O | . | O | O | . | . |")
+    print(f" | X | X | X | {disc_example} | X | O | O | O | X | O | X | . |")
     print("")
     sleep(DELAY_TIME)
     print("   When you get 4 in a row like shown above or")
     print("   in any other direction, you win the game!\n")
+
+    sleep(DELAY_TIME)
+    input("   Press Enter to continue...\n")
+    clear()
+    logo()
+
+    sleep(DELAY_TIME)
+    print("   1   2   3   4   5   6   7   8   9   10  11  12")
+    print("                                       ")
+    print(" | . | . | . | . | . | . | . | . | . | . | . | . |")
+    print(" | . | . | . | . | . | . | . | . | . | . | . | . |")
+    game_status()
+    sleep(DELAY_TIME)
+    print("   You'll start on Level 1 and your goal is to")
+    print("   reach level 10. The Board will narrow each time")
+    print("   you level up, increasing the difficulty.\n")
 
     sleep(DELAY_TIME)
     input("   Press Enter to start playing!...\n")
@@ -181,7 +199,7 @@ def next_turn(disc):
     global player_turn
     global winner
     global next_comp_move
-    
+
     # Reset next computer move
     next_comp_move = 0
 
