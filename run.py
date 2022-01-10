@@ -20,6 +20,7 @@ game_level = 1
 winner = False
 player_turn = True
 next_comp_move = 0
+hard_mode = False
 
 
 def reset_board_db():
@@ -394,7 +395,7 @@ def check_winner(disc):
                     computer_next_move(x+1, y)
 
                 elif board_db[x+1][y] == "." and board_db[x][y] == ".":
-                    computer_next_move(x+1, y)
+                    hard_mode and computer_next_move(x+1, y)
 
     # Check horizontal spaces from other direction
     for y in range(1, BOARD_HEIGHT):
@@ -407,7 +408,7 @@ def check_winner(disc):
                     computer_next_move(x+2, y)
 
                 elif board_db[x+2][y] == "." and board_db[x+3][y] == ".":
-                    computer_next_move(x+2, y)
+                    hard_mode and computer_next_move(x+2, y)
 
     # Check vertical spaces
     for x in range(game_width):
@@ -443,7 +444,7 @@ def check_winner(disc):
                     computer_next_move(x, y)
 
                 elif board_db[x+1][y-1] == "." and board_db[x][y] == ".":
-                    computer_next_move(x+1, y-1)
+                    hard_mode and computer_next_move(x+1, y-1)
 
     # Check / diagonal spaces from other direction
     for x in range(game_width - 3):
@@ -456,7 +457,7 @@ def check_winner(disc):
                     computer_next_move(x+3, y-3)
 
                 elif board_db[x+2][y-2] == "." and board_db[x+3][y-3] == ".":
-                    computer_next_move(x+2, y-2)
+                    hard_mode and computer_next_move(x+2, y-2)
 
     # Check \ diagonal spaces
     for x in range(game_width - 3):
@@ -477,7 +478,7 @@ def check_winner(disc):
                     computer_next_move(x, y)
 
                 elif board_db[x+1][y+1] == "." and board_db[x][y] == ".":
-                    computer_next_move(x+1, y+1)
+                    hard_mode and computer_next_move(x+1, y+1)
 
     # Check \ diagonal spaces from other direction
     for x in range(game_width - 3):
@@ -490,7 +491,7 @@ def check_winner(disc):
                     computer_next_move(x+3, y+3)
 
                 elif board_db[x+2][y+2] == "." and board_db[x+3][y+3] == ".":
-                    computer_next_move(x+2, y+2)
+                    hard_mode and computer_next_move(x+2, y+2)
 
     return False
 
@@ -501,16 +502,15 @@ def computer_next_move(x, y):
     """
     global next_comp_move
 
-    if next_comp_move == 0:
-        try:
-            # Check if the square under the next winning square is not empty
-            if board_db[x][y+1] != ".":
-                # Tell computer to put next disc here
-                next_comp_move = x+1
-
-        except IndexError:
+    try:
+        # Check if the square under the next winning square is not empty
+        if board_db[x][y+1] != ".":
             # Tell computer to put next disc here
             next_comp_move = x+1
+
+    except IndexError:
+        # Tell computer to put next disc here
+        next_comp_move = x+1
 
 
 def we_have_a_winner():
