@@ -89,6 +89,8 @@ def welcome():
     """
     Display the welcome text and games rules
     """
+    global hard_mode
+
     clear()
     logo()
     sleep(DELAY_TIME)
@@ -151,7 +153,14 @@ def welcome():
     print("   you level up, increasing the difficulty.\n")
 
     sleep(DELAY_TIME)
-    input("   Press Enter to start playing!...\n")
+    print("                      Let's play!!")
+    mode_input = input("   Type 'HARD' for hard mode or press enter for easy mode\n")
+
+    if mode_input.lower() == "hard":
+        # Player wants to play with hard mode on
+        print("   HARD MODE! YOU MANIAC!! :-o\n")
+        sleep(DELAY_TIME*3)
+        hard_mode = True
 
     # Begin the game!
     reset_board_db()
@@ -277,14 +286,19 @@ def game_status():
     """
     Prints the status of the game
     """
-    space = "           " if game_level < 10 else "          "
-    status = f"\n       Level: {game_level}{space}"
+    space = "        " if game_level < 10 else "       "
+    status = f"\n    Level: {game_level}{space}"
+    hard_text = "HARD Mode   "
+    easy_text = "Easy Mode   "
     user_winn = "      You WON!!\n"
     user_turn = "      Your Turn\n"
     comp_winn = "   Computer Won\n"
     comp_turn = "Computer's Turn\n"
 
     # Put the status in order
+
+    status += hard_text if hard_mode else easy_text
+
     if player_turn:
         status += user_winn if winner else user_turn
 
