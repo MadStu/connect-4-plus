@@ -77,7 +77,6 @@ def logo():
   | |    / _ \| '_ \| '_ \ / _ \/ __| __| / /_| |
   | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
    \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
-                                 By Stuart Raynor
     \033[1;32;48m""")
 
 
@@ -169,10 +168,10 @@ def drop_disc(column):
             sleep(DROP_SPEED)
             board_db[column][i] = "."
 
-    next_turn(disc)
+    next_turn(disc, column)
 
 
-def next_turn(disc):
+def next_turn(disc, last_column):
     """
     Check for winner, if not, swap the player turn, check for draw
     """
@@ -191,7 +190,7 @@ def next_turn(disc):
             player_turn = False
             check_draw()
             game_board()
-            computer_turn()
+            computer_turn(last_column)
 
         else:
             # The last turn was the computer's so change it
@@ -321,12 +320,16 @@ def enter_column_number():
     drop_disc(column_choice)
 
 
-def computer_turn():
+def computer_turn(last_column):
     """
     Chooses a random column and checks to see if that column is available
     """
-    # Choose a random column
-    column_choice = random.randint(1, game_width)
+    if disc_count % 5 == 0:
+        # Go on top of the last player disc
+        column_choice = last_column + 1
+    else:
+        # Choose a random column
+        column_choice = random.randint(1, game_width)
 
     while board_db[column_choice-1][1] != ".":
         # The chosen column is full so choose again
@@ -484,3 +487,4 @@ def top_level():
 
 
 welcome()
+
