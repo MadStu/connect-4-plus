@@ -97,7 +97,7 @@ def welcome():
     print("   The game is easy, you take turns with the")
     print("   computer to place your discs which fall into")
     print("   each column, in this game you'll play with X's")
-    print("   and O's. You'll be O and the computer will be X.\n")
+    print("   and O's. \n   You'll be O and the computer will be X.\n")
 
     sleep(DELAY_TIME)
     input("   Press Enter to continue...\n")
@@ -180,6 +180,10 @@ def next_turn(disc):
     """
     global player_turn
     global winner
+    global next_comp_move
+    
+    # Reset next computer move
+    next_comp_move = 0
 
     if check_winner(disc):
         # Game has a winner so handle that
@@ -328,8 +332,6 @@ def computer_turn():
     Chooses a random column or copies the players evry 3rd move
     Then checks to see if that column is available
     """
-    global next_comp_move
-
     if next_comp_move > 0:
         # Go where was suggested
         column_choice = next_comp_move
@@ -340,9 +342,6 @@ def computer_turn():
     # The chosen column is full so choose again
     while board_db[column_choice-1][1] != ".":
         column_choice = random.randint(1, game_width)
-
-    # Reset next computer move
-    next_comp_move = 0
 
     sleep(DELAY_TIME)
     drop_disc(column_choice)
