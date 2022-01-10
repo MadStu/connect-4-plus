@@ -13,7 +13,7 @@ game_width = BOARD_WIDTH
 DELAY_TIME = 0.15
 
 # Speed which the disc drops down
-DROP_SPEED = 0.05
+DROP_SPEED = 0.06
 
 # Each game won increases their level
 game_level = 1
@@ -21,6 +21,7 @@ winner = False
 player_turn = True
 next_comp_move = 0
 hard_mode = False
+got_3 = False
 
 
 def reset_board_db():
@@ -154,12 +155,13 @@ def welcome():
 
     sleep(DELAY_TIME)
     print("                      Let's play!!")
-    mode_input = input("   Type 'HARD' for hard mode or press enter for easy mode\n")
+    input_text = "   Type 'HARD' for hard mode or just press enter\n"
+    mode_input = input(input_text)
 
     if mode_input.lower() == "hard":
         # Player wants to play with hard mode on
         print("   HARD MODE! YOU MANIAC!! :-o\n")
-        sleep(DELAY_TIME*3)
+        sleep(DELAY_TIME*6)
         hard_mode = True
 
     # Begin the game!
@@ -209,11 +211,13 @@ def next_turn(disc):
     global player_turn
     global winner
     global next_comp_move
+    global got_3
 
     # Reset next computer move
     next_comp_move = 0
+    got_3 = False
 
-    if check_winner(disc):
+    if check_winner("O") or check_winner("X"):
         # Game has a winner so handle that
         winner = True
         game_board()
@@ -390,6 +394,8 @@ def check_winner(disc):
     The following code has been modified but was originally from line 69 of
     https://github.com/justinvallely/Python-Connect-4/
     """
+    global got_3
+
     # Check horizontal spaces
     for y in range(1, BOARD_HEIGHT):
         for x in range(game_width - 3):
@@ -403,26 +409,26 @@ def check_winner(disc):
                     return True
 
                 elif board_db[x+1][y] == disc and board_db[x][y] == ".":
-                    computer_next_move(x, y)
+                    got_3 = True and computer_next_move(x, y)
 
                 elif board_db[x+1][y] == "." and board_db[x][y] == disc:
-                    computer_next_move(x+1, y)
+                    got_3 = True and computer_next_move(x+1, y)
 
                 elif board_db[x+1][y] == "." and board_db[x][y] == ".":
-                    hard_mode and computer_next_move(x+1, y)
+                    hard_mode and not got_3 and computer_next_move(x+1, y)
 
     # Check horizontal spaces from other direction
     for y in range(1, BOARD_HEIGHT):
         for x in range(game_width - 3):
             if board_db[x][y] == disc and board_db[x+1][y] == disc:
                 if board_db[x+2][y] == disc and board_db[x+3][y] == ".":
-                    computer_next_move(x+3, y)
+                    got_3 = True and computer_next_move(x+3, y)
 
                 elif board_db[x+2][y] == "." and board_db[x+3][y] == disc:
-                    computer_next_move(x+2, y)
+                    got_3 = True and computer_next_move(x+2, y)
 
                 elif board_db[x+2][y] == "." and board_db[x+3][y] == ".":
-                    hard_mode and computer_next_move(x+2, y)
+                    hard_mode and not got_3 and computer_next_move(x+2, y)
 
     # Check vertical spaces
     for x in range(game_width):
@@ -437,7 +443,7 @@ def check_winner(disc):
                     return True
 
                 elif board_db[x][y+1] == disc and board_db[x][y] == ".":
-                    computer_next_move(x, y)
+                    got_3 = True and computer_next_move(x, y)
 
     # Check / diagonal spaces
     for x in range(game_width - 3):
@@ -452,26 +458,26 @@ def check_winner(disc):
                     return True
 
                 elif board_db[x+1][y-1] == "." and board_db[x][y] == disc:
-                    computer_next_move(x+1, y-1)
+                    got_3 = True and computer_next_move(x+1, y-1)
 
                 elif board_db[x+1][y-1] == disc and board_db[x][y] == ".":
-                    computer_next_move(x, y)
+                    got_3 = True and computer_next_move(x, y)
 
                 elif board_db[x+1][y-1] == "." and board_db[x][y] == ".":
-                    hard_mode and computer_next_move(x+1, y-1)
+                    hard_mode and not got_3 and computer_next_move(x+1, y-1)
 
     # Check / diagonal spaces from other direction
     for x in range(game_width - 3):
         for y in range(4, BOARD_HEIGHT):
             if board_db[x][y] == disc and board_db[x+1][y-1] == disc:
                 if board_db[x+2][y-2] == "." and board_db[x+3][y-3] == disc:
-                    computer_next_move(x+2, y-2)
+                    got_3 = True and computer_next_move(x+2, y-2)
 
                 elif board_db[x+2][y-2] == disc and board_db[x+3][y-3] == ".":
-                    computer_next_move(x+3, y-3)
+                    got_3 = True and computer_next_move(x+3, y-3)
 
                 elif board_db[x+2][y-2] == "." and board_db[x+3][y-3] == ".":
-                    hard_mode and computer_next_move(x+2, y-2)
+                    hard_mode and not got_3 and computer_next_move(x+2, y-2)
 
     # Check \ diagonal spaces
     for x in range(game_width - 3):
@@ -486,45 +492,43 @@ def check_winner(disc):
                     return True
 
                 elif board_db[x+1][y+1] == "." and board_db[x][y] == disc:
-                    computer_next_move(x+1, y+1)
+                    got_3 = True and computer_next_move(x+1, y+1)
 
                 elif board_db[x+1][y+1] == disc and board_db[x][y] == ".":
-                    computer_next_move(x, y)
+                    got_3 = True and computer_next_move(x, y)
 
                 elif board_db[x+1][y+1] == "." and board_db[x][y] == ".":
-                    hard_mode and computer_next_move(x+1, y+1)
+                    hard_mode and not got_3 and computer_next_move(x+1, y+1)
 
     # Check \ diagonal spaces from other direction
     for x in range(game_width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
             if board_db[x][y] == disc and board_db[x+1][y+1] == disc:
                 if board_db[x+2][y+2] == "." and board_db[x+3][y+3] == disc:
-                    computer_next_move(x+2, y+2)
+                    got_3 = True and computer_next_move(x+2, y+2)
 
                 elif board_db[x+2][y+2] == disc and board_db[x+3][y+3] == ".":
-                    computer_next_move(x+3, y+3)
+                    got_3 = True and computer_next_move(x+3, y+3)
 
                 elif board_db[x+2][y+2] == "." and board_db[x+3][y+3] == ".":
-                    hard_mode and computer_next_move(x+2, y+2)
+                    hard_mode and not got_3 and computer_next_move(x+2, y+2)
 
     return False
 
 
-def computer_next_move(x, y):
+def computer_next_move(column, row):
     """
     Tells the computer the next best place to go to beat the player
     """
     global next_comp_move
 
+    # Check if there's a supporting disc in that square
     try:
-        # Check if the square under the next winning square is not empty
-        if board_db[x][y+1] != ".":
-            # Tell computer to put next disc here
-            next_comp_move = x+1
+        if board_db[column][row + 1] != ".":
+            next_comp_move = column + 1
 
     except IndexError:
-        # Tell computer to put next disc here
-        next_comp_move = x+1
+        next_comp_move = column + 1
 
 
 def we_have_a_winner():
