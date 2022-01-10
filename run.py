@@ -18,6 +18,7 @@ DROP_SPEED = 0.05
 # Each game won increases their level
 game_level = 1
 winner = False
+next_comp_move = 0
 
 
 def reset_board_db():
@@ -31,6 +32,7 @@ def reset_board_db():
     global board_db
     global game_level
     global game_width
+    global next_comp_move
 
     # Reset or adjust game level and board width
     if winner:
@@ -48,6 +50,7 @@ def reset_board_db():
     player_turn = True
     winner = False
     disc_count = 0
+    next_comp_move = 0
     board_db = []
 
     # Add blank data into the board_db column by column
@@ -168,10 +171,10 @@ def drop_disc(column):
             sleep(DROP_SPEED)
             board_db[column][i] = "."
 
-    next_turn(disc, column)
+    next_turn(disc)
 
 
-def next_turn(disc, last_column):
+def next_turn(disc):
     """
     Check for winner, if not, swap the player turn, check for draw
     """
@@ -190,7 +193,7 @@ def next_turn(disc, last_column):
             player_turn = False
             check_draw()
             game_board()
-            computer_turn(last_column)
+            computer_turn()
 
         else:
             # The last turn was the computer's so change it
@@ -320,14 +323,16 @@ def enter_column_number():
     drop_disc(column_choice)
 
 
-def computer_turn(last_column):
+def computer_turn():
     """
     Chooses a random column or copies the players evry 3rd move
     Then checks to see if that column is available
     """
-    if disc_count % 5 == 0:
+    global next_comp_move
+
+    if next_comp_move > 0:
         # Go on top of the last player disc
-        column_choice = last_column + 1
+        column_choice = next_comp_move
     else:
         # Choose a random column
         column_choice = random.randint(1, game_width)
@@ -335,6 +340,9 @@ def computer_turn(last_column):
     # The chosen column is full so choose again
     while board_db[column_choice-1][1] != ".":
         column_choice = random.randint(1, game_width)
+
+    # Reset next computer move
+    next_comp_move = 0
 
     sleep(DELAY_TIME)
     drop_disc(column_choice)
@@ -351,52 +359,89 @@ def check_winner(disc):
     # Check horizontal spaces
     for y in range(1, BOARD_HEIGHT):
         for x in range(game_width - 3):
-            if board_db[x][y] == disc and board_db[x+1][y] == disc:
-                if board_db[x+2][y] == disc and board_db[x+3][y] == disc:
-                    # Turn the disc RED
+            if board_db[x+3][y] == disc and board_db[x+2][y] == disc:
+                if board_db[x+1][y] == disc and board_db[x][y] == disc:
+                    # Turn the winning discs RED
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+1][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+2][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+3][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
+                elif board_db[x+1][y] == disc and board_db[x][y] == ".":
+                    # Tell computer to put next disc here
+                    computer_next_move(x)
+
+                elif board_db[x+1][y] == "." and board_db[x][y] == disc:
+                    # Tell computer to put next disc here
+                    computer_next_move(x+1)
+
     # Check vertical spaces
     for x in range(game_width):
         for y in range(1, (BOARD_HEIGHT - 3)):
-            if board_db[x][y] == disc and board_db[x][y+1] == disc:
-                if board_db[x][y+2] == disc and board_db[x][y+3] == disc:
-                    # Turn the disc RED
+            if board_db[x][y+3] == disc and board_db[x][y+2] == disc:
+                if board_db[x][y+1] == disc and board_db[x][y] == disc:
+                    # Turn the winning discs RED
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
+                elif board_db[x][y+1] == disc and board_db[x][y] == ".":
+                    # Tell computer to put next disc here
+                    computer_next_move(x)
+
     # Check / diagonal spaces
     for x in range(game_width - 3):
         for y in range(4, BOARD_HEIGHT):
-            if board_db[x][y] == disc and board_db[x+1][y-1] == disc:
-                if board_db[x+2][y-2] == disc and board_db[x+3][y-3] == disc:
-                    # Turn the disc RED
+            if board_db[x+3][y-3] == disc and board_db[x+2][y-2] == disc:
+                if board_db[x+1][y-1] == disc and board_db[x][y] == disc:
+                    # Turn the winning discs RED
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+1][y-1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+2][y-2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+3][y-3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
+                elif board_db[x+1][y-1] == "." and board_db[x][y] == disc:
+                    # Tell computer to put next disc here
+                    computer_next_move(x+1)
+
+                elif board_db[x+1][y-1] == disc and board_db[x][y] == ".":
+                    # Tell computer to put next disc here
+                    computer_next_move(x)
+
     # Check \ diagonal spaces
     for x in range(game_width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
-            if board_db[x][y] == disc and board_db[x+1][y+1] == disc:
-                if board_db[x+2][y+2] == disc and board_db[x+3][y+3] == disc:
-                    # Turn the disc RED
+            if board_db[x+3][y+3] == disc and board_db[x+2][y+2] == disc:
+                if board_db[x+1][y+1] == disc and board_db[x][y] == disc:
+                    # Turn the winning discs RED
                     board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+1][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+2][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     board_db[x+3][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
+                elif board_db[x+1][y+1] == "." and board_db[x][y] == disc:
+                    # Tell computer to put next disc here
+                    computer_next_move(x+1)
+
+                elif board_db[x+1][y+1] == disc and board_db[x][y] == ".":
+                    # Tell computer to put next disc here
+                    computer_next_move(x)
+
     return False
+
+
+def computer_next_move(column):
+    """
+    Tells the computer the next best place to go to beat the player
+    """
+    global next_comp_move
+
+    next_comp_move = column + 1
 
 
 def we_have_a_winner():
@@ -488,4 +533,3 @@ def top_level():
 
 
 welcome()
-
