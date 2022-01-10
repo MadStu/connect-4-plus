@@ -322,7 +322,8 @@ def enter_column_number():
 
 def computer_turn(last_column):
     """
-    Chooses a random column and checks to see if that column is available
+    Chooses a random column or copies the players evry 3rd move
+    Then checks to see if that column is available
     """
     if disc_count % 5 == 0:
         # Go on top of the last player disc
@@ -331,8 +332,8 @@ def computer_turn(last_column):
         # Choose a random column
         column_choice = random.randint(1, game_width)
 
+    # The chosen column is full so choose again
     while board_db[column_choice-1][1] != ".":
-        # The chosen column is full so choose again
         column_choice = random.randint(1, game_width)
 
     sleep(DELAY_TIME)
