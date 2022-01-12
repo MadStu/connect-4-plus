@@ -377,7 +377,7 @@ def computer_turn():
     drop_disc(column_choice)
 
 
-def check_winner(d, e="."):
+def check_winner(d):
     """
     d = disc and e = empty
     Shortened to satisfy the pep8 line length warnings
@@ -390,6 +390,7 @@ def check_winner(d, e="."):
     The following code has been modified but was originally from line 69 of
     https://github.com/justinvallely/Python-Connect-4/
     """
+    e = "."
     # Check / diagonal spaces
     for x in range(g_state.width - 3):
         for y in range(4, BOARD_HEIGHT):
