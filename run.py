@@ -3,7 +3,7 @@ from time import sleep
 import random
 
 # Set Recursion limit higher for the AI
-from sys import setrecursionlimit, getrecursionlimit
+from sys import setrecursionlimit
 setrecursionlimit(2500)
 
 # Board starting grid size. Height includes the blank space above
@@ -88,7 +88,6 @@ def logo():
   | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
    \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
     \033[1;32;48m""")
-    print(getrecursionlimit())
 
 
 def welcome():
@@ -159,14 +158,14 @@ def welcome():
     print("   you level up, increasing the difficulty.\n")
 
     sleep(DELAY_TIME)
-    print("                      Let's play!!")
-    input_text = "   Type 'HARD' for hard mode or just press enter\n"
+    print("                Make your choice:")
+    input_text = "             [H]ard mode [E]asy mode\n"
     mode_input = input(input_text)
 
-    if mode_input.lower() == "hard":
+    if mode_input.lower() == "h" or mode_input.lower() == "hard":
         # Player wants to play with hard mode on
-        print("   HARD MODE! YOU MANIAC!! :-o\n")
-        sleep(DELAY_TIME*6)
+        print("      HARD MODE!   YOU MANIAC!!!! :-o\n")
+        sleep(DELAY_TIME*7)
         hard_mode = True
 
     # Begin the game!
@@ -594,10 +593,10 @@ def play_again():
     else:
         input_text += "continue playing"
 
-    input_text += " \n   or type 'N' to quit\n"
+    input_text += " \n   or [N]o to quit\n"
     play_again = input(input_text)
 
-    if play_again.lower() == "n":
+    if play_again.lower() == "n" or play_again.lower() == "no":
         # Player wants to end the game so quit
         print("   OK, Thank you for playing. Come back soon!! :)\n")
         quit()
