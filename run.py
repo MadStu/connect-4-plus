@@ -2,8 +2,9 @@ from os import system, name
 from time import sleep
 import random
 
-import sys
-#sys.setrecursionlimit(2500)
+# Set Recursion limit higher for the AI
+from sys import setrecursionlimit, getrecursionlimit
+setrecursionlimit(2500)
 
 # Board starting grid size. Height includes the blank space above
 BOARD_HEIGHT = 7
@@ -18,7 +19,7 @@ DELAY_TIME = 0.15
 # Speed which the disc drops down
 DROP_SPEED = 0.06
 
-# Each game won increases their level
+# The following global variables are in their default state
 game_level = 1
 winner = False
 player_turn = True
@@ -87,7 +88,7 @@ def logo():
   | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
    \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
     \033[1;32;48m""")
-    print(sys.getrecursionlimit())
+    print(getrecursionlimit())
 
 
 def welcome():
