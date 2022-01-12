@@ -377,8 +377,11 @@ def computer_turn():
     drop_disc(column_choice)
 
 
-def check_winner(disc):
+def check_winner(d, e="."):
     """
+    d = disc and e = empty
+    Shortened to satisfy the pep8 line length warnings
+
     Checks if there's any winning lines of 4
     Changes the colour of the winning discs
 
@@ -390,140 +393,140 @@ def check_winner(disc):
     # Check / diagonal spaces
     for x in range(g_state.width - 3):
         for y in range(4, BOARD_HEIGHT):
-            if g_state.db[x+3][y-3] == disc and g_state.db[x+2][y-2] == disc:
-                if g_state.db[x+1][y-1] == disc and g_state.db[x][y] == disc:
+            if g_state.db[x+3][y-3] == d and g_state.db[x+2][y-2] == d:
+                if g_state.db[x+1][y-1] == d and g_state.db[x][y] == d:
                     # Turn the winning discs RED
-                    g_state.db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x+1][y-1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x+2][y-2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x+3][y-3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.db[x][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x+1][y-1] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x+2][y-2] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x+3][y-3] = "\033[1;31;48m"+d+"\033[1;32;48m"
                     return True
 
-                elif g_state.db[x+1][y-1] == "." and g_state.db[x][y] == disc:
+                elif g_state.db[x+1][y-1] == e and g_state.db[x][y] == d:
                     g_state.got_3 = True
                     computer_next_move(x+1, y-1)
 
-                elif g_state.db[x+1][y-1] == disc and g_state.db[x][y] == ".":
+                elif g_state.db[x+1][y-1] == d and g_state.db[x][y] == e:
                     g_state.got_3 = True
                     computer_next_move(x, y)
 
-                elif g_state.db[x+1][y-1] == "." and g_state.db[x][y] == ".":
+                elif g_state.db[x+1][y-1] == e and g_state.db[x][y] == e:
                     if g_state.hard_mode and g_state.got_3 is not True:
                         computer_next_move(x+1, y-1)
 
     # Check / diagonal spaces from other direction
     for x in range(g_state.width - 3):
         for y in range(4, BOARD_HEIGHT):
-            if g_state.db[x][y] == disc and g_state.db[x+1][y-1] == disc:
-                if g_state.db[x+2][y-2] == "." and g_state.db[x+3][y-3] == disc:
+            if g_state.db[x][y] == d and g_state.db[x+1][y-1] == d:
+                if g_state.db[x+2][y-2] == e and g_state.db[x+3][y-3] == d:
                     g_state.got_3 = True
                     computer_next_move(x+2, y-2)
 
-                elif g_state.db[x+2][y-2] == disc and g_state.db[x+3][y-3] == ".":
+                elif g_state.db[x+2][y-2] == d and g_state.db[x+3][y-3] == e:
                     g_state.got_3 = True
                     computer_next_move(x+3, y-3)
 
-                elif g_state.db[x+2][y-2] == "." and g_state.db[x+3][y-3] == ".":
+                elif g_state.db[x+2][y-2] == e and g_state.db[x+3][y-3] == e:
                     if g_state.hard_mode and g_state.got_3 is not True:
                         computer_next_move(x+2, y-2)
 
     # Check \ diagonal spaces
     for x in range(g_state.width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
-            if g_state.db[x+3][y+3] == disc and g_state.db[x+2][y+2] == disc:
-                if g_state.db[x+1][y+1] == disc and g_state.db[x][y] == disc:
+            if g_state.db[x+3][y+3] == d and g_state.db[x+2][y+2] == d:
+                if g_state.db[x+1][y+1] == d and g_state.db[x][y] == d:
                     # Turn the winning discs RED
-                    g_state.db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x+1][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x+2][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x+3][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.db[x][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x+1][y+1] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x+2][y+2] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x+3][y+3] = "\033[1;31;48m"+d+"\033[1;32;48m"
                     return True
 
-                elif g_state.db[x+1][y+1] == "." and g_state.db[x][y] == disc:
+                elif g_state.db[x+1][y+1] == e and g_state.db[x][y] == d:
                     g_state.got_3 = True
                     computer_next_move(x+1, y+1)
 
-                elif g_state.db[x+1][y+1] == disc and g_state.db[x][y] == ".":
+                elif g_state.db[x+1][y+1] == d and g_state.db[x][y] == e:
                     g_state.got_3 = True
                     computer_next_move(x, y)
 
-                elif g_state.db[x+1][y+1] == "." and g_state.db[x][y] == ".":
+                elif g_state.db[x+1][y+1] == e and g_state.db[x][y] == e:
                     if g_state.hard_mode and g_state.got_3 is not True:
                         computer_next_move(x+1, y+1)
 
     # Check \ diagonal spaces from other direction
     for x in range(g_state.width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
-            if g_state.db[x][y] == disc and g_state.db[x+1][y+1] == disc:
-                if g_state.db[x+2][y+2] == "." and g_state.db[x+3][y+3] == disc:
+            if g_state.db[x][y] == d and g_state.db[x+1][y+1] == d:
+                if g_state.db[x+2][y+2] == e and g_state.db[x+3][y+3] == d:
                     g_state.got_3 = True
                     computer_next_move(x+2, y+2)
 
-                elif g_state.db[x+2][y+2] == disc and g_state.db[x+3][y+3] == ".":
+                elif g_state.db[x+2][y+2] == d and g_state.db[x+3][y+3] == e:
                     g_state.got_3 = True
                     computer_next_move(x+3, y+3)
 
-                elif g_state.db[x+2][y+2] == "." and g_state.db[x+3][y+3] == ".":
+                elif g_state.db[x+2][y+2] == e and g_state.db[x+3][y+3] == e:
                     if g_state.hard_mode and g_state.got_3 is not True:
                         computer_next_move(x+2, y+2)
 
     # Check horizontal spaces
     for y in range(1, BOARD_HEIGHT):
         for x in range(g_state.width - 3):
-            if g_state.db[x+3][y] == disc and g_state.db[x+2][y] == disc:
-                if g_state.db[x+1][y] == disc and g_state.db[x][y] == disc:
+            if g_state.db[x+3][y] == d and g_state.db[x+2][y] == d:
+                if g_state.db[x+1][y] == d and g_state.db[x][y] == d:
                     # Turn the winning discs RED
-                    g_state.db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x+1][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x+2][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x+3][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.db[x][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x+1][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x+2][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x+3][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
                     return True
 
-                elif g_state.db[x+1][y] == disc and g_state.db[x][y] == ".":
+                elif g_state.db[x+1][y] == d and g_state.db[x][y] == e:
                     g_state.got_3 = True
                     computer_next_move(x, y)
 
-                elif g_state.db[x+1][y] == "." and g_state.db[x][y] == disc:
+                elif g_state.db[x+1][y] == e and g_state.db[x][y] == d:
                     g_state.got_3 = True
                     computer_next_move(x+1, y)
 
-                elif g_state.db[x+1][y] == "." and g_state.db[x][y] == ".":
+                elif g_state.db[x+1][y] == e and g_state.db[x][y] == e:
                     if g_state.hard_mode and g_state.got_3 is not True:
                         computer_next_move(x+1, y)
 
     # Check horizontal spaces from other direction
     for y in range(1, BOARD_HEIGHT):
         for x in range(g_state.width - 3):
-            if g_state.db[x][y] == disc and g_state.db[x+1][y] == disc:
-                if g_state.db[x+2][y] == disc and g_state.db[x+3][y] == ".":
+            if g_state.db[x][y] == d and g_state.db[x+1][y] == d:
+                if g_state.db[x+2][y] == d and g_state.db[x+3][y] == e:
                     g_state.got_3 = True
                     computer_next_move(x+3, y)
 
-                elif g_state.db[x+2][y] == "." and g_state.db[x+3][y] == disc:
+                elif g_state.db[x+2][y] == e and g_state.db[x+3][y] == d:
                     g_state.got_3 = True
                     computer_next_move(x+2, y)
 
-                elif g_state.db[x+2][y] == "." and g_state.db[x+3][y] == ".":
+                elif g_state.db[x+2][y] == e and g_state.db[x+3][y] == e:
                     if g_state.hard_mode and g_state.got_3 is not True:
                         computer_next_move(x+2, y)
 
     # Check vertical spaces
     for x in range(g_state.width):
         for y in range(1, (BOARD_HEIGHT - 3)):
-            if g_state.db[x][y+3] == disc and g_state.db[x][y+2] == disc:
-                if g_state.db[x][y+1] == disc and g_state.db[x][y] == disc:
+            if g_state.db[x][y+3] == d and g_state.db[x][y+2] == d:
+                if g_state.db[x][y+1] == d and g_state.db[x][y] == d:
                     # Turn the winning discs RED
-                    g_state.db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    g_state.db[x][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.db[x][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x][y+1] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x][y+2] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    g_state.db[x][y+3] = "\033[1;31;48m"+d+"\033[1;32;48m"
                     return True
 
-                elif g_state.db[x][y+1] == disc and g_state.db[x][y] == ".":
+                elif g_state.db[x][y+1] == d and g_state.db[x][y] == e:
                     g_state.got_3 = True
                     computer_next_move(x, y)
 
-                elif g_state.db[x][y+1] == "." and g_state.db[x][y] == ".":
+                elif g_state.db[x][y+1] == e and g_state.db[x][y] == e:
                     if g_state.hard_mode and g_state.got_3 is not True:
                         computer_next_move(x, y+1)
 
