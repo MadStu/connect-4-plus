@@ -594,9 +594,9 @@ def play_again():
         input_text += "continue playing"
 
     input_text += " \n   or [N]o to quit\n"
-    play_again = input(input_text)
+    play_again_input = input(input_text)
 
-    if play_again.lower() == "n" or play_again.lower() == "no":
+    if play_again_input.lower() == "n" or play_again_input.lower() == "no":
         # Player wants to end the game so quit
         print("   OK, Thank you for playing. Come back soon!! :)\n")
         quit()
