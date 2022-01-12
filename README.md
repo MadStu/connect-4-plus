@@ -4,6 +4,8 @@ Connect 4 is a strategy game where the idea is to get 4 of your own discs in a l
 
 The game is useful for people who spend a lot of time in terminals and allows them to let off steam. They can have a quick game lasting less than a minute, or continue playing until they've beaten the computer, so it's good for somebody to play whether they only have a free moment or lots of time to spare.
 
+A deployed version may be found here: [Connect 4](http://my-connect-4.herokuapp.com/)
+
 ## Planning 
 
 I planned to make a python game that could run in any python3 terminal window and be challenging enough for the player to want to return to the game again and again.
@@ -71,15 +73,20 @@ You will need to mention unfixed bugs and why they were not fixed. This section 
 
 ## Deployment
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub) 
+The deployed program can be found here - http://my-connect-4.herokuapp.com/
 
-- The site was deployed to GitHub pages. The steps to deploy are as follows: 
-  - In the GitHub repository, navigate to the Settings tab 
-  - From the source section drop-down menu, select the Master Branch
-  - Once the master branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment. 
-
-The live link can be found here - https://code-institute-org.github.io/love-running-2.0/index.html 
-
+- The connect4 game was deployed to herokuapp.com using a web interface terminal template. The steps to deploy are as follows: 
+    - Sign up or log in to herokuapp.com.
+    - Click "New" then "Create new app".
+    - Enter an app name, choose your region and then click "Create app".
+    - On the next page, go to the Settings Tab.
+    - Click on "Reveal Config Vars". Add "port" in the KEY text field and "8000" in the VALUE text field, then click the "Add" button.
+    - Click on "Add buildpack" and add the python build pack first, then save changes.
+    - Click on "Add buildpack" again and add the nodejs build pack for the web interface to work.
+    - Click on the Deploy tab at the top, select GitHub and connect to your GitHub account.
+    - Search for the repository name (connect-4) and click the "Connect" button.
+    - Scroll down to the Automatic deploys section and choose the main branch to deploy from.
+    - Click the "Enable Automatic Deploys" button which syncs the herokuapp.com files with your repository every so often.
 
 ## Credits 
 
