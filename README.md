@@ -16,7 +16,15 @@ The game is useful for people who spend a lot of time in terminals and allows th
 
 ## Planning 
 
-![Flow Chart](assets\images\flow-chart.png)
+I planned to make a python game that could run in any python3 terminal window and be challenging enough for the player to want to return to the game again and again.
+
+Connect 4 was a game I thought could meet the criteria I was looking for and could easily be represented within a text based GUI.
+
+Before writing any code I first built a flow chart to map out where it needed to start, where it needed to go and how it would end.
+
+This helped massively at the beginning of the project and I used that to build the initial basic functioning game loop which everything since has been based upon.
+
+![Flow Chart](https://github.com/MadStu/connect-4/raw/main/assets/images/flow-chart.png)
 
 ### Existing Features
 
