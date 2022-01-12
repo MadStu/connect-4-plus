@@ -2,6 +2,9 @@ from os import system, name
 from time import sleep
 import random
 
+import sys
+#sys.setrecursionlimit(2500)
+
 # Board starting grid size. Height includes the blank space above
 BOARD_HEIGHT = 7
 BOARD_WIDTH = 12
@@ -84,6 +87,7 @@ def logo():
   | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
    \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
     \033[1;32;48m""")
+    print(sys.getrecursionlimit())
 
 
 def welcome():
