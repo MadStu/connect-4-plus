@@ -44,6 +44,12 @@ This helped massively at the beginning of the project and I used that to build t
 
 ![Animated Disc Drop](https://github.com/lucyrush/readme-template/blob/master/media/love_running_times.png)
 
+- __Input Validation__
+
+  - Any input from the user is validated, asking if they wany to play hard mode, play again or from the column number they enter.
+
+![Input Validation](https://github.com/lucyrush/readme-template/blob/master/media/love_running_times.png)
+
 ### Features Left to Implement
 
 - Another feature idea
@@ -57,7 +63,7 @@ I also asked friends and family to play with and try to produce errors or uninte
 ### Validator Testing 
 
 - PEP8
-  - No errors were returned when passing through [PEP8Online.com](http://pep8online.com/)
+  - No errors or warnings were returned when passing through [PEP8online.com](http://pep8online.com/)
 
 ### Bugs
 
