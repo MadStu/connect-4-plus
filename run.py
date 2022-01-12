@@ -6,7 +6,7 @@ import random
 from sys import setrecursionlimit
 setrecursionlimit(2500)
 
-# Board starting grid size. Height includes the blank space above
+# Board starting grid size. Height includes the top blank row
 BOARD_HEIGHT = 7
 BOARD_WIDTH = 12
 
@@ -197,10 +197,10 @@ def drop_disc(column):
             sleep(DROP_SPEED)
             Game.db[column][i] = "."
 
-    next_turn(disc)
+    next_turn()
 
 
-def next_turn(disc):
+def next_turn():
     """
     Check for winner, if not, swap the player turn, check for draw
     """
