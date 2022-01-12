@@ -422,7 +422,7 @@ def check_winner(disc):
                     computer_next_move(x, y)
 
                 elif board_db[x+1][y-1] == "." and board_db[x][y] == ".":
-                    if hard_mode and got_3 != True: 
+                    if hard_mode and got_3 not True:
                         computer_next_move(x+1, y-1)
 
     # Check / diagonal spaces from other direction
@@ -438,7 +438,7 @@ def check_winner(disc):
                     computer_next_move(x+3, y-3)
 
                 elif board_db[x+2][y-2] == "." and board_db[x+3][y-3] == ".":
-                    if hard_mode and got_3 != True: 
+                    if hard_mode and got_3 not True:
                         computer_next_move(x+2, y-2)
 
     # Check \ diagonal spaces
@@ -462,7 +462,7 @@ def check_winner(disc):
                     computer_next_move(x, y)
 
                 elif board_db[x+1][y+1] == "." and board_db[x][y] == ".":
-                    if hard_mode and got_3 != True: 
+                    if hard_mode and got_3 not True:
                         computer_next_move(x+1, y+1)
 
     # Check \ diagonal spaces from other direction
@@ -478,7 +478,7 @@ def check_winner(disc):
                     computer_next_move(x+3, y+3)
 
                 elif board_db[x+2][y+2] == "." and board_db[x+3][y+3] == ".":
-                    if hard_mode and got_3 != True: 
+                    if hard_mode and got_3 not True:
                         computer_next_move(x+2, y+2)
 
     # Check horizontal spaces
@@ -502,7 +502,7 @@ def check_winner(disc):
                     computer_next_move(x+1, y)
 
                 elif board_db[x+1][y] == "." and board_db[x][y] == ".":
-                    if hard_mode and got_3 != True: 
+                    if hard_mode and got_3 not True:
                         computer_next_move(x+1, y)
 
     # Check horizontal spaces from other direction
@@ -518,7 +518,7 @@ def check_winner(disc):
                     computer_next_move(x+2, y)
 
                 elif board_db[x+2][y] == "." and board_db[x+3][y] == ".":
-                    if hard_mode and got_3 != True: 
+                    if hard_mode and got_3 not True:
                         computer_next_move(x+2, y)
 
     # Check vertical spaces
@@ -538,7 +538,7 @@ def check_winner(disc):
                     computer_next_move(x, y)
 
                 elif board_db[x][y+1] == "." and board_db[x][y] == ".":
-                    if hard_mode and got_3 != True: 
+                    if hard_mode and got_3 not True:
                         computer_next_move(x, y+1)
 
     return False
