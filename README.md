@@ -24,33 +24,45 @@ This helped massively at the beginning of the project and I used that to build t
 
   - The game's GUI is entirely text based and can be run directly in any python3 terminal.
 
-![GUI](https://github.com/lucyrush/readme-template/blob/master/media/love_running_nav.png)
+![Text Based GUI](https://github.com/MadStu/connect-4/raw/main/assets/images/text-based-gui.png)
 
-- __New Game Concept__
+- __New Gameplay Concept__
 
   - The regular version of the game is 6 columns tall and 7 columns wide. This game starts you on level 1 which is 12 columns wide. This makes it easier as you have more space to win.
   - Every time you win a game, you move up a level and the column width is shortened.
 
-![Landing Page](https://github.com/lucyrush/readme-template/blob/master/media/love_running_landing.png)
+![New Gameplay Comcept](https://github.com/MadStu/connect-4/raw/main/assets/images/new-game-concept.png)
 
 - __Hard Mode__
 
   - The game features a hard mode allowing the player to play against a harder opponent.
   - This the player a real sense of achievement when they win. 
 
-![Hard Mode](https://github.com/lucyrush/readme-template/blob/master/media/love_running_ethos.png)
+![Hard Mode](https://github.com/MadStu/connect-4/raw/main/assets/images/hard-mode.png)
 
 - __Animated Disc Drop__
 
   - Basic animation is included which shows the player discs falling as they're dropped into the column which is visually appealing.
 
-![Animated Disc Drop](https://github.com/lucyrush/readme-template/blob/master/media/love_running_times.png)
+![Animated Disc Drop](https://github.com/MadStu/connect-4/raw/main/assets/images/animated-disc-drop.png)
+
+- __Status Bar__
+
+  - A status bar keeps the player informed with the level they're on, what game difficulty they're playing and who's turn it is.
+
+![Status Bar](https://github.com/MadStu/connect-4/raw/main/assets/images/status-bar.png)
 
 - __Input Validation__
 
   - Any input from the user is validated, asking if they wany to play hard mode, play again or from the column number they enter.
 
-![Input Validation](https://github.com/lucyrush/readme-template/blob/master/media/love_running_times.png)
+![Input Validation](https://github.com/MadStu/connect-4/raw/main/assets/images/input-validation.png)
+
+- __Coloured Winning Discs__
+
+  - Any input from the user is validated, asking if they wany to play hard mode, play again or from the column number they enter.
+
+![Coloured Winning Discs](https://github.com/MadStu/connect-4/raw/main/assets/images/coloured-winning-discs.png)
 
 ### Features Left to Implement
 
