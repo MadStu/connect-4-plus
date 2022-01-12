@@ -10,63 +10,56 @@ setrecursionlimit(2500)
 BOARD_HEIGHT = 7
 BOARD_WIDTH = 12
 
-# The working variable of BOARD_WIDTH
-game_width = BOARD_WIDTH
-
 # Delay time of items being shown
 DELAY_TIME = 0.15
 
 # Speed which the disc drops down
 DROP_SPEED = 0.06
 
-# The following global variables are in their default state
-game_level = 1
-winner = False
-player_turn = True
-next_comp_move = 0
-hard_mode = False
-got_3 = False
+# The following class of global variables are their default state
+class g_state:
+    g_level = 1
+    g_winner = False
+    g_player_turn = True
+    g_next_comp_move = 0
+    g_mode = False
+    g_3 = False
+    g_width = BOARD_WIDTH
+    g_db = []
+    disc_count = 0
 
 
-def reset_board_db():
+def reset_game():
     """
     Resets the working data and game board for a new game
     Increase or reset game level and board width
     """
-    global player_turn
-    global winner
-    global disc_count
-    global board_db
-    global game_level
-    global game_width
-    global next_comp_move
-
     # Reset or adjust game level and board width
-    if winner:
-        if player_turn:
+    if g_state.g_winner:
+        if g_state.g_player_turn:
             # Player has won!
-            game_level += 1
-            game_width -= 1
+            g_state.g_level += 1
+            g_state.g_width -= 1
 
         else:
             # Computer has won :(
-            game_level = 1
-            game_width = BOARD_WIDTH
+            g_state.g_level = 1
+            g_state.g_width = BOARD_WIDTH
 
     # Reset Everything else
-    player_turn = True
-    winner = False
-    disc_count = 0
-    next_comp_move = 0
-    board_db = []
+    g_state.g_player_turn = True
+    g_state.g_winner = False
+    g_state.disc_count = 0
+    g_state.g_next_comp_move = 0
+    g_state.g_db = []
 
-    # Add blank data into the board_db column by column
-    for i in range(game_width):
+    # Add blank data into the g_state.g_db column by column
+    for i in range(g_state.g_width):
         temp_board = []
         for ii in range(BOARD_HEIGHT):
             temp_board.append(" ") if ii == 0 else temp_board.append(".")
 
-        board_db.append(temp_board)
+        g_state.g_db.append(temp_board)
 
 
 def clear():
@@ -94,8 +87,6 @@ def welcome():
     """
     Display the welcome text and games rules
     """
-    global hard_mode
-
     clear()
     logo()
     sleep(DELAY_TIME)
@@ -166,10 +157,10 @@ def welcome():
         # Player wants to play with hard mode on
         print("      HARD MODE!   YOU MANIAC!!!! :-o\n")
         sleep(DELAY_TIME*7)
-        hard_mode = True
+        g_state.g_mode = True
 
     # Begin the game!
-    reset_board_db()
+    reset_game()
     game_board()
     enter_column_number()
 
@@ -179,23 +170,23 @@ def drop_disc(column):
     Animates the dropping of the player disc
     Updates the board data with current disc locations
     """
-    disc = "O" if player_turn else "X"
+    disc = "O" if g_state.g_player_turn else "X"
     column -= 1
     bottom = BOARD_HEIGHT - 1
 
     # Finds the the next available square to determine the bottom
-    while board_db[column][bottom] != ".":
+    while g_state.g_db[column][bottom] != ".":
         bottom -= 1
 
     # Places disc in the next square down and refreshes the board
     for i in range(bottom + 1):
-        board_db[column][i] = disc
+        g_state.g_db[column][i] = disc
         game_board()
 
         # Determines if it's blank space or a . to replace
         if i == 0:
             sleep(DELAY_TIME*2)
-            board_db[column][i] = " "
+            g_state.g_db[column][i] = " "
 
         elif i == bottom:
             # Disc has reached the bottom
@@ -203,7 +194,7 @@ def drop_disc(column):
 
         else:
             sleep(DROP_SPEED)
-            board_db[column][i] = "."
+            g_state.g_db[column][i] = "."
 
     next_turn(disc)
 
@@ -212,30 +203,26 @@ def next_turn(disc):
     """
     Check for winner, if not, swap the player turn, check for draw
     """
-    global player_turn
-    global winner
-    global next_comp_move
-
     # Reset next computer move
-    next_comp_move = 0
+    g_state.g_next_comp_move = 0
 
     if check_winner("O") or check_winner("X"):
         # Game has a winner so handle that
-        winner = True
+        g_state.g_winner = True
         game_board()
         we_have_a_winner()
 
     else:
-        if player_turn:
+        if g_state.g_player_turn:
             # The last turn was the players so change it
-            player_turn = False
+            g_state.g_player_turn = False
             check_draw()
             game_board()
             computer_turn()
 
         else:
             # The last turn was the computer's so change it
-            player_turn = True
+            g_state.g_player_turn = True
             check_draw()
             game_board()
             enter_column_number()
@@ -254,7 +241,7 @@ def game_board():
     margin_len = 17
 
     # Determine the margin width based on number of columns
-    for i in range(game_width - 1):
+    for i in range(g_state.g_width - 1):
         margin_len -= 2 if i % 2 == 0 else 1
 
     # Make sure the margin is never less than 0 spaces wide
@@ -263,7 +250,7 @@ def game_board():
     # Print the column numbers
     board_line = margin + three_spaces
 
-    for i in range(1, game_width + 1):
+    for i in range(1, g_state.g_width + 1):
         if i < 10:
             board_line += (str(i) + three_spaces)
 
@@ -277,9 +264,9 @@ def game_board():
         board_line = margin
 
         # Print the walls in the main area. None for the top
-        for ii in range(game_width):
+        for ii in range(g_state.g_width):
             board_line += three_spaces if i == 0 else wall
-            board_line += board_db[ii][i]
+            board_line += g_state.g_db[ii][i]
 
         # Prints walls or spaces depending which line is processing
         board_line += three_spaces if i == 0 else wall
@@ -292,8 +279,8 @@ def game_status():
     """
     Prints the status of the game
     """
-    space = "        " if game_level < 10 else "       "
-    status = f"\n    Level: {game_level}{space}"
+    space = "        " if g_state.g_level < 10 else "       "
+    status = f"\n    Level: {g_state.g_level}{space}"
     hard_text = "HARD Mode   "
     easy_text = "Easy Mode   "
     user_winn = "      You WON!!\n"
@@ -303,13 +290,13 @@ def game_status():
 
     # Put the status in order
 
-    status += hard_text if hard_mode else easy_text
+    status += hard_text if g_state.g_mode else easy_text
 
-    if player_turn:
-        status += user_winn if winner else user_turn
+    if g_state.g_player_turn:
+        status += user_winn if g_state.g_winner else user_turn
 
     else:
-        status += comp_winn if winner else comp_turn
+        status += comp_winn if g_state.g_winner else comp_turn
 
     print(status)
 
@@ -321,7 +308,7 @@ def enter_column_number():
     """
     column_choice = 0
     column_full = True
-    column_range = game_width + 1
+    column_range = g_state.g_width + 1
 
     while column_choice not in range(1, column_range) or column_full:
         try:
@@ -350,11 +337,11 @@ def enter_column_number():
             elif column_choice not in range(1, column_range):
                 # Handle when input number not an available column
                 warn = "Please only enter a number between 1 and"
-                print("   ", warn, game_width)
+                print("   ", warn, g_state.g_width)
                 sleep(DELAY_TIME*4)
                 game_board()
 
-            elif board_db[column_choice-1][1] != ".":
+            elif g_state.g_db[column_choice-1][1] != ".":
                 # Check to see if the column is full
                 print("   That column is full!")
                 sleep(DELAY_TIME*2)
@@ -373,19 +360,19 @@ def computer_turn():
     """
     global got_3
 
-    if next_comp_move > 0:
+    if g_state.g_next_comp_move > 0:
         # Go where was suggested
-        column_choice = next_comp_move
+        column_choice = g_state.g_next_comp_move
     else:
         # Choose a random column
-        column_choice = random.randint(1, game_width)
+        column_choice = random.randint(1, g_state.g_width)
 
     # The chosen column is full so choose again
-    while board_db[column_choice-1][1] != ".":
-        column_choice = random.randint(1, game_width)
+    while g_state.g_db[column_choice-1][1] is not ".":
+        column_choice = random.randint(1, g_state.g_width)
 
     sleep(DELAY_TIME)
-    got_3 = False
+    g_state.g_3 = False
     drop_disc(column_choice)
 
 
@@ -399,146 +386,144 @@ def check_winner(disc):
     The following code has been modified but was originally from line 69 of
     https://github.com/justinvallely/Python-Connect-4/
     """
-    global got_3
-
     # Check / diagonal spaces
-    for x in range(game_width - 3):
+    for x in range(g_state.g_width - 3):
         for y in range(4, BOARD_HEIGHT):
-            if board_db[x+3][y-3] == disc and board_db[x+2][y-2] == disc:
-                if board_db[x+1][y-1] == disc and board_db[x][y] == disc:
+            if g_state.g_db[x+3][y-3] == disc and g_state.g_db[x+2][y-2] == disc:
+                if g_state.g_db[x+1][y-1] == disc and g_state.g_db[x][y] == disc:
                     # Turn the winning discs RED
-                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+1][y-1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+2][y-2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+3][y-3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x+1][y-1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x+2][y-2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x+3][y-3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
-                elif board_db[x+1][y-1] == "." and board_db[x][y] == disc:
-                    got_3 = True
+                elif g_state.g_db[x+1][y-1] == "." and g_state.g_db[x][y] == disc:
+                    g_state.g_3 = True
                     computer_next_move(x+1, y-1)
 
-                elif board_db[x+1][y-1] == disc and board_db[x][y] == ".":
-                    got_3 = True
+                elif g_state.g_db[x+1][y-1] == disc and g_state.g_db[x][y] == ".":
+                    g_state.g_3 = True
                     computer_next_move(x, y)
 
-                elif board_db[x+1][y-1] == "." and board_db[x][y] == ".":
-                    if hard_mode and got_3 is not True:
+                elif g_state.g_db[x+1][y-1] == "." and g_state.g_db[x][y] == ".":
+                    if g_state.g_mode and g_state.g_3 is not True:
                         computer_next_move(x+1, y-1)
 
     # Check / diagonal spaces from other direction
-    for x in range(game_width - 3):
+    for x in range(g_state.g_width - 3):
         for y in range(4, BOARD_HEIGHT):
-            if board_db[x][y] == disc and board_db[x+1][y-1] == disc:
-                if board_db[x+2][y-2] == "." and board_db[x+3][y-3] == disc:
-                    got_3 = True
+            if g_state.g_db[x][y] == disc and g_state.g_db[x+1][y-1] == disc:
+                if g_state.g_db[x+2][y-2] == "." and g_state.g_db[x+3][y-3] == disc:
+                    g_state.g_3 = True
                     computer_next_move(x+2, y-2)
 
-                elif board_db[x+2][y-2] == disc and board_db[x+3][y-3] == ".":
-                    got_3 = True
+                elif g_state.g_db[x+2][y-2] == disc and g_state.g_db[x+3][y-3] == ".":
+                    g_state.g_3 = True
                     computer_next_move(x+3, y-3)
 
-                elif board_db[x+2][y-2] == "." and board_db[x+3][y-3] == ".":
-                    if hard_mode and got_3 is not True:
+                elif g_state.g_db[x+2][y-2] == "." and g_state.g_db[x+3][y-3] == ".":
+                    if g_state.g_mode and g_state.g_3 is not True:
                         computer_next_move(x+2, y-2)
 
     # Check \ diagonal spaces
-    for x in range(game_width - 3):
+    for x in range(g_state.g_width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
-            if board_db[x+3][y+3] == disc and board_db[x+2][y+2] == disc:
-                if board_db[x+1][y+1] == disc and board_db[x][y] == disc:
+            if g_state.g_db[x+3][y+3] == disc and g_state.g_db[x+2][y+2] == disc:
+                if g_state.g_db[x+1][y+1] == disc and g_state.g_db[x][y] == disc:
                     # Turn the winning discs RED
-                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+1][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+2][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+3][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x+1][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x+2][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x+3][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
-                elif board_db[x+1][y+1] == "." and board_db[x][y] == disc:
-                    got_3 = True
+                elif g_state.g_db[x+1][y+1] == "." and g_state.g_db[x][y] == disc:
+                    g_state.g_3 = True
                     computer_next_move(x+1, y+1)
 
-                elif board_db[x+1][y+1] == disc and board_db[x][y] == ".":
-                    got_3 = True
+                elif g_state.g_db[x+1][y+1] == disc and g_state.g_db[x][y] == ".":
+                    g_state.g_3 = True
                     computer_next_move(x, y)
 
-                elif board_db[x+1][y+1] == "." and board_db[x][y] == ".":
-                    if hard_mode and got_3 is not True:
+                elif g_state.g_db[x+1][y+1] == "." and g_state.g_db[x][y] == ".":
+                    if g_state.g_mode and g_state.g_3 is not True:
                         computer_next_move(x+1, y+1)
 
     # Check \ diagonal spaces from other direction
-    for x in range(game_width - 3):
+    for x in range(g_state.g_width - 3):
         for y in range(1, (BOARD_HEIGHT - 3)):
-            if board_db[x][y] == disc and board_db[x+1][y+1] == disc:
-                if board_db[x+2][y+2] == "." and board_db[x+3][y+3] == disc:
-                    got_3 = True
+            if g_state.g_db[x][y] == disc and g_state.g_db[x+1][y+1] == disc:
+                if g_state.g_db[x+2][y+2] == "." and g_state.g_db[x+3][y+3] == disc:
+                    g_state.g_3 = True
                     computer_next_move(x+2, y+2)
 
-                elif board_db[x+2][y+2] == disc and board_db[x+3][y+3] == ".":
-                    got_3 = True
+                elif g_state.g_db[x+2][y+2] == disc and g_state.g_db[x+3][y+3] == ".":
+                    g_state.g_3 = True
                     computer_next_move(x+3, y+3)
 
-                elif board_db[x+2][y+2] == "." and board_db[x+3][y+3] == ".":
-                    if hard_mode and got_3 is not True:
+                elif g_state.g_db[x+2][y+2] == "." and g_state.g_db[x+3][y+3] == ".":
+                    if g_state.g_mode and g_state.g_3 is not True:
                         computer_next_move(x+2, y+2)
 
     # Check horizontal spaces
     for y in range(1, BOARD_HEIGHT):
-        for x in range(game_width - 3):
-            if board_db[x+3][y] == disc and board_db[x+2][y] == disc:
-                if board_db[x+1][y] == disc and board_db[x][y] == disc:
+        for x in range(g_state.g_width - 3):
+            if g_state.g_db[x+3][y] == disc and g_state.g_db[x+2][y] == disc:
+                if g_state.g_db[x+1][y] == disc and g_state.g_db[x][y] == disc:
                     # Turn the winning discs RED
-                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+1][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+2][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x+3][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x+1][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x+2][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x+3][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
-                elif board_db[x+1][y] == disc and board_db[x][y] == ".":
-                    got_3 = True
+                elif g_state.g_db[x+1][y] == disc and g_state.g_db[x][y] == ".":
+                    g_state.g_3 = True
                     computer_next_move(x, y)
 
-                elif board_db[x+1][y] == "." and board_db[x][y] == disc:
-                    got_3 = True
+                elif g_state.g_db[x+1][y] == "." and g_state.g_db[x][y] == disc:
+                    g_state.g_3 = True
                     computer_next_move(x+1, y)
 
-                elif board_db[x+1][y] == "." and board_db[x][y] == ".":
-                    if hard_mode and got_3 is not True:
+                elif g_state.g_db[x+1][y] == "." and g_state.g_db[x][y] == ".":
+                    if g_state.g_mode and g_state.g_3 is not True:
                         computer_next_move(x+1, y)
 
     # Check horizontal spaces from other direction
     for y in range(1, BOARD_HEIGHT):
-        for x in range(game_width - 3):
-            if board_db[x][y] == disc and board_db[x+1][y] == disc:
-                if board_db[x+2][y] == disc and board_db[x+3][y] == ".":
-                    got_3 = True
+        for x in range(g_state.g_width - 3):
+            if g_state.g_db[x][y] == disc and g_state.g_db[x+1][y] == disc:
+                if g_state.g_db[x+2][y] == disc and g_state.g_db[x+3][y] == ".":
+                    g_state.g_3 = True
                     computer_next_move(x+3, y)
 
-                elif board_db[x+2][y] == "." and board_db[x+3][y] == disc:
-                    got_3 = True
+                elif g_state.g_db[x+2][y] == "." and g_state.g_db[x+3][y] == disc:
+                    g_state.g_3 = True
                     computer_next_move(x+2, y)
 
-                elif board_db[x+2][y] == "." and board_db[x+3][y] == ".":
-                    if hard_mode and got_3 is not True:
+                elif g_state.g_db[x+2][y] == "." and g_state.g_db[x+3][y] == ".":
+                    if g_state.g_mode and g_state.g_3 is not True:
                         computer_next_move(x+2, y)
 
     # Check vertical spaces
-    for x in range(game_width):
+    for x in range(g_state.g_width):
         for y in range(1, (BOARD_HEIGHT - 3)):
-            if board_db[x][y+3] == disc and board_db[x][y+2] == disc:
-                if board_db[x][y+1] == disc and board_db[x][y] == disc:
+            if g_state.g_db[x][y+3] == disc and g_state.g_db[x][y+2] == disc:
+                if g_state.g_db[x][y+1] == disc and g_state.g_db[x][y] == disc:
                     # Turn the winning discs RED
-                    board_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
-                    board_db[x][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x][y] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x][y+1] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x][y+2] = "\033[1;31;48m"+disc+"\033[1;32;48m"
+                    g_state.g_db[x][y+3] = "\033[1;31;48m"+disc+"\033[1;32;48m"
                     return True
 
-                elif board_db[x][y+1] == disc and board_db[x][y] == ".":
-                    got_3 = True
+                elif g_state.g_db[x][y+1] == disc and g_state.g_db[x][y] == ".":
+                    g_state.g_3 = True
                     computer_next_move(x, y)
 
-                elif board_db[x][y+1] == "." and board_db[x][y] == ".":
-                    if hard_mode and got_3 is not True:
+                elif g_state.g_db[x][y+1] == "." and g_state.g_db[x][y] == ".":
+                    if g_state.g_mode and g_state.g_3 is not True:
                         computer_next_move(x, y+1)
 
     return False
@@ -548,15 +533,13 @@ def computer_next_move(column, row):
     """
     Tells the computer the next best place to go to beat the player
     """
-    global next_comp_move
-
     # Check if there's a supporting disc in that square
     try:
-        if board_db[column][row + 1] != ".":
-            next_comp_move = column + 1
+        if g_state.g_db[column][row + 1] is not ".":
+            g_state.g_next_comp_move = column + 1
 
     except IndexError:
-        next_comp_move = column + 1
+        g_state.g_next_comp_move = column + 1
 
 
 def we_have_a_winner():
@@ -568,9 +551,9 @@ def we_have_a_winner():
     user_win = "   You've beaten the computer!\n"
     comp_win = "   You didn't win this time :(\n"
 
-    win_text += user_win if player_turn else comp_win
+    win_text += user_win if g_state.g_player_turn else comp_win
 
-    if game_level < (BOARD_WIDTH - 2):
+    if g_state.g_level < (BOARD_WIDTH - 2):
         print(win_text)
         sleep(DELAY_TIME*4)
 
@@ -587,7 +570,7 @@ def play_again():
     input_text = "   Press Enter to "
 
     # Reset game level after they've won the game
-    if game_level >= BOARD_WIDTH - 2 and winner:
+    if g_state.g_level >= BOARD_WIDTH - 2 and g_state.g_winner:
         top_level()
         input_text += "play again"
     else:
@@ -605,22 +588,22 @@ def play_again():
         # Player wants to play again so reset and start the game
         print("   OK, resetting game...")
         sleep(DELAY_TIME)
-        reset_board_db()
+        reset_game()
         game_board()
         enter_column_number()
 
 
 def check_draw():
     """
+    Increments the disc count
     Checks to see if the board is full without any winners
     """
-    global disc_count
-    disc_count += 1
+    g_state.disc_count += 1
 
     # Calculate the max number of squares based on board size
-    board_max = (BOARD_HEIGHT-1) * game_width
+    board_max = (BOARD_HEIGHT-1) * g_state.g_width
 
-    if disc_count >= board_max:
+    if g_state.disc_count >= board_max:
         # Game's a draw so handle that
         print("   No winners this time :(\n")
         print("             Try again!\n")
@@ -633,18 +616,15 @@ def top_level():
     When player reaches top level they are told they've won the game
     and everything is reset
     """
-    global game_level
-    global game_width
-
     game_won = "               YOU BEAT THE GAME!!!\n"
     game_won += "          VERY well done! I'm impressed!"
     print(game_won)
 
     sleep(10)
     game_board()
-    winner = False
-    game_level = 0
-    game_width = BOARD_WIDTH + 1
+    g_state.g_winner = False
+    g_state.g_level = 0
+    g_state.g_width = BOARD_WIDTH + 1
 
 
 welcome()
