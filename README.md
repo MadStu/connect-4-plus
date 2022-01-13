@@ -83,7 +83,22 @@ I also asked friends and family to play with and try to produce errors or uninte
 
 ### Bugs
 
-You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed. 
+- ~~herokuapp.com not displaying underscores on the logo.~~
+  - Solved by making the logo art text have a lighter weight.
+- ~~Game would say there's a winner if it was a tie.~~
+  - Solved by adding a disc counter.
+- ~~Computer finds the next move to beat the player, but if the player goes there, the computer would still place disc in the same column.~~
+  - Solved by checking all discs after a move and not just the previous players.
+- ~~Computer would ignore it's own potential win, prioritising blocking the player.~~
+  - Solved by: 
+    - Having the computer check it's own discs after the players.
+    - Prioritising discs with 3 in a row over discs with 2 in a row.
+- ~~Computer would try to block players by placing discs in the next column, but the square under where the winning disc would go is empty so the disc just falls past.~~
+  - Solved by checking to see if the square underneath is empty.
+- ~~Checking the square underneath could produce an IndexError as it wouldn't exist.~~
+  - Solved by using a Try/Except block to handle it.
+- ~~Recursion Error when the program is checking winners and checking for next computer move.~~
+  - Solved by increasing the recursion limit.
 
 ## Deployment
 
