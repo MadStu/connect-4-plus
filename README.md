@@ -2,7 +2,7 @@
 
 Connect 4 is a strategy game where the idea is to get 4 of your own discs in a line in any direction, horizontally, vertically or diagonally ( -- ¦ / \ ), hence you connect 4 together. You must also block your opponent from connecting 4 and can be quite satisfying when you plan and predict a few moves in advance.
 
-The game is useful for people who spend a lot of time in terminals and allows them to let off steam. They can have a quick game lasting less than a minute, or continue playing until they've beaten the computer, so it's good for somebody to play whether they only have a free moment or lots of time to spare.
+This game is useful for people who spend a lot of time in terminals and allows them to let off steam. They can have a quick game lasting less than a minute, or continue playing until they've beaten the computer, so it's good for somebody to play whether they only have a free moment or lots of time to spare.
 
 A deployed version may be found here: [Connect 4](http://my-connect-4.herokuapp.com/)
 
@@ -36,7 +36,7 @@ This helped massively at the beginning of the project and I used that to build t
 - __Hard Mode__
 
   - The game features a hard mode allowing the player to play against a harder opponent.
-  - This the player a real sense of achievement when they win. 
+  - This gives the player a real sense of achievement when they win. 
 
 ![Hard Mode](https://github.com/MadStu/connect-4/raw/main/assets/images/hard-mode.png)
 
@@ -54,21 +54,23 @@ This helped massively at the beginning of the project and I used that to build t
 
 - __Input Validation__
 
-  - Any input from the user is validated, asking if they wany to play hard mode, play again or from the column number they enter.
+  - Any input from the user is validated, asking if they want to play hard mode, play again or from the column number they enter.
 
 ![Input Validation](https://github.com/MadStu/connect-4/raw/main/assets/images/input-validation.png)
 
 - __Coloured Winning Discs__
 
-  - Any input from the user is validated, asking if they wany to play hard mode, play again or from the column number they enter.
+  - When either the user or computer player wins, the winning discs are highlighted red to show the line of connect 4.
 
 ![Coloured Winning Discs](https://github.com/MadStu/connect-4/raw/main/assets/images/coloured-winning-discs.png)
 
 ### Features Left to Implement
 
-- Another feature idea
+- Implement a points system based on number of turns
+- Add a high score board
+- Add AI that learns and predicts the players next move based on their previous pattern of moves
 
-## Testing 
+## Testing
 
 I've tested the code continuously as I've developed it, making sure all functionality works as it should and fix any typos or coding errors as and when they happen.
 
