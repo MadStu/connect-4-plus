@@ -1,5 +1,7 @@
 # Connect 4
 
+![Connect 4 Logo](https://github.com/MadStu/connect-4/raw/main/assets/images/connect-4-logo.png)
+
 Connect 4 is a strategy game where the idea is to get 4 of your own discs in a line in any direction, horizontally, vertically or diagonally ( -- ¦ / \ ), hence you connect 4 together. You must also block your opponent from connecting 4 and can be quite satisfying when you plan and predict a few moves in advance.
 
 This game is useful for people who spend a lot of time in terminals and allows them to let off steam. They can have a quick game lasting less than a minute, or continue playing until they've beaten the computer, so it's good for somebody to play whether they only have a free moment or lots of time to spare.
@@ -66,20 +68,20 @@ This helped massively at the beginning of the project and I used that to build t
 
 ### Features Left to Implement
 
-- Implement a points system based on number of turns
-- Add a high score board
-- Add AI that learns and predicts the players next move based on their previous pattern of moves
+- Implement a points system based on number of turns.
+- Add a high score board.
+- Add AI that learns and predicts the players next move based on their previous pattern of moves.
 
 ## Testing
 
 I've tested the code continuously as I've developed it, making sure all functionality works as it should and fix any typos or coding errors as and when they happen.
 
-I also asked friends and family to play with and try to produce errors or unintended behaviours 
+I also asked friends and family to play with and try to produce errors or unintended behaviours.
 
 ### Validator Testing 
 
 - PEP8
-  - No errors or warnings were returned when passing through [PEP8online.com](http://pep8online.com/)
+  - No errors or warnings were returned when passing through [PEP8online.com](http://pep8online.com/).
 
 ### Bugs
 
@@ -119,50 +121,8 @@ The deployed program can be found here - http://my-connect-4.herokuapp.com/
 
 ## Credits 
 
-In this section you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism. 
-
-You can break the credits section up into Content and Media, depending on what you have included in your project. 
-
-### Content 
-
-- The text for the Home page was taken from Wikipedia Article A
-- Instructions on how to implement form validation on the Sign Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
-
-### Media
-
-- The photos used on the home and sign up page are from This Open Source site
-- The images used for the gallery page were taken from this other open source site
-
-
-Congratulations on completing your Readme, you have made another big stride in the direction of being a developer! 
-
-## Other General Project Advice
-
-Below you will find a couple of extra tips that may be helpful when completing your project. Remember that each of these projects will become part of your final portfolio so it’s important to allow enough time to showcase your best work! 
-
-- One of the most basic elements of keeping a healthy commit history is with the commit message. When getting started with your project, read through [this article](https://chris.beams.io/posts/git-commit/) by Chris Beams on How to Write  a Git Commit Message 
-  - Make sure to keep the messages in the imperative mood 
-
-- When naming the files in your project directory, make sure to consider meaningful naming of files, point to specific names and sections of content.
-  - For example, instead of naming an image used ‘image1.png’ consider naming it ‘landing_page_img.png’. This will ensure that there are clear file paths kept. 
-
-- Do some extra research on good and bad coding practices, there are a handful of useful articles to read, consider reviewing the following list when getting started:
-  - [Writing Your Best Code](https://learn.shayhowe.com/html-css/writing-your-best-code/)
-  - [HTML & CSS Coding Best Practices](https://medium.com/@inceptiondj.info/html-css-coding-best-practice-fadb9870a00f)
-  - [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html#General)
-
-Getting started with your Portfolio Projects can be daunting, planning your project can make it a lot easier to tackle, take small steps to reach the final outcome and enjoy the process! 
-
-
-
-
-
-
-
-
-https://online.visual-paradigm.com/
-
-https://www.geeksforgeeks.org/clear-screen-python/
-
-https://patorjk.com/software/taag/#p=display&f=Doom&t=Connect%204
+- I used the Code Institute web template and terminal window to deploy the program.
+- I initially used the check_winner function from https://github.com/justinvallely/Python-Connect-4/blob/master/connect4.py (Line 69).
+- I learned how to clear the terminal screen from this tutorial: https://www.geeksforgeeks.org/clear-screen-python/
+- I got the Connect 4 logo text from this website: https://patorjk.com/software/taag/#p=display&f=Doom&t=Connect%204
+- I made the flowchart by using this website:  https://online.visual-paradigm.com/
