@@ -104,20 +104,26 @@ I also asked friends and family to play with and try to produce errors or uninte
 
 ## Deployment
 
-The deployed program can be found here - http://my-connect-4.herokuapp.com/
+I've deployed it on herokuapp.com and used the following method.
 
-- The connect4 game was deployed to herokuapp.com using a web interface terminal template. The steps to deploy are as follows: 
+- The connect4 game can be deployed to herokuapp.com using a web interface terminal template. The steps to deploy are as follows: 
     - Sign up or log in to herokuapp.com.
     - Click "New" then "Create new app".
     - Enter an app name, choose your region and then click "Create app".
     - On the next page, go to the Settings Tab.
     - Click on "Reveal Config Vars". Add "port" in the KEY text field and "8000" in the VALUE text field, then click the "Add" button.
     - Click on "Add buildpack" and add the python build pack first, then save changes.
-    - Click on "Add buildpack" again and add the nodejs build pack for the web interface to work.
+    - Click on "Add buildpack" again and add the nodejs build pack for the web interface to work. Be sure these 2 are in that order, Python first.
     - Click on the Deploy tab at the top, select GitHub and connect to your GitHub account.
     - Search for the repository name (connect-4) and click the "Connect" button.
     - Scroll down to the Automatic deploys section and choose the main branch to deploy from.
     - Click the "Enable Automatic Deploys" button which syncs the herokuapp.com files with your repository every so often.
+
+You can also deploy to your own systems.
+
+- If you wish to deploy within your own Python3 environment:
+    - Download or copy the contents of run.py to your own system.
+    - Run the game by typing: ***__python3 run.py__***
 
 ## Credits 
 
