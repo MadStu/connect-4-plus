@@ -640,7 +640,7 @@ def enter_column_number():
                 # Easter egg! Because I like the book
                 game_board()
                 print("   Answer to the Ultimate Question of Life,")
-                print("               The Universe, and Everything\n")
+                print("               The Universe, and Everything")
                 sleep(DELAY_TIME*10)
                 game_board()
 
@@ -710,8 +710,8 @@ def we_have_a_winner():
     Tell the player who has won
     """
     win_text = "   WE HAVE A WINNER!!\n"
-    user_win = "   You've beaten the computer!\n"
-    comp_win = "   You didn't win this time :(\n"
+    user_win = "   You've beaten the computer!"
+    comp_win = "   You didn't win this time :("
 
     win_text += user_win if Game.player_turn else comp_win
 
