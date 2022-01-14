@@ -1,6 +1,6 @@
 # Connect 4
 
-![Connect 4 Logo](https://github.com/MadStu/connect-4/raw/main/assets/images/connect-4-logo.png)
+![Connect 4](https://github.com/MadStu/connect-4/raw/main/assets/images/web-page.png)
 
 Connect 4 is a strategy game where the idea is to get 4 of your own discs in a line in any direction, horizontally, vertically or diagonally ( -- ¦ / \ ), hence you connect 4 together. You must also block your opponent from connecting 4 and can be quite satisfying when you plan and predict a few moves in advance.
 
@@ -132,3 +132,4 @@ You can also deploy to your own systems.
 - I learned how to clear the terminal screen from this tutorial: https://www.geeksforgeeks.org/clear-screen-python/
 - I got the Connect 4 logo text from this website: https://patorjk.com/software/taag/#p=display&f=Doom&t=Connect%204
 - I made the flowchart by using this website:  https://online.visual-paradigm.com/
+- I used a royalty free image of an old computer from: https://www.pikpng.com/
