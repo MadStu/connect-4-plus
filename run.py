@@ -639,8 +639,12 @@ def enter_column_number():
             elif column_choice == 88:
                 # Go where the computer would have gone cheat
                 game_board()
-                print("   CHEATER!!")
-                column_choice = Game.next_move
+                move = Game.next_move
+                cheat_yes = f"   (Try {move})"
+                cheat_no = "   Cheats never prosper..."
+                cheat_text = "   CHEATER!!"
+                cheat_text += cheat_yes if move > 0 else cheat_no
+                print(cheat_text)
                 sleep(DELAY_TIME*10)
 
             elif column_choice == 42:
