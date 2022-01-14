@@ -15,8 +15,8 @@
         }
 
         #maindiv {
-            max-width: 500px;
-            max-height: 700px;
+            max-width: 600px;
+            height: 800px;
             margin: auto;
             background-image: url('https://github.com/MadStu/connect-4/raw/main/assets/images/schneider-amstrad-pc-old.png');
             background-size: contain;
@@ -27,6 +27,7 @@
         */
 
         .xterm {
+            border-radius: 25px;
             font-feature-settings: "liga"0;
             position: relative;
             user-select: none;
@@ -83,7 +84,6 @@
 
         .xterm .xterm-viewport {
             /* On OS X this is required in order for the scroll bar to appear fully opaque */
-            border-radius: 25px;
             background-color: #000;
             overflow-y: scroll;
             cursor: default;
