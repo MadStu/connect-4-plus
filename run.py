@@ -20,6 +20,7 @@ DROP_SPEED = 0.06
 RED_TEXT = "\033[1;31;48m"
 GREEN_TEXT = "\033[1;32;48m"
 LOGO_TEXT = "\033[0;32;48m"
+NAME_TEXT = "\033[0;31;48m"
 
 # Winning game level
 WIN_LEVEL = BOARD_WIDTH - 3
@@ -326,7 +327,7 @@ def enter_name():
         logo()
         sleep(DELAY_TIME)
 
-        input_text = "\n          Enter your 3 letter name (eg: STU):\n"
+        input_text = "\n        Enter your 3 letter name (eg: STU):\n"
         name_input = input(input_text)
 
         while not name_input.isalpha():
@@ -342,7 +343,7 @@ def enter_name():
 
         i = 0
         while i < 6:
-            name = RED_TEXT + " " * 10
+            name = NAME_TEXT + " " * 10
             name += letters.dict[name_input[0].lower()][i]
             name += letters.dict[name_input[1].lower()][i]
             name += letters.dict[name_input[2].lower()][i]
