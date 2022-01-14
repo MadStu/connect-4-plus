@@ -40,13 +40,8 @@ class Game:
 
 class BoardCheck:
     """
-    d = player disc and e = empty
-    Shortened to satisfy the pep8 line length warnings
-
-    Checks if there's any winning lines of 4
-    Changes the colour of the winning discs
-
-    Also checks for free spaces for the computer to stop player winning
+    Holds the functions that check the board for any potential
+    or actual connect 4 winning lines
 
     The following code has been modified but was originally from line 69 of
     https://github.com/justinvallely/Python-Connect-4/
@@ -55,6 +50,15 @@ class BoardCheck:
         self.disc = disc
 
     def diag_right_forward(self):
+        """
+        d = player disc and e = empty
+        Shortened to satisfy the pep8 line length warnings
+
+        Checks if there's any winning lines of 4
+        Changes the colour of the winning discs
+
+        Also checks for free spaces for the computer to stop player winning
+        """
         d = self.disc
         e = "."
         # Check / diagonal spaces
@@ -83,6 +87,15 @@ class BoardCheck:
         return False
 
     def diag_right_backward(self):
+        """
+        d = player disc and e = empty
+        Shortened to satisfy the pep8 line length warnings
+
+        Checks if there's any winning lines of 4
+        Changes the colour of the winning discs
+
+        Also checks for free spaces for the computer to stop player winning
+        """
         d = self.disc
         e = "."
         # Check / diagonal spaces from other direction
@@ -103,6 +116,15 @@ class BoardCheck:
         return False
 
     def diag_left_forward(self):
+        """
+        d = player disc and e = empty
+        Shortened to satisfy the pep8 line length warnings
+
+        Checks if there's any winning lines of 4
+        Changes the colour of the winning discs
+
+        Also checks for free spaces for the computer to stop player winning
+        """
         d = self.disc
         e = "."
         # Check \ diagonal spaces
@@ -131,6 +153,15 @@ class BoardCheck:
         return False
 
     def diag_left_backward(self):
+        """
+        d = player disc and e = empty
+        Shortened to satisfy the pep8 line length warnings
+
+        Checks if there's any winning lines of 4
+        Changes the colour of the winning discs
+
+        Also checks for free spaces for the computer to stop player winning
+        """
         d = self.disc
         e = "."
         # Check \ diagonal spaces from other direction
@@ -151,6 +182,15 @@ class BoardCheck:
         return False
 
     def horizontal_forward(self):
+        """
+        d = player disc and e = empty
+        Shortened to satisfy the pep8 line length warnings
+
+        Checks if there's any winning lines of 4
+        Changes the colour of the winning discs
+
+        Also checks for free spaces for the computer to stop player winning
+        """
         d = self.disc
         e = "."
         # Check horizontal spaces
@@ -179,6 +219,15 @@ class BoardCheck:
         return False
 
     def horizontal_backward(self):
+        """
+        d = player disc and e = empty
+        Shortened to satisfy the pep8 line length warnings
+
+        Checks if there's any winning lines of 4
+        Changes the colour of the winning discs
+
+        Also checks for free spaces for the computer to stop player winning
+        """
         d = self.disc
         e = "."
         # Check horizontal spaces from other direction
@@ -199,6 +248,15 @@ class BoardCheck:
         return False
 
     def vertical(self):
+        """
+        d = player disc and e = empty
+        Shortened to satisfy the pep8 line length warnings
+
+        Checks if there's any winning lines of 4
+        Changes the colour of the winning discs
+
+        Also checks for free spaces for the computer to stop player winning
+        """
         d = self.disc
         e = "."
         # Check vertical spaces
