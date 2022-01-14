@@ -383,11 +383,11 @@ def welcome():
             first = input(input_text)
 
     sleep(DELAY_TIME)
+    reset_game()
+    game_board()
     choose_mode()
 
     # Begin the game!
-    reset_game()
-    game_board()
     enter_column_number()
 
 
@@ -414,14 +414,14 @@ def welcome_text():
     logo()
 
     sleep(DELAY_TIME)
-    print("   1   2   3   4   5   6   7   8   9   10  11  12")
-    print("                                       ")
-    print(" | . | . | . | . | . | . | . | . | . | . | . | . |")
-    print(" | . | . | . | . | . | . | . | . | . | . | . | . |\n")
+    print("""   1   2   3   4   5   6   7   8   9   10  11  12
+
+ | . | . | . | . | . | . | . | . | . | . | . | . |
+ | . | . | . | . | . | . | . | . | . | . | . | . |\n""")
     sleep(DELAY_TIME)
-    print("   Each column is numbered from left-right.")
-    print("   You'll need to enter a column number in which")
-    print("   to drop your disc.\n")
+    print("""   Each column is numbered from left-right.
+   You'll need to enter a column number in which
+   to drop your disc.\n""")
 
     sleep(DELAY_TIME)
     input("   Press Enter to continue...\n")
@@ -430,12 +430,12 @@ def welcome_text():
 
     sleep(DELAY_TIME)
     disc_example = RED_TEXT + "O" + GREEN_TEXT
-    print("   1   2   3   4   5   6   7   8   9   10  11  12")
-    print("                                       ")
-    print(f" | . | . | . | . | . | . | {disc_example} | . | . | . | . | . |")
-    print(f" | . | . | . | . | . | {disc_example} | X | . | X | . | . | . |")
-    print(f" | O | X | . | . | {disc_example} | X | O | . | O | O | . | . |")
-    print(f" | X | X | X | {disc_example} | X | O | O | O | X | O | X | . |")
+    print(f"""   1   2   3   4   5   6   7   8   9   10  11  12
+
+ | . | . | . | . | . | . | {disc_example} | . | . | . | . | . |
+ | . | . | . | . | . | {disc_example} | X | . | X | . | . | . |
+ | O | X | . | . | {disc_example} | X | O | . | O | O | . | . |
+ | X | X | X | {disc_example} | X | O | O | O | X | O | X | . |""")
     print("")
     sleep(DELAY_TIME)
     print("   When you get 4 in a row like shown above or")
@@ -447,15 +447,18 @@ def welcome_text():
     logo()
 
     sleep(DELAY_TIME)
-    print("   1   2   3   4   5   6   7   8   9   10  11  12")
-    print("                                       ")
-    print(" | . | . | . | . | . | . | . | . | . | . | . | . |")
-    print(" | . | . | . | . | . | . | . | . | . | . | . | . |")
+    print("""   1   2   3   4   5   6   7   8   9   10  11  12
+
+ | . | . | . | . | . | . | . | . | . | . | . | . |
+ | . | . | . | . | . | . | . | . | . | . | . | . |""")
     game_status()
     sleep(DELAY_TIME)
-    print("   You'll start on Level 1 and your goal is to")
-    print("   reach level 10. The Board will narrow each time")
-    print("   you level up, increasing the difficulty.\n")
+    print(f"""   You'll start on Level 1 and your goal is to
+   beat level {WIN_LEVEL}. The Board will narrow each time
+   you level up, increasing the difficulty.\n""")
+
+    sleep(DELAY_TIME)
+    input("   Press Enter to continue...\n")
 
 
 def choose_mode():
