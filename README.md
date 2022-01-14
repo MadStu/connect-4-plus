@@ -1,12 +1,12 @@
 # Connect 4
 
-![Connect 4](https://github.com/MadStu/connect-4/raw/main/assets/images/web-page.png)
-
 Connect 4 is a strategy game where the idea is to get 4 of your own discs in a line in any direction, horizontally, vertically or diagonally ( -- ¦ / \ ), hence you connect 4 together. You must also block your opponent from connecting 4 and can be quite satisfying when you plan and predict a few moves in advance.
 
 This game is useful for people who spend a lot of time in terminals and allows them to let off steam. They can have a quick game lasting less than a minute, or continue playing until they've beaten the computer, so it's good for somebody to play whether they only have a free moment or lots of time to spare.
 
 A deployed version may be found here: [Connect 4](http://my-connect-4.herokuapp.com/)
+
+![Connect 4](https://github.com/MadStu/connect-4/raw/main/assets/images/web-page.png)
 
 ## Planning 
 
