@@ -355,6 +355,44 @@ def logo():
 
 def welcome():
     """
+    Ask player if they want to view the rules
+    """
+    clear()
+    logo()
+    sleep(DELAY_TIME)
+
+    print("\n                 Make your choice:")
+    input_text = "      [P]lay game or read the [I]nstructions\n"
+    first = input(input_text)
+    valid_input = False
+
+    while not valid_input:
+        if first.lower() == "p" or first.lower() == "play":
+            valid_input = True
+
+        elif first.lower() == "i" or first.lower() == "instructions":
+            valid_input = True
+            welcome_text()
+
+        else:
+            print("   Not a valid input...")
+            sleep(DELAY_TIME*10)
+            clear()
+            logo()
+            print("\n                 Make your choice:")
+            first = input(input_text)
+
+    sleep(DELAY_TIME)
+    choose_mode()
+
+    # Begin the game!
+    reset_game()
+    game_board()
+    enter_column_number()
+
+
+def welcome_text():
+    """
     Display the welcome text and games rules
     """
     clear()
@@ -364,10 +402,11 @@ def welcome():
     print("   WELCOME to the fun game of Connect 4!\n")
     sleep(DELAY_TIME)
 
-    print("   The game is easy, you take turns with the")
-    print("   computer to place your discs which fall into")
-    print("   each column, in this game you'll play with X's")
-    print("   and O's. \n   You'll be O and the computer will be X.\n")
+    print("""   The game is easy, you take turns with the
+   computer to place your discs which fall into
+   each column, in this game you'll play with X's
+   and O's.
+   You'll be O and the computer will be X.\n""")
 
     sleep(DELAY_TIME)
     input("   Press Enter to continue...\n")
@@ -417,15 +456,6 @@ def welcome():
     print("   You'll start on Level 1 and your goal is to")
     print("   reach level 10. The Board will narrow each time")
     print("   you level up, increasing the difficulty.\n")
-
-    sleep(DELAY_TIME)
-
-    choose_mode()
-
-    # Begin the game!
-    reset_game()
-    game_board()
-    enter_column_number()
 
 
 def choose_mode():
