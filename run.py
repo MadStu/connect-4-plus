@@ -443,7 +443,7 @@ def choose_mode():
             reset_game()
             game_board()
             print("      HARD MODE!   YOU MANIAC!!!! :-o\n")
-            sleep(DELAY_TIME*8)
+            sleep(DELAY_TIME*10)
             Game.hard_mode = True
             valid_input = True
 
@@ -453,12 +453,11 @@ def choose_mode():
 
         else:
             print("     Not a valid input.. Try again!..\n")
-            sleep(DELAY_TIME*6)
+            sleep(DELAY_TIME*1)
             clear()
             logo()
             reset_game()
             game_board()
-            sleep(DELAY_TIME)
             print("                Make your choice:")
             input_text = "             [H]ard mode [E]asy mode\n"
             mode_input = input(input_text)
@@ -619,7 +618,7 @@ def enter_column_number():
             # Handle the error if it's not a number
             game_board()
             print("   Not a number")
-            sleep(DELAY_TIME*2)
+            sleep(DELAY_TIME*10)
             game_board()
 
         finally:
@@ -634,7 +633,7 @@ def enter_column_number():
                 game_board()
                 Game.level = 8
                 print("   CHEATER!!")
-                sleep(DELAY_TIME*5)
+                sleep(DELAY_TIME*10)
                 game_board()
 
             elif column_choice == 42:
@@ -642,7 +641,7 @@ def enter_column_number():
                 game_board()
                 print("   Answer to the Ultimate Question of Life,")
                 print("               The Universe, and Everything\n")
-                sleep(DELAY_TIME*9)
+                sleep(DELAY_TIME*10)
                 game_board()
 
             elif column_choice not in range(1, column_range):
@@ -650,14 +649,14 @@ def enter_column_number():
                 game_board()
                 warn = "Please only enter a number between 1 and"
                 print("   ", warn, Game.width)
-                sleep(DELAY_TIME*4)
+                sleep(DELAY_TIME*10)
                 game_board()
 
             elif Game.db[column_choice-1][1] != ".":
                 # Check to see if the column is full
                 game_board()
                 print("   That column is full!")
-                sleep(DELAY_TIME*2)
+                sleep(DELAY_TIME*10)
                 game_board()
 
             else:
@@ -719,7 +718,7 @@ def we_have_a_winner():
     if Game.level < (BOARD_WIDTH - 2):
         game_board()
         print(win_text)
-        sleep(DELAY_TIME*4)
+        sleep(DELAY_TIME*10)
 
     play_again()
 
@@ -760,7 +759,7 @@ def play_again():
             valid_input = True
             game_board()
             print("   OK, resetting game...")
-            sleep(DELAY_TIME)
+            sleep(DELAY_TIME*10)
             reset_game()
             game_board()
             _ = choose_mode() if mode_choice else None
@@ -771,7 +770,7 @@ def play_again():
             # Player wants to play again so reset and start the game
             game_board()
             print("   Not a valid input...")
-            sleep(DELAY_TIME*6)
+            sleep(DELAY_TIME*10)
             game_board()
             play_again_inp = input(input_text)
 
@@ -791,7 +790,7 @@ def check_draw():
         game_board()
         print("   No winners this time :(\n")
         print("             Try again!\n")
-        sleep(DELAY_TIME*3)
+        sleep(DELAY_TIME*10)
         play_again()
 
 
