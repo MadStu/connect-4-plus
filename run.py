@@ -21,6 +21,9 @@ RED_TEXT = "\033[1;31;48m"
 GREEN_TEXT = "\033[1;32;48m"
 LOGO_TEXT = "\033[0;32;48m"
 
+# Winning game level
+WIN_LEVEL = BOARD_WIDTH - 3
+
 
 class Game:
     # This class carries the game state variables
@@ -33,6 +36,209 @@ class Game:
     width = BOARD_WIDTH
     db = []
     disc_count = 0
+
+
+class BoardCheck:
+    """
+    d = player disc and e = empty
+    Shortened to satisfy the pep8 line length warnings
+
+    Checks if there's any winning lines of 4
+    Changes the colour of the winning discs
+
+    Also checks for free spaces for the computer to stop player winning
+
+    The following code has been modified but was originally from line 69 of
+    https://github.com/justinvallely/Python-Connect-4/
+    """
+    def __init__(self, disc):
+        self.disc = disc
+
+    def diag_right_forward(self):
+        d = self.disc
+        e = "."
+        # Check / diagonal spaces
+        for x in range(Game.width - 3):
+            for y in range(4, BOARD_HEIGHT):
+                if Game.db[x+3][y-3] == d and Game.db[x+2][y-2] == d:
+                    if Game.db[x+1][y-1] == d and Game.db[x][y] == d:
+                        # Turn the winning discs RED
+                        Game.db[x][y] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x+1][y-1] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x+2][y-2] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x+3][y-3] = RED_TEXT + d + GREEN_TEXT
+                        return True
+
+                    elif Game.db[x+1][y-1] == e and Game.db[x][y] == d:
+                        Game.got_3 = True
+                        computer_next_move(x+1, y-1)
+
+                    elif Game.db[x+1][y-1] == d and Game.db[x][y] == e:
+                        Game.got_3 = True
+                        computer_next_move(x, y)
+
+                    elif Game.db[x+1][y-1] == e and Game.db[x][y] == e:
+                        if Game.hard_mode and not Game.got_3:
+                            computer_next_move(x+1, y-1)
+        return False
+
+    def diag_right_backward(self):
+        d = self.disc
+        e = "."
+        # Check / diagonal spaces from other direction
+        for x in range(Game.width - 3):
+            for y in range(4, BOARD_HEIGHT):
+                if Game.db[x][y] == d and Game.db[x+1][y-1] == d:
+                    if Game.db[x+2][y-2] == e and Game.db[x+3][y-3] == d:
+                        Game.got_3 = True
+                        computer_next_move(x+2, y-2)
+
+                    elif Game.db[x+2][y-2] == d and Game.db[x+3][y-3] == e:
+                        Game.got_3 = True
+                        computer_next_move(x+3, y-3)
+
+                    elif Game.db[x+2][y-2] == e and Game.db[x+3][y-3] == e:
+                        if Game.hard_mode and not Game.got_3:
+                            computer_next_move(x+2, y-2)
+        return False
+
+    def diag_left_forward(self):
+        d = self.disc
+        e = "."
+        # Check \ diagonal spaces
+        for x in range(Game.width - 3):
+            for y in range(1, (BOARD_HEIGHT - 3)):
+                if Game.db[x+3][y+3] == d and Game.db[x+2][y+2] == d:
+                    if Game.db[x+1][y+1] == d and Game.db[x][y] == d:
+                        # Turn the winning discs RED
+                        Game.db[x][y] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x+1][y+1] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x+2][y+2] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x+3][y+3] = RED_TEXT + d + GREEN_TEXT
+                        return True
+
+                    elif Game.db[x+1][y+1] == e and Game.db[x][y] == d:
+                        Game.got_3 = True
+                        computer_next_move(x+1, y+1)
+
+                    elif Game.db[x+1][y+1] == d and Game.db[x][y] == e:
+                        Game.got_3 = True
+                        computer_next_move(x, y)
+
+                    elif Game.db[x+1][y+1] == e and Game.db[x][y] == e:
+                        if Game.hard_mode and not Game.got_3:
+                            computer_next_move(x+1, y+1)
+        return False
+
+    def diag_left_backward(self):
+        d = self.disc
+        e = "."
+        # Check \ diagonal spaces from other direction
+        for x in range(Game.width - 3):
+            for y in range(1, (BOARD_HEIGHT - 3)):
+                if Game.db[x][y] == d and Game.db[x+1][y+1] == d:
+                    if Game.db[x+2][y+2] == e and Game.db[x+3][y+3] == d:
+                        Game.got_3 = True
+                        computer_next_move(x+2, y+2)
+
+                    elif Game.db[x+2][y+2] == d and Game.db[x+3][y+3] == e:
+                        Game.got_3 = True
+                        computer_next_move(x+3, y+3)
+
+                    elif Game.db[x+2][y+2] == e and Game.db[x+3][y+3] == e:
+                        if Game.hard_mode and not Game.got_3:
+                            computer_next_move(x+2, y+2)
+        return False
+
+    def horizontal_forward(self):
+        d = self.disc
+        e = "."
+        # Check horizontal spaces
+        for y in range(1, BOARD_HEIGHT):
+            for x in range(Game.width - 3):
+                if Game.db[x+3][y] == d and Game.db[x+2][y] == d:
+                    if Game.db[x+1][y] == d and Game.db[x][y] == d:
+                        # Turn the winning discs RED
+                        Game.db[x][y] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x+1][y] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x+2][y] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x+3][y] = RED_TEXT + d + GREEN_TEXT
+                        return True
+
+                    elif Game.db[x+1][y] == d and Game.db[x][y] == e:
+                        Game.got_3 = True
+                        computer_next_move(x, y)
+
+                    elif Game.db[x+1][y] == e and Game.db[x][y] == d:
+                        Game.got_3 = True
+                        computer_next_move(x+1, y)
+
+                    elif Game.db[x+1][y] == e and Game.db[x][y] == e:
+                        if Game.hard_mode and not Game.got_3:
+                            computer_next_move(x+1, y)
+        return False
+
+    def horizontal_backward(self):
+        d = self.disc
+        e = "."
+        # Check horizontal spaces from other direction
+        for y in range(1, BOARD_HEIGHT):
+            for x in range(Game.width - 3):
+                if Game.db[x][y] == d and Game.db[x+1][y] == d:
+                    if Game.db[x+2][y] == d and Game.db[x+3][y] == e:
+                        Game.got_3 = True
+                        computer_next_move(x+3, y)
+
+                    elif Game.db[x+2][y] == e and Game.db[x+3][y] == d:
+                        Game.got_3 = True
+                        computer_next_move(x+2, y)
+
+                    elif Game.db[x+2][y] == e and Game.db[x+3][y] == e:
+                        if Game.hard_mode and not Game.got_3:
+                            computer_next_move(x+2, y)
+        return False
+
+    def vertical(self):
+        d = self.disc
+        e = "."
+        # Check vertical spaces
+        for x in range(Game.width):
+            for y in range(1, (BOARD_HEIGHT - 3)):
+                if Game.db[x][y+3] == d and Game.db[x][y+2] == d:
+                    if Game.db[x][y+1] == d and Game.db[x][y] == d:
+                        # Turn the winning discs RED
+                        Game.db[x][y] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x][y+1] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x][y+2] = RED_TEXT + d + GREEN_TEXT
+                        Game.db[x][y+3] = RED_TEXT + d + GREEN_TEXT
+                        return True
+
+                    elif Game.db[x][y+1] == d and Game.db[x][y] == e:
+                        Game.got_3 = True
+                        computer_next_move(x, y)
+
+                    elif Game.db[x][y+1] == e and Game.db[x][y] == e:
+                        if Game.hard_mode and not Game.got_3:
+                            computer_next_move(x, y+1)
+        return False
+
+
+def check_winner(disc):
+    """
+    Checks to see if there are any connect 4 winners
+    """
+    check = BoardCheck(disc)
+
+    if check.diag_right_forward() or check.diag_right_backward():
+        return True
+    elif check.diag_left_forward() or check.diag_left_backward():
+        return True
+    elif check.horizontal_forward() or check.horizontal_backward():
+        return True
+    elif check.vertical():
+        return True
+    else:
+        return False
 
 
 def reset_game():
@@ -360,6 +566,13 @@ def enter_column_number():
                 print("Thanks for playing")
                 quit()
 
+            elif column_choice == 22222:
+                # Easy High level for dev purposes
+                Game.level = 8
+                print("   CHEATER!!")
+                sleep(DELAY_TIME*5)
+                game_board()
+
             elif column_choice == 42:
                 # Easter egg! Because I like the book
                 print("   Answer to the Ultimate Question of Life,")
@@ -409,163 +622,6 @@ def computer_turn():
     drop_disc(column_choice)
 
 
-def check_winner(d):
-    """
-    d = disc and e = empty
-    Shortened to satisfy the pep8 line length warnings
-
-    Checks if there's any winning lines of 4
-    Changes the colour of the winning discs
-
-    Also checks for free spaces for the computer to stop player winning
-
-    The following code has been modified but was originally from line 69 of
-    https://github.com/justinvallely/Python-Connect-4/
-    """
-    e = "."
-    # Check / diagonal spaces
-    for x in range(Game.width - 3):
-        for y in range(4, BOARD_HEIGHT):
-            if Game.db[x+3][y-3] == d and Game.db[x+2][y-2] == d:
-                if Game.db[x+1][y-1] == d and Game.db[x][y] == d:
-                    # Turn the winning discs RED
-                    Game.db[x][y] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x+1][y-1] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x+2][y-2] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x+3][y-3] = RED_TEXT+d+GREEN_TEXT
-                    return True
-
-                elif Game.db[x+1][y-1] == e and Game.db[x][y] == d:
-                    Game.got_3 = True
-                    computer_next_move(x+1, y-1)
-
-                elif Game.db[x+1][y-1] == d and Game.db[x][y] == e:
-                    Game.got_3 = True
-                    computer_next_move(x, y)
-
-                elif Game.db[x+1][y-1] == e and Game.db[x][y] == e:
-                    if Game.hard_mode and Game.got_3 is not True:
-                        computer_next_move(x+1, y-1)
-
-    # Check / diagonal spaces from other direction
-    for x in range(Game.width - 3):
-        for y in range(4, BOARD_HEIGHT):
-            if Game.db[x][y] == d and Game.db[x+1][y-1] == d:
-                if Game.db[x+2][y-2] == e and Game.db[x+3][y-3] == d:
-                    Game.got_3 = True
-                    computer_next_move(x+2, y-2)
-
-                elif Game.db[x+2][y-2] == d and Game.db[x+3][y-3] == e:
-                    Game.got_3 = True
-                    computer_next_move(x+3, y-3)
-
-                elif Game.db[x+2][y-2] == e and Game.db[x+3][y-3] == e:
-                    if Game.hard_mode and Game.got_3 is not True:
-                        computer_next_move(x+2, y-2)
-
-    # Check \ diagonal spaces
-    for x in range(Game.width - 3):
-        for y in range(1, (BOARD_HEIGHT - 3)):
-            if Game.db[x+3][y+3] == d and Game.db[x+2][y+2] == d:
-                if Game.db[x+1][y+1] == d and Game.db[x][y] == d:
-                    # Turn the winning discs RED
-                    Game.db[x][y] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x+1][y+1] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x+2][y+2] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x+3][y+3] = RED_TEXT+d+GREEN_TEXT
-                    return True
-
-                elif Game.db[x+1][y+1] == e and Game.db[x][y] == d:
-                    Game.got_3 = True
-                    computer_next_move(x+1, y+1)
-
-                elif Game.db[x+1][y+1] == d and Game.db[x][y] == e:
-                    Game.got_3 = True
-                    computer_next_move(x, y)
-
-                elif Game.db[x+1][y+1] == e and Game.db[x][y] == e:
-                    if Game.hard_mode and Game.got_3 is not True:
-                        computer_next_move(x+1, y+1)
-
-    # Check \ diagonal spaces from other direction
-    for x in range(Game.width - 3):
-        for y in range(1, (BOARD_HEIGHT - 3)):
-            if Game.db[x][y] == d and Game.db[x+1][y+1] == d:
-                if Game.db[x+2][y+2] == e and Game.db[x+3][y+3] == d:
-                    Game.got_3 = True
-                    computer_next_move(x+2, y+2)
-
-                elif Game.db[x+2][y+2] == d and Game.db[x+3][y+3] == e:
-                    Game.got_3 = True
-                    computer_next_move(x+3, y+3)
-
-                elif Game.db[x+2][y+2] == e and Game.db[x+3][y+3] == e:
-                    if Game.hard_mode and Game.got_3 is not True:
-                        computer_next_move(x+2, y+2)
-
-    # Check horizontal spaces
-    for y in range(1, BOARD_HEIGHT):
-        for x in range(Game.width - 3):
-            if Game.db[x+3][y] == d and Game.db[x+2][y] == d:
-                if Game.db[x+1][y] == d and Game.db[x][y] == d:
-                    # Turn the winning discs RED
-                    Game.db[x][y] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x+1][y] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x+2][y] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x+3][y] = RED_TEXT+d+GREEN_TEXT
-                    return True
-
-                elif Game.db[x+1][y] == d and Game.db[x][y] == e:
-                    Game.got_3 = True
-                    computer_next_move(x, y)
-
-                elif Game.db[x+1][y] == e and Game.db[x][y] == d:
-                    Game.got_3 = True
-                    computer_next_move(x+1, y)
-
-                elif Game.db[x+1][y] == e and Game.db[x][y] == e:
-                    if Game.hard_mode and Game.got_3 is not True:
-                        computer_next_move(x+1, y)
-
-    # Check horizontal spaces from other direction
-    for y in range(1, BOARD_HEIGHT):
-        for x in range(Game.width - 3):
-            if Game.db[x][y] == d and Game.db[x+1][y] == d:
-                if Game.db[x+2][y] == d and Game.db[x+3][y] == e:
-                    Game.got_3 = True
-                    computer_next_move(x+3, y)
-
-                elif Game.db[x+2][y] == e and Game.db[x+3][y] == d:
-                    Game.got_3 = True
-                    computer_next_move(x+2, y)
-
-                elif Game.db[x+2][y] == e and Game.db[x+3][y] == e:
-                    if Game.hard_mode and Game.got_3 is not True:
-                        computer_next_move(x+2, y)
-
-    # Check vertical spaces
-    for x in range(Game.width):
-        for y in range(1, (BOARD_HEIGHT - 3)):
-            if Game.db[x][y+3] == d and Game.db[x][y+2] == d:
-                if Game.db[x][y+1] == d and Game.db[x][y] == d:
-                    # Turn the winning discs RED
-                    Game.db[x][y] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x][y+1] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x][y+2] = RED_TEXT+d+GREEN_TEXT
-                    Game.db[x][y+3] = RED_TEXT+d+GREEN_TEXT
-                    return True
-
-                elif Game.db[x][y+1] == d and Game.db[x][y] == e:
-                    Game.got_3 = True
-                    computer_next_move(x, y)
-
-                elif Game.db[x][y+1] == e and Game.db[x][y] == e:
-                    if Game.hard_mode and Game.got_3 is not True:
-                        computer_next_move(x, y+1)
-
-    return False
-
-
 def computer_next_move(column, row):
     """
     Tells the computer the next best place to go to beat the player
@@ -601,35 +657,52 @@ def we_have_a_winner():
 
 def play_again():
     """
-    Ask if they want to play again and check their input is valid
+    Ask if player wants to play again and check their input is valid
     """
     sleep(DELAY_TIME)
     game_board()
+    mode_choice = False
 
-    input_text = "   Press Enter to "
+    input_text = "   Do you want to "
 
     # Reset game level after they've won the game
-    if Game.level >= BOARD_WIDTH - 2 and Game.winner:
+    if Game.level >= WIN_LEVEL and Game.winner:
         top_level()
-        input_text += "play again"
-    else:
-        input_text += "continue playing"
+        input_text += "play again?"
+        mode_choice = True
 
-    input_text += " \n   or [N]o to quit\n"
+    else:
+        input_text += "continue playing?"
+
+    input_text += " \n   [Y]es or [N]o\n"
     play_again_input = input(input_text)
+    valid_input = False
 
-    if play_again_input.lower() == "n" or play_again_input.lower() == "no":
-        # Player wants to end the game so quit
-        print("   OK, Thank you for playing. Come back soon!! :)\n")
-        quit()
+    while not valid_input:
+        if play_again_input.lower() == "n" or play_again_input.lower() == "no":
+            # Player wants to end the game so quit
+            valid_input = True
+            print("   OK, Thank you for playing. Come back soon!! :)\n")
+            quit()
 
-    else:
-        # Player wants to play again so reset and start the game
-        print("   OK, resetting game...")
-        sleep(DELAY_TIME)
-        reset_game()
-        game_board()
-        enter_column_number()
+        elif play_again_input.lower() == "y" or play_again_input.lower() == "yes":
+            # Player wants to play again so reset and start the game
+            valid_input = True
+            print("   OK, resetting game...")
+            sleep(DELAY_TIME)
+            reset_game()
+            game_board()
+            _ = choose_mode() if mode_choice else None
+            game_board()
+            enter_column_number()
+
+        else:
+            # Player wants to play again so reset and start the game
+            print("   Not a valid input...")
+            sleep(DELAY_TIME*6)
+            clear()
+            game_board()
+            play_again_input = input(input_text)
 
 
 def check_draw():
@@ -659,11 +732,11 @@ def top_level():
     game_won += "          VERY well done! I'm impressed!"
     print(game_won)
 
-    sleep(10)
+    sleep(DELAY_TIME*10)
     game_board()
     Game.winner = False
-    Game.level = 0
-    Game.width = BOARD_WIDTH + 1
+    Game.level = 1
+    Game.width = BOARD_WIDTH
 
 
 welcome()
