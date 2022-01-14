@@ -66,6 +66,13 @@ This helped massively at the beginning of the project and I used that to build t
 
 ![Coloured Winning Discs](https://github.com/MadStu/connect-4/raw/main/assets/images/coloured-winning-discs.png)
 
+- __Cheat Code__
+
+  - The game includes a cheat code (88) which may give a hint to the player of the next column to try.
+  - If the computer hasn't seen a potentially winning pattern the player is instead shown a message that cheaters never prosper.
+
+![Cheat Message](https://github.com/MadStu/connect-4/raw/main/assets/images/cheat-message.png)
+
 ### Features Left to Implement
 
 - Implement a points system based on number of turns.
