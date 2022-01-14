@@ -609,10 +609,12 @@ def enter_column_number():
     while column_choice not in range(1, column_range) or column_full:
         try:
             # User inputs column number
+            game_board()
             column_choice = int(input("   Enter your column choice...\n"))
 
         except ValueError:
             # Handle the error if it's not a number
+            game_board()
             print("   Not a number")
             sleep(DELAY_TIME*2)
             game_board()
@@ -620,11 +622,13 @@ def enter_column_number():
         finally:
             if column_choice == 999:
                 # Easy quit game code for dev purposes
+                game_board()
                 print("Thanks for playing")
                 quit()
 
             elif column_choice == 22222:
                 # Easy High level for dev purposes
+                game_board()
                 Game.level = 8
                 print("   CHEATER!!")
                 sleep(DELAY_TIME*5)
@@ -632,6 +636,7 @@ def enter_column_number():
 
             elif column_choice == 42:
                 # Easter egg! Because I like the book
+                game_board()
                 print("   Answer to the Ultimate Question of Life,")
                 print("               The Universe, and Everything\n")
                 sleep(DELAY_TIME*9)
@@ -639,6 +644,7 @@ def enter_column_number():
 
             elif column_choice not in range(1, column_range):
                 # Handle when input number not an available column
+                game_board()
                 warn = "Please only enter a number between 1 and"
                 print("   ", warn, Game.width)
                 sleep(DELAY_TIME*4)
@@ -646,6 +652,7 @@ def enter_column_number():
 
             elif Game.db[column_choice-1][1] != ".":
                 # Check to see if the column is full
+                game_board()
                 print("   That column is full!")
                 sleep(DELAY_TIME*2)
                 game_board()
@@ -658,8 +665,9 @@ def enter_column_number():
 
 def computer_turn():
     """
-    Chooses a random column or copies the players evry 3rd move
-    Then checks to see if that column is available
+    Chooses the previously next move
+    If no next move defined, choose a random square
+    Check to see if that column is available
     """
     global got_3
 
@@ -706,6 +714,7 @@ def we_have_a_winner():
     win_text += user_win if Game.player_turn else comp_win
 
     if Game.level < (BOARD_WIDTH - 2):
+        game_board()
         print(win_text)
         sleep(DELAY_TIME*4)
 
@@ -739,12 +748,14 @@ def play_again():
         if play_again_inp.lower() == "n" or play_again_inp.lower() == "no":
             # Player wants to end the game so quit
             valid_input = True
+            game_board()
             print("   OK, Thank you for playing. Come back soon!! :)\n")
             quit()
 
         elif play_again_inp.lower() == "y" or play_again_inp.lower() == "yes":
             # Player wants to play again so reset and start the game
             valid_input = True
+            game_board()
             print("   OK, resetting game...")
             sleep(DELAY_TIME)
             reset_game()
@@ -755,9 +766,9 @@ def play_again():
 
         else:
             # Player wants to play again so reset and start the game
+            game_board()
             print("   Not a valid input...")
             sleep(DELAY_TIME*6)
-            clear()
             game_board()
             play_again_inp = input(input_text)
 
@@ -774,6 +785,7 @@ def check_draw():
 
     if Game.disc_count >= board_max:
         # Game's a draw so handle that
+        game_board()
         print("   No winners this time :(\n")
         print("             Try again!\n")
         sleep(DELAY_TIME*3)
@@ -785,6 +797,7 @@ def top_level():
     When player reaches top level they are told they've won the game
     and everything is reset
     """
+    game_board()
     game_won = "               YOU BEAT THE GAME!!!\n"
     game_won += "          VERY well done! I'm impressed!"
     print(game_won)
