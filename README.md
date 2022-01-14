@@ -78,12 +78,15 @@ This helped massively at the beginning of the project and I used that to build t
 - Implement a points system based on number of turns.
 - Add a high score board.
 - Add AI that learns and predicts the players next move based on their previous pattern of moves.
+- Make the Easy mode opponent easier to beat.
 
 ## Testing
 
 I've tested the code continuously as I've developed it, making sure all functionality works as it should and fix any typos or coding errors as and when they happen.
 
 I also asked friends and family to play with and try to produce errors or unintended behaviours.
+
+Some feedback I had was that the computer was too hard to beat on Easy mode so I plan to make that mode a little easier.
 
 ### Validator Testing 
 
