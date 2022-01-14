@@ -16,6 +16,11 @@ DELAY_TIME = 0.15
 # Speed which the disc drops down
 DROP_SPEED = 0.06
 
+# Text Styles
+RED_TEXT = "\033[1;31;48m"
+GREEN_TEXT = "\033[1;32;48m"
+LOGO_TEXT = "\033[0;32;48m"
+
 
 class Game:
     # This class carries the game state variables
@@ -67,7 +72,7 @@ def clear():
     """
     Clear the Screen to help keep the game board clean and easy to read
     """
-    print("\033[1;32;48m ")
+    print(GREEN_TEXT)
     _ = system('cls') if name == 'nt' else system('clear')
 
 
@@ -75,13 +80,13 @@ def logo():
     """
     Prints the Connect 4 logo text
     """
-    print("""\033[0;32;48m   _____                             _       ___
+    print(LOGO_TEXT + """   _____                             _       ___
   /  __ \                           | |     /   |
   | /  \/ ___  _ __  _ __   ___  ___| |_   / /| |
   | |    / _ \| '_ \| '_ \ / _ \/ __| __| / /_| |
   | \__/\ (_) | | | | | | |  __/ (__| |_  \___  |
   \_____/\___/|_| |_|_| |_|\___|\___|\__|     |_/
-    \033[1;32;48m""")
+    """ + GREEN_TEXT)
 
 
 def welcome():
@@ -397,10 +402,10 @@ def check_winner(d):
             if Game.db[x+3][y-3] == d and Game.db[x+2][y-2] == d:
                 if Game.db[x+1][y-1] == d and Game.db[x][y] == d:
                     # Turn the winning discs RED
-                    Game.db[x][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x+1][y-1] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x+2][y-2] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x+3][y-3] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    Game.db[x][y] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x+1][y-1] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x+2][y-2] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x+3][y-3] = RED_TEXT+d+GREEN_TEXT
                     return True
 
                 elif Game.db[x+1][y-1] == e and Game.db[x][y] == d:
@@ -437,10 +442,10 @@ def check_winner(d):
             if Game.db[x+3][y+3] == d and Game.db[x+2][y+2] == d:
                 if Game.db[x+1][y+1] == d and Game.db[x][y] == d:
                     # Turn the winning discs RED
-                    Game.db[x][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x+1][y+1] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x+2][y+2] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x+3][y+3] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    Game.db[x][y] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x+1][y+1] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x+2][y+2] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x+3][y+3] = RED_TEXT+d+GREEN_TEXT
                     return True
 
                 elif Game.db[x+1][y+1] == e and Game.db[x][y] == d:
@@ -477,10 +482,10 @@ def check_winner(d):
             if Game.db[x+3][y] == d and Game.db[x+2][y] == d:
                 if Game.db[x+1][y] == d and Game.db[x][y] == d:
                     # Turn the winning discs RED
-                    Game.db[x][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x+1][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x+2][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x+3][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    Game.db[x][y] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x+1][y] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x+2][y] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x+3][y] = RED_TEXT+d+GREEN_TEXT
                     return True
 
                 elif Game.db[x+1][y] == d and Game.db[x][y] == e:
@@ -517,10 +522,10 @@ def check_winner(d):
             if Game.db[x][y+3] == d and Game.db[x][y+2] == d:
                 if Game.db[x][y+1] == d and Game.db[x][y] == d:
                     # Turn the winning discs RED
-                    Game.db[x][y] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x][y+1] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x][y+2] = "\033[1;31;48m"+d+"\033[1;32;48m"
-                    Game.db[x][y+3] = "\033[1;31;48m"+d+"\033[1;32;48m"
+                    Game.db[x][y] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x][y+1] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x][y+2] = RED_TEXT+d+GREEN_TEXT
+                    Game.db[x][y+3] = RED_TEXT+d+GREEN_TEXT
                     return True
 
                 elif Game.db[x][y+1] == d and Game.db[x][y] == e:
