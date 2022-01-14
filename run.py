@@ -439,8 +439,9 @@ def choose_mode():
     while not valid_input:
         if mode_input.lower() == "h" or mode_input.lower() == "hard":
             # Player wants to play with hard mode
+            game_board()
             print("      HARD MODE!   YOU MANIAC!!!! :-o\n")
-            sleep(DELAY_TIME*7)
+            sleep(DELAY_TIME*8)
             Game.hard_mode = True
             valid_input = True
 
