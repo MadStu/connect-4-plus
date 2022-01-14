@@ -36,6 +36,7 @@ class Game:
     width = BOARD_WIDTH
     db = []
     disc_count = 0
+    player_name = ""
 
 
 class BoardCheck:
@@ -315,6 +316,48 @@ class letters:
     }
 
 
+def enter_name():
+    """
+    Player can enter their name
+    """
+    name_check = False
+    while not name_check:
+        clear()
+        logo()
+        sleep(DELAY_TIME)
+
+        input_text = "\n          Enter your 3 letter name (eg: STU):\n"
+        name_input = input(input_text)
+
+        while not name_input.isalpha():
+            print("   Only letters A-Z are allowed...")
+            sleep(DELAY_TIME*10)
+            clear()
+            logo()
+            name_input = input(input_text)
+
+        clear()
+        logo()
+        sleep(DELAY_TIME)
+
+        i = 0
+        while i < 6:
+            name = RED_TEXT + " " * 10
+            name += letters.dict[name_input[0].lower()][i]
+            name += letters.dict[name_input[1].lower()][i]
+            name += letters.dict[name_input[2].lower()][i]
+            name += GREEN_TEXT
+            print(name)
+            i += 1
+
+        sleep(DELAY_TIME)
+        print("\n               Is this your name?")
+        check_name = input("                 [Y]es or [N]o?\n")
+        if check_name.lower() == "y" or check_name.lower() == "yes":
+            name_check = True
+            Game.player_name = name_input
+
+
 def check_winner(disc):
     """
     Checks to see if there are any connect 4 winners
@@ -416,6 +459,8 @@ def welcome():
             print("\n                 Make your choice:")
             first = input(input_text)
 
+    sleep(DELAY_TIME)
+    enter_name()
     sleep(DELAY_TIME)
     reset_game()
     game_board()
