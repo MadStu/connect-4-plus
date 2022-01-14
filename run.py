@@ -675,17 +675,17 @@ def play_again():
         input_text += "continue playing?"
 
     input_text += " \n   [Y]es or [N]o\n"
-    play_again_input = input(input_text)
+    play_again_inp = input(input_text)
     valid_input = False
 
     while not valid_input:
-        if play_again_input.lower() == "n" or play_again_input.lower() == "no":
+        if play_again_inp.lower() == "n" or play_again_inp.lower() == "no":
             # Player wants to end the game so quit
             valid_input = True
             print("   OK, Thank you for playing. Come back soon!! :)\n")
             quit()
 
-        elif play_again_input.lower() == "y" or play_again_input.lower() == "yes":
+        elif play_again_inp.lower() == "y" or play_again_inp.lower() == "yes":
             # Player wants to play again so reset and start the game
             valid_input = True
             print("   OK, resetting game...")
@@ -702,7 +702,7 @@ def play_again():
             sleep(DELAY_TIME*6)
             clear()
             game_board()
-            play_again_input = input(input_text)
+            play_again_inp = input(input_text)
 
 
 def check_draw():
