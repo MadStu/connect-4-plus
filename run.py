@@ -126,7 +126,7 @@ def welcome():
     logo()
 
     sleep(DELAY_TIME)
-    disc_example = "\033[1;31;48mO\033[1;32;48m"
+    disc_example = RED_TEXT + "O" + GREEN_TEXT
     print("   1   2   3   4   5   6   7   8   9   10  11  12")
     print("                                       ")
     print(f" | . | . | . | . | . | . | {disc_example} | . | . | . | . | . |")
@@ -155,20 +155,47 @@ def welcome():
     print("   you level up, increasing the difficulty.\n")
 
     sleep(DELAY_TIME)
-    print("                Make your choice:")
-    input_text = "             [H]ard mode [E]asy mode\n"
-    mode_input = input(input_text)
 
-    if mode_input.lower() == "h" or mode_input.lower() == "hard":
-        # Player wants to play with hard mode on
-        print("      HARD MODE!   YOU MANIAC!!!! :-o\n")
-        sleep(DELAY_TIME*7)
-        Game.hard_mode = True
+    choose_mode()
 
     # Begin the game!
     reset_game()
     game_board()
     enter_column_number()
+
+
+def choose_mode():
+    """
+    Player chooses which game mode to play in. Hard or Easy!
+    """
+    print("                Make your choice:")
+    input_text = "             [H]ard mode [E]asy mode\n"
+    mode_input = input(input_text)
+    valid_input = False
+
+    while not valid_input:
+        if mode_input.lower() == "h" or mode_input.lower() == "hard":
+            # Player wants to play with hard mode
+            print("      HARD MODE!   YOU MANIAC!!!! :-o\n")
+            sleep(DELAY_TIME*7)
+            Game.hard_mode = True
+            valid_input = True
+
+        elif mode_input.lower() == "e" or mode_input.lower() == "easy":
+            # Player wants to play with easy mode
+            valid_input = True
+
+        else:
+            print("     Not a valid input.. Try again!..\n")
+            sleep(DELAY_TIME*6)
+            clear()
+            logo()
+            reset_game()
+            game_board()
+            sleep(DELAY_TIME)
+            print("                Make your choice:")
+            input_text = "             [H]ard mode [E]asy mode\n"
+            mode_input = input(input_text)
 
 
 def drop_disc(column):
