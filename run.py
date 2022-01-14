@@ -636,6 +636,13 @@ def enter_column_number():
                 sleep(DELAY_TIME*10)
                 game_board()
 
+            elif column_choice == 88:
+                # Go where the computer would have gone cheat
+                game_board()
+                print("   CHEATER!!")
+                column_choice = Game.next_move
+                sleep(DELAY_TIME*10)
+
             elif column_choice == 42:
                 # Easter egg! Because I like the book
                 game_board()
