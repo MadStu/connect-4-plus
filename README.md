@@ -156,6 +156,7 @@ You can also deploy to your own systems.
 - I used the Code Institute web template and terminal window to deploy the program.
 - I initially used the check_winner function from https://github.com/justinvallely/Python-Connect-4/blob/master/connect4.py (Line 69).
 - I learned how to clear the terminal screen from this tutorial: https://www.geeksforgeeks.org/clear-screen-python/
+- I learned how to work with .csv files from this website: https://www.pythontutorial.net/python-basics/python-read-csv-file/
 - I got the Connect 4 logo text from this website: https://patorjk.com/software/taag/#p=display&f=Doom&t=Connect%204
 - I made the flowchart by using this website:  https://online.visual-paradigm.com/
 - I used a royalty free image of an old computer from: https://www.pikpng.com/

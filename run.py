@@ -43,12 +43,16 @@ class TopScores:
         """
         Read the top scores data and make a list
         """
+        # Empty the current list first
         Game.top_scores = []
+
         with open(CSV, encoding="utf8") as f:
             csv_reader = csv.reader(f)
             for i, line in enumerate(csv_reader):
                 Game.top_scores.append(line)
                 Game.top_scores[i][0] = int(Game.top_scores[i][0])
+
+        # Sort, then reverse the list
         Game.top_scores.sort()
         Game.top_scores.reverse()
 
@@ -72,6 +76,8 @@ class TopScores:
 
         margin = 7
         i = 0
+
+        # Print scoreboard line by line
         while i < 10:
             line_text = ""
             if i == 0:
