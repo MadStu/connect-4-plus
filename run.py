@@ -68,18 +68,28 @@ class TopScores:
         clear()
         logo()
 
-        test = f"""          1st   |   {Game.top_scores[0][0]} Points   |   {Game.top_scores[0][1]}
-          2nd   |   {Game.top_scores[1][0]} Points   |   {Game.top_scores[1][1]}
-          3rd   |   {Game.top_scores[2][0]} Points   |   {Game.top_scores[2][1]}
-          4th   |   {Game.top_scores[3][0]} Points   |   {Game.top_scores[3][1]}
-          5th   |   {Game.top_scores[4][0]} Points   |   {Game.top_scores[4][1]}
-          6th   |   {Game.top_scores[5][0]} Points   |   {Game.top_scores[5][1]}
-          7th   |   {Game.top_scores[6][0]} Points   |   {Game.top_scores[6][1]}
-          8th   |   {Game.top_scores[7][0]} Points   |   {Game.top_scores[7][1]}
-          9th   |   {Game.top_scores[8][0]} Points   |   {Game.top_scores[8][1]}
-         10th   |   {Game.top_scores[9][0]} Points   |   {Game.top_scores[9][1]}"""
+        margin = 10
+        i=0
+        while i < 10:
+            line_text = ""
+            if i == 0:
+                ord = "st"
+            elif i == 1:
+                ord = "nd"
+            elif i == 2:
+                ord = "rd"
+            elif i == 9:
+                margin = 9
+            else:
+                ord = "th"
+            line_text += margin * " "
+            line_text += str(i+1) + ord + "   |"
+            line_text += (7 - len(str(Game.top_scores[i][0]))) * " "
+            line_text += str(Game.top_scores[i][0])
+            line_text += " Points   |   " + Game.top_scores[i][1].upper()
+            print(line_text)
+            i += 1
 
-        print(test)
 
     def add():
         """
@@ -1092,7 +1102,7 @@ def top_level():
         i += 1
 
     game_won = "\n                   YOU BEAT HAL!!!\n"
-    game_won += """   I'm afraid. I'm afraid, {name}. {name}, my mind is
+    game_won += f"""   I'm afraid. I'm afraid, {name}. {name}, my mind is
    going. I can feel it. I can feel it. My mind is
    going. There is no question about it. I can feel
    it. I can feel it. I can feel it. I'm a... fraid."""
