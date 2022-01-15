@@ -115,7 +115,8 @@ Some feedback I had was that the computer was too hard to beat on Easy mode so I
   - Solved by adding if else in the reset_game function. It now checks to see if the level was at the top level or not.
 - ~~Game difficulty not changing mode when the player selects a different setting after winning at top level.~~
   - Solved, I'd missed adding the setting in the choose_mode function as the default mode was "easy" and only changed when player set mode to "hard".
-- Score increments highly when you don't enter valid input when choosing difficulty mode.
+- ~~Score increments highly when you input invalid data when choosing difficulty mode before game starts.~~
+  - Solved by removing the call to reset_game which is no longer required there.
 
 ## Deployment
 
