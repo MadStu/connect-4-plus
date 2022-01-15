@@ -111,6 +111,7 @@ Some feedback I had was that the computer was too hard to beat on Easy mode so I
   - Solved by using a Try/Except block to handle it.
 - ~~Recursion Error when the program is checking winners and checking for next computer move.~~
   - Solved by increasing the recursion limit.
+- IndexError when resetting game after player has reached top level
 
 ## Deployment
 
