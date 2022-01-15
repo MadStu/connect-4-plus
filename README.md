@@ -1,8 +1,8 @@
 # Connect 4
 
-Connect 4 is a strategy game where the idea is to get 4 of your own discs in a line in any direction, horizontally, vertically or diagonally ( -- ¦ / \ ), hence you connect 4 together. You must also block your opponent from connecting 4 and can be quite satisfying when you plan and predict a few moves in advance.
+Connect 4 is a strategy game where the idea is to get 4 of your own discs in a line in any direction, horizontally, vertically or diagonally ( -- ¦ / \ ), hence you connect 4 together. You must also block your opponent, Hal (the computer), from connecting 4.
 
-This game is useful for people who spend a lot of time in terminals and allows them to let off steam. They can have a quick game lasting less than a minute, or continue playing until they've beaten the computer, so it's good for somebody to play whether they only have a free moment or lots of time to spare.
+This game is useful for people who spend a lot of time in terminals and allows them to let off steam. They can have a quick game lasting less than a minute, or continue playing until they've beaten Hal, so it's good for somebody to play whether they only have a free moment or lots of time to spare.
 
 A deployed version may be found here: [Connect 4](http://my-connect-4.herokuapp.com/)
 
@@ -16,7 +16,7 @@ Connect 4 was a game I thought could meet the criteria I was looking for and cou
 
 Before writing any code I first built a flow chart to map out where it needed to start, where it needed to go and how it would end.
 
-This helped massively at the beginning of the project and I used that to build the initial basic functioning game loop which everything since has been based upon.
+This helped massively at the beginning of the project to get the ball rolling and I used it to build the initial basic functioning game loop which everything since has been based upon.
 
 ![Flow Chart](https://github.com/MadStu/connect-4/raw/main/assets/images/flow-chart.png)
 
@@ -37,39 +37,40 @@ This helped massively at the beginning of the project and I used that to build t
 
 - __Hard Mode__
 
-  - The game features a hard mode allowing the player to play against a harder opponent.
+  - The game features a hard mode allowing the player to play against a much smarter version of Hal.
   - This gives the player a real sense of achievement when they win. 
 
 ![Hard Mode](https://github.com/MadStu/connect-4/raw/main/assets/images/hard-mode.png)
 
 - __Animated Disc Drop__
 
-  - Basic animation is included which shows the player discs falling as they're dropped into the column which is visually appealing.
+  - Basic animation is included which shows both player discs falling as they're dropped into the column which is visually satisfying.
 
 ![Animated Disc Drop](https://github.com/MadStu/connect-4/raw/main/assets/images/animated-disc-drop.png)
 
 - __Status Bar__
 
-  - A status bar keeps the player informed with the level they're on, what game difficulty they're playing and who's turn it is.
+  - A status bar keeps the player informed with the level they're on, what game difficulty they're playing, who's turn it is and what their score is.
 
 ![Status Bar](https://github.com/MadStu/connect-4/raw/main/assets/images/status-bar.png)
 
 - __Input Validation__
 
-  - Any input from the user is validated, asking if they want to play hard mode, play again or from the column number they enter.
+  - All input from the user is validated, whether asking if they want to play hard mode, play again and also the column number they enter.
 
 ![Input Validation](https://github.com/MadStu/connect-4/raw/main/assets/images/input-validation.png)
 
 - __Coloured Winning Discs__
 
-  - When either the user or computer player wins, the winning discs are highlighted red to show the line of connect 4.
+  - When either the user or Hal wins, the winning discs are highlighted red to show the line of connect 4.
 
 ![Coloured Winning Discs](https://github.com/MadStu/connect-4/raw/main/assets/images/coloured-winning-discs.png)
 
 - __Cheat Code__
 
   - The game includes a cheat code (88) which may give a hint to the player of the next column to try.
-  - If the computer hasn't seen a potentially winning pattern the player is instead shown a message that cheaters never prosper.
+  - If Hal hasn't found a potentially winning pattern the player is instead shown a message that cheaters never prosper.
+  - There is a penalty for using the cheat code in terms of lost points.
 
 ![Cheat Message](https://github.com/MadStu/connect-4/raw/main/assets/images/cheat-message.png)
 
@@ -136,7 +137,6 @@ I've deployed it on herokuapp.com and used the following method.
     - Click "New" then "Create new app".
     - Enter an app name, choose your region and then click "Create app".
     - On the next page, go to the Settings Tab.
-    - Click on "Reveal Config Vars". Add "port" in the KEY text field and "8000" in the VALUE text field, then click the "Add" button.
     - Click on "Add buildpack" and add the python build pack first, then save changes.
     - Click on "Add buildpack" again and add the nodejs build pack for the web interface to work. Be sure these 2 are in that order, Python first.
     - Click on the Deploy tab at the top, select GitHub and connect to your GitHub account.

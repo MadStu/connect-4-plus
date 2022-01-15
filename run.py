@@ -46,6 +46,7 @@ class TopScores:
         # Empty the current list first
         Game.top_scores = []
 
+        # Open and read .csv line by line
         with open(CSV, encoding="utf8") as f:
             csv_reader = csv.reader(f)
             for i, line in enumerate(csv_reader):
@@ -456,6 +457,7 @@ def enter_name():
         input_text = "\n        Enter your 3 letter name (eg: STU):\n"
         name_input = input(input_text)
 
+        # Check it's A-z and at least 3 letters long
         while not name_input.isalpha() or len(name_input) < 3:
             print("   Only A-Z are allowed and 3 letters length...")
             sleep(DELAY_TIME*10)
@@ -468,6 +470,7 @@ def enter_name():
         sleep(DELAY_TIME)
 
         i = 0
+        # Print the name in big ascii art letters
         while i < 6:
             name = NAME_TEXT + " " * 10
             name += letters.dict[name_input[0].lower()][i]
@@ -521,7 +524,7 @@ def reset_game():
                 Game.width -= 1
 
         else:
-            # Computer has won :(
+            # Hal has won :(
             Game.level = 1
             Game.width = BOARD_WIDTH
             Game.score = 0
