@@ -73,10 +73,16 @@ This helped massively at the beginning of the project and I used that to build t
 
 ![Cheat Message](https://github.com/MadStu/connect-4/raw/main/assets/images/cheat-message.png)
 
+- __Score Board__
+
+  - A score board shows the player the top ten scores.
+
+![Score Board](https://github.com/MadStu/connect-4/raw/main/assets/images/score-board.png)
+
 ### Features Left to Implement
 
 - ~~Implement a points system based on number of turns.~~
-- Add a high score board.
+- ~~Add a high score board.~~
 - Add AI that learns and predicts the players next move based on their previous pattern of moves.
 - Make the Easy mode opponent easier to beat.
 
@@ -117,6 +123,8 @@ Some feedback I had was that the computer was too hard to beat on Easy mode so I
   - Solved, I'd missed adding the setting in the choose_mode function as the default mode was "easy" and only changed when player set mode to "hard".
 - ~~Score increments highly when you input invalid data when choosing difficulty mode before game starts.~~
   - Solved by removing the call to reset_game which is no longer required there.
+- ~~Scoreboard updates twice when player completes the game and doesn't continue the playing.~~
+  - Solved by checking the game level within the play_again function.
 
 ## Deployment
 
