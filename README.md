@@ -75,7 +75,7 @@ This helped massively at the beginning of the project and I used that to build t
 
 ### Features Left to Implement
 
-- Implement a points system based on number of turns.
+- ~~Implement a points system based on number of turns.~~
 - Add a high score board.
 - Add AI that learns and predicts the players next move based on their previous pattern of moves.
 - Make the Easy mode opponent easier to beat.
@@ -115,6 +115,7 @@ Some feedback I had was that the computer was too hard to beat on Easy mode so I
   - Solved by adding if else in the reset_game function. It now checks to see if the level was at the top level or not.
 - ~~Game difficulty not changing mode when the player selects a different setting after winning at top level.~~
   - Solved, I'd missed adding the setting in the choose_mode function as the default mode was "easy" and only changed when player set mode to "hard".
+- Score increments highly when you don't enter valid input when choosing difficulty mode.
 
 ## Deployment
 
