@@ -594,6 +594,7 @@ def choose_mode():
         elif mode_input.lower() == "e" or mode_input.lower() == "easy":
             # Player wants to play with easy mode
             valid_input = True
+            Game.hard_mode = False
 
         else:
             print("     Not a valid input.. Try again!..\n")
@@ -975,7 +976,6 @@ def top_level():
     sleep(DELAY_TIME*30)
     game_board()
     reset_game()
-    #Game.winner = False
     Game.level = 1
     Game.width = BOARD_WIDTH
 
