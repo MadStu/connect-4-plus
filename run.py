@@ -137,6 +137,7 @@ class Game:
     disc_count = 0
     player_name = "hal"
     score = 0
+    last_score = 0
     top_scores = []
 
 
@@ -528,6 +529,7 @@ def reset_game():
             Game.level = 1
             Game.width = BOARD_WIDTH
             Game.score = 0
+            Game.last_score = 0
 
     # Add relevant points to the score based on current board size,
     # game level and difficulty mode
@@ -1006,20 +1008,12 @@ def we_have_a_winner():
         print(win_text)
         sleep(DELAY_TIME*10)
 
-    # If the player lost, remove their points from this level
-    if not Game.player_turn:
-        # Calculate the max number of squares based on board size
-        board_max = (BOARD_HEIGHT-1) * Game.width
-
-        # Determine free moves left
-        moves_left = ((board_max / 2) - Game.disc_count) + 1
-
-        # Determine points per move
-        points = BASE_POINTS * Game.level
-        points += points if Game.hard_mode else 0
-
-        # Remove these points from player score - loser
-        Game.score -= int(points * moves_left)
+    if Game.player_turn:
+        # If the player won, record their points up to this level
+        Game.last_score = Game.score
+    else:
+        # If the player lost, remove their points from this level
+        Game.score = Game.last_score
 
     play_again()
 
