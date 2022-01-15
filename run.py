@@ -13,7 +13,7 @@ BOARD_WIDTH = 12
 # Delay time of items being shown
 DELAY_TIME = 0.15
 
-# Speed which the disc drops down
+# Speed at which the disc drops down
 DROP_SPEED = 0.06
 
 # Text Styles
@@ -24,6 +24,10 @@ NAME_TEXT = "\033[0;31;48m"
 
 # Winning game level
 WIN_LEVEL = BOARD_WIDTH - 3
+
+# How many points are deducted for each square
+# Multiplied by the game level
+BASE_POINTS = 10
 
 
 class Game:
@@ -38,6 +42,7 @@ class Game:
     db = []
     disc_count = 0
     player_name = ""
+    score = 0
 
 
 class BoardCheck:
@@ -415,6 +420,7 @@ def reset_game():
             if Game.level >= WIN_LEVEL:
                 Game.level = 1
                 Game.width = BOARD_WIDTH
+                Game.score = 0
             else:
                 Game.level += 1
                 Game.width -= 1
@@ -423,6 +429,10 @@ def reset_game():
             # Computer has won :(
             Game.level = 1
             Game.width = BOARD_WIDTH
+            Game.score = 0
+
+    board_max = (BOARD_HEIGHT-1) * Game.width
+    Game.score += board_max * (BASE_POINTS * Game.level)
 
     # Reset Everything else
     Game.player_turn = True
@@ -941,6 +951,9 @@ def check_draw():
 
     # Calculate the max number of squares based on board size
     board_max = (BOARD_HEIGHT-1) * Game.width
+
+    if Game.player_turn:
+        Game.Score -= BASE_POINTS * Game.level
 
     if Game.disc_count >= board_max:
         # Game's a draw so handle that

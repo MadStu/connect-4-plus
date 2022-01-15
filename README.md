@@ -114,7 +114,7 @@ Some feedback I had was that the computer was too hard to beat on Easy mode so I
 - ~~IndexError when resetting game after player has reached top level.~~
   - Solved by adding if else in the reset_game function. It now checks to see if the level was at the top level or not.
 - ~~Game difficulty not changing mode when the player selects a different setting after winning at top level.~~
-  - Solved, I'd missed adding the setting in the choose_mode function as the default mode was "easy" and only changed when setting hard.
+  - Solved, I'd missed adding the setting in the choose_mode function as the default mode was "easy" and only changed when player set mode to "hard".
 
 ## Deployment
 
