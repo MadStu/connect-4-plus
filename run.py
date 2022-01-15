@@ -1012,7 +1012,7 @@ def we_have_a_winner():
         # If the player won, record their points up to this level
         Game.last_score = Game.score
     else:
-        # If the player lost, remove their points from this level
+        # If the player lost, reset their points to their previous level
         Game.score = Game.last_score
 
     play_again()
