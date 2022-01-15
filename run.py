@@ -20,7 +20,6 @@ DROP_SPEED = 0.06
 
 # Text Styles
 RED_TEXT = "\033[1;31;48m"
-YELLOW_TEXT = "\033[1;33;48m"
 GREEN_TEXT = "\033[1;32;48m"
 LOGO_TEXT = "\033[0;32;48m"
 NAME_TEXT = "\033[0;31;48m"
@@ -44,12 +43,14 @@ class TopScores:
         """
         Read the top scores data and make a list 
         """
+        Game.top_scores = []
         with open(CSV, encoding="utf8") as f:
             csv_reader = csv.reader(f)
-            for line_no, line in enumerate(csv_reader):
+            for i, line in enumerate(csv_reader):
                 Game.top_scores.append(line)
-                Game.top_scores[line_no][0] = int(Game.top_scores[line_no][0])
-        Game.top_scores.sort(reverse = True)
+                Game.top_scores[i][0] = int(Game.top_scores[i][0])
+        Game.top_scores.sort()
+        Game.top_scores.reverse()
 
     def write():
         """
@@ -84,7 +85,7 @@ class TopScores:
         """
         Add player score to the Game.top_scores list
         """
-        # Temp list for apeening to main list
+        # Temp list for appending to main list
         temp_list =[]
         temp_list.append(Game.score)
         temp_list.append(Game.player_name)
@@ -588,7 +589,7 @@ def welcome():
     reset_game()
     
     TopScores.display()
-    sleep(10)
+    sleep(DELAY_TIME*30)
 
     game_board()
 
@@ -994,7 +995,7 @@ def play_again():
     Ask if player wants to play again and check their input is valid
     """
     sleep(DELAY_TIME)
-    game_board()
+    TopScores.display()
     mode_choice = False
 
     input_text = "   Would you like to "
@@ -1017,9 +1018,10 @@ def play_again():
             # Player wants to end the game so quit
             valid_input = True
 
-            if Game.score > Game.top_scores[9][1]:
+            if Game.score > Game.top_scores[9][0]:
                 print("Your score was added to the scoreboard!")
                 sleep(DELAY_TIME*10)
+                TopScores.add()
             TopScores.display()
             print("   OK, Thank you for playing. Come back soon!! :)\n")
             quit()
@@ -1027,7 +1029,7 @@ def play_again():
         elif play_again_inp.lower() == "y" or play_again_inp.lower() == "yes":
             # Player wants to play again so reset and start the game
             valid_input = True
-            game_board()
+            TopScores.display()
             print("   OK, resetting game...")
             sleep(DELAY_TIME*10)
             reset_game()
@@ -1037,11 +1039,11 @@ def play_again():
             enter_column_number()
 
         else:
-            # Player wants to play again so reset and start the game
-            game_board()
+            # Not a valid input
+            TopScores.display()
             print("   Not a valid input...")
             sleep(DELAY_TIME*10)
-            game_board()
+            TopScores.display()
             play_again_inp = input(input_text)
 
 
@@ -1097,7 +1099,8 @@ def top_level():
     print(game_won)
 
     sleep(10)
-    game_board()
+    TopScores.add()
+    TopScores.display()
 
 
 welcome()
