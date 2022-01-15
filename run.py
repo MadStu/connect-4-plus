@@ -412,8 +412,12 @@ def reset_game():
     if Game.winner:
         if Game.player_turn:
             # Player has won!
-            Game.level += 1
-            Game.width -= 1
+            if Game.level >= WIN_LEVEL:
+                Game.level = 1
+                Game.width = BOARD_WIDTH
+            else:
+                Game.level += 1
+                Game.width -= 1
 
         else:
             # Computer has won :(
@@ -572,7 +576,7 @@ def choose_mode():
     Player chooses which game mode to play in. Hard or Easy!
     """
     p_name = Game.player_name.capitalize()
-    print(f"             Make your choice, {p_name}:")
+    print(f"              Make your choice, {p_name}:")
     input_text = "             [H]ard mode [E]asy mode\n"
     mode_input = input(input_text)
     valid_input = False
@@ -598,7 +602,7 @@ def choose_mode():
             logo()
             reset_game()
             game_board()
-            print(f"             Make your choice, {p_name}:")
+            print(f"              Make your choice, {p_name}:")
             input_text = "             [H]ard mode [E]asy mode\n"
             mode_input = input(input_text)
 
@@ -968,10 +972,10 @@ def top_level():
     game_won += "          VERY well done! I'm impressed!"
     print(game_won)
 
-    sleep(10)
+    sleep(DELAY_TIME*30)
     game_board()
     reset_game()
-    Game.winner = False
+    #Game.winner = False
     Game.level = 1
     Game.width = BOARD_WIDTH
 
