@@ -528,11 +528,12 @@ def welcome_text():
     print("   WELCOME to the fun game of Connect 4!\n")
     sleep(DELAY_TIME)
 
-    print("""   The game is easy, you take turns with the
-   computer to place your discs which fall into
-   each column, in this game you'll play with X's
-   and O's.
-   You'll be O and Hal (the computer) will be X.\n""")
+    print("""   The game is easy, you'll take turns with
+   Hal (the computer) to place your discs which
+   fall into each column, in this game you'll
+   play with X's and O's.
+
+   You will be O and Hal will be X.\n""")
 
     sleep(DELAY_TIME)
     input("   Press Enter to continue...\n")
@@ -545,7 +546,7 @@ def welcome_text():
  | . | . | . | . | . | . | . | . | . | . | . | . |
  | . | . | . | . | . | . | . | . | . | . | . | . |\n""")
     sleep(DELAY_TIME)
-    print("""   Each column is numbered from left-right.
+    print("""   Each column is numbered from left to right.
    You'll need to enter a column number in which
    to drop your disc.\n""")
 
@@ -561,11 +562,10 @@ def welcome_text():
  | . | . | . | . | . | . | {disc_example} | . | . | . | . | . |
  | . | . | . | . | . | {disc_example} | X | . | X | . | . | . |
  | O | X | . | . | {disc_example} | X | O | . | O | O | . | . |
- | X | X | X | {disc_example} | X | O | O | O | X | O | X | . |""")
-    print("")
+ | X | X | X | {disc_example} | X | O | O | O | X | O | X | . |\n""")
     sleep(DELAY_TIME)
-    print("   When you get 4 in a row like shown above or")
-    print("   in any other direction, you win the game!\n")
+    print("""   When you connect 4 in a line as shown above
+   or in any other direction, you win the game!\n""")
 
     sleep(DELAY_TIME)
     input("   Press Enter to continue...\n")
@@ -580,8 +580,9 @@ def welcome_text():
     game_status()
     sleep(DELAY_TIME)
     print(f"""   You'll start on Level 1 and your goal is to
-   beat Hal by winning level {WIN_LEVEL}. The Board will narrow
-   each time you level up, increasing the difficulty.\n""")
+   beat Hal by completing level {WIN_LEVEL}. The game board
+   will narrow each time you level up, increasing
+   the difficulty.\n""")
 
     sleep(DELAY_TIME)
     input("   Press Enter to continue...\n")
