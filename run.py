@@ -733,10 +733,11 @@ def game_status():
     Prints the status of the game
     """
     p_name = Game.player_name.capitalize()
-    space = "        " if Game.level < 10 else "       "
-    status = f"\n    Level: {Game.level}{space}"
-    hard_text = "HARD Mode   "
-    easy_text = "Easy Mode   "
+    space = "  " if Game.level < 10 else " "
+    status = f"\n Level: {Game.level}{space}"
+    hard_text = "HARD Mode  "
+    easy_text = "Easy Mode  "
+    scor_text = f"Score: {Game.score} "
     user_winn = f"      {p_name.upper()} WON!!\n"
     user_turn = f"     {p_name}'s Turn\n"
     comp_winn = "   Computer Won\n"
@@ -745,6 +746,7 @@ def game_status():
     # Put the status in order
 
     status += hard_text if Game.hard_mode else easy_text
+    status += scor_text
 
     if Game.player_turn:
         status += user_winn if Game.winner else user_turn
@@ -953,7 +955,7 @@ def check_draw():
     board_max = (BOARD_HEIGHT-1) * Game.width
 
     if Game.player_turn:
-        Game.Score -= BASE_POINTS * Game.level
+        Game.score -= BASE_POINTS * Game.level
 
     if Game.disc_count >= board_max:
         # Game's a draw so handle that
