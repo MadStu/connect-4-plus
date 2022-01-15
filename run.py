@@ -42,7 +42,7 @@ class Game:
     width = BOARD_WIDTH
     db = []
     disc_count = 0
-    player_name = ""
+    player_name = "hal"
     score = 0
 
 
@@ -532,7 +532,7 @@ def welcome_text():
    computer to place your discs which fall into
    each column, in this game you'll play with X's
    and O's.
-   You'll be O and the computer will be X.\n""")
+   You'll be O and Hal (the computer) will be X.\n""")
 
     sleep(DELAY_TIME)
     input("   Press Enter to continue...\n")
@@ -580,8 +580,8 @@ def welcome_text():
     game_status()
     sleep(DELAY_TIME)
     print(f"""   You'll start on Level 1 and your goal is to
-   beat level {WIN_LEVEL}. The Board will narrow each time
-   you level up, increasing the difficulty.\n""")
+   beat Hal by winning level {WIN_LEVEL}. The Board will narrow
+   each time you level up, increasing the difficulty.\n""")
 
     sleep(DELAY_TIME)
     input("   Press Enter to continue...\n")
@@ -739,15 +739,15 @@ def game_status():
     Prints the status of the game
     """
     p_name = Game.player_name.capitalize()
-    space = "  " if Game.level < 10 else " "
-    status = f"\n  Level: {Game.level}{space}"
-    hard_text = "HARD Mode "
-    easy_text = "Easy Mode "
-    user_winn = f"      {p_name.upper()} WON!!  "
-    user_turn = f"     {p_name}'s Turn  "
-    comp_winn = "   Computer Won  "
-    comp_turn = "Computer's Turn  "
-    scor_text = f"Score: {Game.score}\n"
+    space = "   " if Game.level < 10 else "  "
+    status = f"\n   Level: {Game.level}{space}"
+    hard_text = "HARD Mode"
+    easy_text = "Easy Mode"
+    user_winn = f"    {p_name.upper()} WON!!"
+    user_turn = f"   {p_name}'s Turn"
+    comp_winn = "      Hal Won"
+    comp_turn = "   Hal's Turn"
+    scor_text = f"   Score: {Game.score}\n"
 
     # Put the status in order
     status += hard_text if Game.hard_mode else easy_text
@@ -820,6 +820,13 @@ def enter_column_number():
                 game_board()
                 print("   Answer to the Ultimate Question of Life,")
                 print("               The Universe, and Everything")
+                sleep(DELAY_TIME*10)
+                game_board()
+
+            elif column_choice == 9000:
+                # Easter egg! Because I LOVE the film
+                game_board()
+                print("   I'm sorry Dave, I'm afraid I can't do that.")
                 sleep(DELAY_TIME*10)
                 game_board()
 
@@ -986,6 +993,7 @@ def top_level():
     """
     clear()
     logo()
+    name = Game.player_name.capitalize()
 
     i = 0
     while i < 6:
@@ -997,11 +1005,14 @@ def top_level():
         print(name)
         i += 1
 
-    game_won = "\n               YOU BEAT THE GAME!!!\n"
-    game_won += "          VERY well done! I'm impressed!"
+    game_won = "\n                   YOU BEAT HAL!!!\n"
+    game_won += """   I'm afraid. I'm afraid, {name}. {name}, my mind is
+   going. I can feel it. I can feel it. My mind is
+   going. There is no question about it. I can feel
+   it. I can feel it. I can feel it. I'm a... fraid."""
     print(game_won)
 
-    sleep(DELAY_TIME*30)
+    sleep(10)
     game_board()
 
 
