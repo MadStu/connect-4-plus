@@ -18,11 +18,8 @@ DELAY_TIME = 0.15
 # Speed at which the disc drops down
 DROP_SPEED = 0.06
 
-# Text Styles
-RED_TEXT = "\033[1;31;48m"
-GREEN_TEXT = "\033[1;32;48m"
-LOGO_TEXT = "\033[0;32;48m"
-NAME_TEXT = "\033[0;31;48m"
+# Location of the .csv file for holding the top scores
+CSV = "scores.csv"
 
 # Winning game level
 WIN_LEVEL = BOARD_WIDTH - 3
@@ -31,8 +28,11 @@ WIN_LEVEL = BOARD_WIDTH - 3
 # Multiplied by the game level
 BASE_POINTS = 2
 
-# Location of the .csv file for holding the top scores
-CSV = "scores.csv"
+# Text Styles
+RED_TEXT = "\033[1;31;48m"
+GREEN_TEXT = "\033[1;32;48m"
+LOGO_TEXT = "\033[0;32;48m"
+NAME_TEXT = "\033[0;31;48m"
 
 
 class TopScores:
@@ -74,7 +74,6 @@ class TopScores:
         logo()
 
         side_text = "TOP SCORES"
-
         margin = 7
         i = 0
 
@@ -91,7 +90,7 @@ class TopScores:
                 margin = 6
             else:
                 ord = "th"
-            line_text += "  " + side_text[i]
+            line_text += "     " + side_text[i]
             line_text += margin * " "
             line_text += str(i+1) + ord + "   |"
             line_text += (7 - len(str(Game.top_scores[i][0]))) * " "
@@ -493,6 +492,7 @@ def check_winner(disc):
     Checks to see if there are any connect 4 winners
     """
     check = BoardCheck(disc)
+    Game.got_3 = False
 
     if check.diag_right_forward() or check.diag_right_backward():
         return True
@@ -972,7 +972,6 @@ def computer_turn():
         column_choice = random.randint(1, Game.width)
 
     sleep(DELAY_TIME)
-    Game.got_3 = False
     drop_disc(column_choice)
 
 
@@ -1018,7 +1017,7 @@ def play_again():
     TopScores.display()
     mode_choice = False
 
-    input_text = "\n   Would you like to "
+    input_text = "\n        Would you like to "
 
     # Reset game level after they've won the game
     if Game.level >= WIN_LEVEL and Game.winner and Game.player_turn:
@@ -1029,7 +1028,7 @@ def play_again():
     else:
         input_text += "continue playing?"
 
-    input_text += " \n   [Y]es or [N]o"
+    input_text += " \n         [Y]es or [N]o"
     input_text += f"        Your Score: {RED_TEXT}{Game.score}{GREEN_TEXT}\n"
     play_again_inp = input(input_text)
     valid_input = False
