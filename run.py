@@ -436,7 +436,7 @@ def reset_game():
     # game level and difficulty mode
     board_max = (BOARD_HEIGHT-1) * Game.width
     board_score = math.floor((board_max / 2) * (BASE_POINTS * Game.level))
-    board_score + board_score if Game.hard_mode else 0 
+    board_score += board_score if Game.hard_mode else 0 
     Game.score += board_score
 
     # Reset Everything else
@@ -508,9 +508,10 @@ def welcome():
     sleep(DELAY_TIME)
     enter_name()
     sleep(DELAY_TIME)
+    choose_mode()
+    sleep(DELAY_TIME)
     reset_game()
     game_board()
-    choose_mode()
 
     # Begin the game!
     enter_column_number()
@@ -590,6 +591,8 @@ def choose_mode():
     """
     Player chooses which game mode to play in. Hard or Easy!
     """
+    clear()
+    logo()
     p_name = Game.player_name.capitalize()
     print(f"              Make your choice, {p_name}:")
     input_text = "             [H]ard mode [E]asy mode\n"
@@ -599,10 +602,11 @@ def choose_mode():
     while not valid_input:
         if mode_input.lower() == "h" or mode_input.lower() == "hard":
             # Player wants to play with hard mode
-            game_board()
+            Game.hard_mode = True
+            clear()
+            logo()
             print(f"    HARD MODE! {p_name.upper()} YOU MANIAC!!!! :-o\n")
             sleep(DELAY_TIME*10)
-            Game.hard_mode = True
             valid_input = True
 
         elif mode_input.lower() == "e" or mode_input.lower() == "easy":
@@ -615,7 +619,6 @@ def choose_mode():
             sleep(DELAY_TIME*1)
             clear()
             logo()
-            game_board()
             print(f"              Make your choice, {p_name}:")
             input_text = "             [H]ard mode [E]asy mode\n"
             mode_input = input(input_text)
