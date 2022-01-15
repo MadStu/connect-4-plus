@@ -67,8 +67,7 @@ class TopScores:
         clear()
         logo()
 
-        test = f"""
-          1st   |   {Game.top_scores[0][0]} Points   |   {Game.top_scores[0][1]}
+        test = f"""          1st   |   {Game.top_scores[0][0]} Points   |   {Game.top_scores[0][1]}
           2nd   |   {Game.top_scores[1][0]} Points   |   {Game.top_scores[1][1]}
           3rd   |   {Game.top_scores[2][0]} Points   |   {Game.top_scores[2][1]}
           4th   |   {Game.top_scores[3][0]} Points   |   {Game.top_scores[3][1]}
@@ -80,6 +79,30 @@ class TopScores:
          10th   |   {Game.top_scores[9][0]} Points   |   {Game.top_scores[9][1]}"""
 
         print(test)
+
+    def add():
+        """
+        Add player score to the Game.top_scores list
+        """
+        # Temp list for apeening to main list
+        temp_list =[]
+        temp_list.append(Game.score)
+        temp_list.append(Game.player_name)
+
+        # Temp list for sorting the main list in order of high score
+        temp_list2 = Game.top_scores
+        temp_list2.append(temp_list)
+        temp_list2.sort(reverse = True)
+
+        # Empty main scoreboard and limit to the top 10 scores
+        Game.top_scores = []
+        i=0
+        while i < 10:
+            Game.top_scores.append(temp_list2[i])
+            i += 1
+
+        # Update the csv with new values
+        TopScores.write()
 
 
 class Game:
@@ -993,7 +1016,11 @@ def play_again():
         if play_again_inp.lower() == "n" or play_again_inp.lower() == "no":
             # Player wants to end the game so quit
             valid_input = True
-            game_board()
+
+            if Game.score > Game.top_scores[9][1]:
+                print("Your score was added to the scoreboard!")
+                sleep(DELAY_TIME*10)
+            TopScores.display()
             print("   OK, Thank you for playing. Come back soon!! :)\n")
             quit()
 
