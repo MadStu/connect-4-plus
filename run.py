@@ -41,7 +41,7 @@ class TopScores:
     """
     def read():
         """
-        Read the top scores data and make a list 
+        Read the top scores data and make a list
         """
         Game.top_scores = []
         with open(CSV, encoding="utf8") as f:
@@ -71,7 +71,7 @@ class TopScores:
         side_text = "TOP SCORES"
 
         margin = 7
-        i=0
+        i = 0
         while i < 10:
             line_text = ""
             if i == 0:
@@ -93,24 +93,23 @@ class TopScores:
             print(line_text)
             i += 1
 
-
     def add():
         """
         Add player score to the Game.top_scores list
         """
         # Temp list for appending to main list
-        temp_list =[]
+        temp_list = []
         temp_list.append(Game.score)
         temp_list.append(Game.player_name)
 
         # Temp list for sorting the main list in order of high score
         temp_list2 = Game.top_scores
         temp_list2.append(temp_list)
-        temp_list2.sort(reverse = True)
+        temp_list2.sort(reverse=True)
 
         # Empty main scoreboard and limit to the top 10 scores
         Game.top_scores = []
-        i=0
+        i = 0
         while i < 10:
             Game.top_scores.append(temp_list2[i])
             i += 1
