@@ -27,7 +27,7 @@ WIN_LEVEL = BOARD_WIDTH - 3
 
 # How many points are deducted for each square
 # Multiplied by the game level
-BASE_POINTS = 10
+BASE_POINTS = 2
 
 
 class Game:
@@ -432,7 +432,7 @@ def reset_game():
             Game.score = 0
 
     board_max = (BOARD_HEIGHT-1) * Game.width
-    Game.score += board_max * (BASE_POINTS * Game.level)
+    Game.score += (board_max / 2) * (BASE_POINTS * Game.level)
 
     # Reset Everything else
     Game.player_turn = True
@@ -734,19 +734,17 @@ def game_status():
     """
     p_name = Game.player_name.capitalize()
     space = "  " if Game.level < 10 else " "
-    status = f"\n Level: {Game.level}{space}"
-    hard_text = "HARD Mode  "
-    easy_text = "Easy Mode  "
-    scor_text = f"Score: {Game.score} "
-    user_winn = f"      {p_name.upper()} WON!!\n"
-    user_turn = f"     {p_name}'s Turn\n"
-    comp_winn = "   Computer Won\n"
-    comp_turn = "Computer's Turn\n"
+    status = f"\n  Level: {Game.level}{space}"
+    hard_text = "HARD Mode "
+    easy_text = "Easy Mode "
+    user_winn = f"      {p_name.upper()} WON!!  "
+    user_turn = f"     {p_name}'s Turn  "
+    comp_winn = "   Computer Won  "
+    comp_turn = "Computer's Turn  "
+    scor_text = f"Score: {Game.score}\n"
 
     # Put the status in order
-
     status += hard_text if Game.hard_mode else easy_text
-    status += scor_text
 
     if Game.player_turn:
         status += user_winn if Game.winner else user_turn
@@ -754,6 +752,7 @@ def game_status():
     else:
         status += comp_winn if Game.winner else comp_turn
 
+    status += scor_text
     print(status)
 
 
@@ -804,6 +803,9 @@ def enter_column_number():
                 cheat_text += cheat_yes if move > 0 else cheat_no
                 print(cheat_text)
                 sleep(DELAY_TIME*10)
+
+                # The cost of cheating!
+                Game.score -= (BASE_POINTS * Game.level) * 2
 
             elif column_choice == 42:
                 # Easter egg! Because I like the book
