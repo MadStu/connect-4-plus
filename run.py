@@ -1,6 +1,7 @@
 from os import system, name
 from time import sleep
 import random
+import math
 
 # Set Recursion limit higher for the AI
 from sys import setrecursionlimit
@@ -432,7 +433,7 @@ def reset_game():
             Game.score = 0
 
     board_max = (BOARD_HEIGHT-1) * Game.width
-    Game.score += (board_max / 2) * (BASE_POINTS * Game.level)
+    Game.score += math.floor((board_max / 2) * (BASE_POINTS * Game.level))
 
     # Reset Everything else
     Game.player_turn = True
