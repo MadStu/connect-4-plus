@@ -1029,9 +1029,10 @@ def play_again():
             valid_input = True
 
             if Game.score > Game.top_scores[9][0]:
-                print("Your score was added to the scoreboard!")
-                sleep(DELAY_TIME*10)
-                TopScores.add()
+                if Game.level < WIN_LEVEL:
+                    print("Your score was added to the scoreboard!")
+                    sleep(DELAY_TIME*10)
+                    TopScores.add()
             TopScores.display()
             print("   OK, Thank you for playing. Come back soon!! :)\n")
             quit()
