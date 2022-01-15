@@ -432,8 +432,12 @@ def reset_game():
             Game.width = BOARD_WIDTH
             Game.score = 0
 
+    # Add relevant points to the score based on current board size,
+    # game level and difficulty mode
     board_max = (BOARD_HEIGHT-1) * Game.width
-    Game.score += math.floor((board_max / 2) * (BASE_POINTS * Game.level))
+    board_score = math.floor((board_max / 2) * (BASE_POINTS * Game.level))
+    board_score + board_score if Game.hard_mode else 0 
+    Game.score += board_score
 
     # Reset Everything else
     Game.player_turn = True
@@ -804,7 +808,9 @@ def enter_column_number():
                 sleep(DELAY_TIME*10)
 
                 # The cost of cheating!
-                Game.score -= (BASE_POINTS * Game.level) * 2
+                cheat_points = (BASE_POINTS * Game.level) * 2
+                cheat_points += cheat_points if Game.hard_mode else 0
+                Game.score -= cheat_points
 
             elif column_choice == 42:
                 # Easter egg! Because I like the book
@@ -956,7 +962,10 @@ def check_draw():
     board_max = (BOARD_HEIGHT-1) * Game.width
 
     if Game.player_turn:
-        Game.score -= BASE_POINTS * Game.level
+        # Deduct points from score each turn
+        points = BASE_POINTS * Game.level
+        points += points if Game.hard_mode else 0
+        Game.score -= points
 
     if Game.disc_count >= board_max:
         # Game's a draw so handle that
@@ -991,9 +1000,6 @@ def top_level():
 
     sleep(DELAY_TIME*30)
     game_board()
-    reset_game()
-    Game.level = 1
-    Game.width = BOARD_WIDTH
 
 
 welcome()
