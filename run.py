@@ -1006,6 +1006,21 @@ def we_have_a_winner():
         print(win_text)
         sleep(DELAY_TIME*10)
 
+    # If the player lost, remove their points from this level
+    if not Game.player_turn:
+        # Calculate the max number of squares based on board size
+        board_max = (BOARD_HEIGHT-1) * Game.width
+
+        # Determine free moves left
+        moves_left = ((board_max / 2) - Game.disc_count) + 1
+
+        # Determine points per move
+        points = BASE_POINTS * Game.level
+        points += points if Game.hard_mode else 0
+
+        # Remove these points from player score - loser
+        Game.score -= int(points * moves_left)
+
     play_again()
 
 
@@ -1054,23 +1069,10 @@ def play_again():
             # Add Score if conditions are met
             if Game.score > Game.top_scores[9][0] and Game.winner:
                 if Game.level < WIN_LEVEL and not Game.player_turn:
-
-                    # Calculate the max number of squares based on board size
-                    board_max = (BOARD_HEIGHT-1) * Game.width
-
-                    # Determine free moves left
-                    moves_left = (board_max / 2) - Game.disc_count
-
-                    # Determine points per move
-                    points = BASE_POINTS * Game.level
-                    points += points if Game.hard_mode else 0
-
-                    # Remove these points from player score - loser
-                    Game.score -= points * moves_left
-
                     print("Your score was added to the scoreboard!")
                     sleep(DELAY_TIME*10)
                     TopScores.add()
+
             TopScores.display()
             print("\n   OK, resetting game...")
             sleep(DELAY_TIME*10)
