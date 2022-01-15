@@ -68,7 +68,9 @@ class TopScores:
         clear()
         logo()
 
-        margin = 10
+        side_text = "TOP SCORES"
+
+        margin = 7
         i=0
         while i < 10:
             line_text = ""
@@ -79,9 +81,10 @@ class TopScores:
             elif i == 2:
                 ord = "rd"
             elif i == 9:
-                margin = 9
+                margin = 6
             else:
                 ord = "th"
+            line_text += "  " + side_text[i]
             line_text += margin * " "
             line_text += str(i+1) + ord + "   |"
             line_text += (7 - len(str(Game.top_scores[i][0]))) * " "
@@ -597,10 +600,9 @@ def welcome():
     choose_mode()
     sleep(DELAY_TIME)
     reset_game()
-    
     TopScores.display()
+    print("\n   The scores to beat!!!")
     sleep(DELAY_TIME*30)
-
     game_board()
 
     # Begin the game!
@@ -1008,7 +1010,7 @@ def play_again():
     TopScores.display()
     mode_choice = False
 
-    input_text = "   Would you like to "
+    input_text = "\n   Would you like to "
 
     # Reset game level after they've won the game
     if Game.level >= WIN_LEVEL and Game.winner and Game.player_turn:
@@ -1035,14 +1037,14 @@ def play_again():
                     sleep(DELAY_TIME*10)
                     TopScores.add()
             TopScores.display()
-            print("   OK, Thank you for playing. Come back soon!! :)\n")
+            print("\n   OK, Thank you for playing. Come back soon!! :)\n")
             quit()
 
         elif play_again_inp.lower() == "y" or play_again_inp.lower() == "yes":
             # Player wants to play again so reset and start the game
             valid_input = True
             TopScores.display()
-            print("   OK, resetting game...")
+            print("\n   OK, resetting game...")
             sleep(DELAY_TIME*10)
             reset_game()
             game_board()
@@ -1053,7 +1055,7 @@ def play_again():
         else:
             # Not a valid input
             TopScores.display()
-            print("   Not a valid input...")
+            print("\n   Not a valid input...")
             sleep(DELAY_TIME*10)
             TopScores.display()
             play_again_inp = input(input_text)
