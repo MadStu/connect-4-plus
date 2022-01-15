@@ -564,7 +564,7 @@ def welcome_text():
  | O | X | . | . | {disc_example} | X | O | . | O | O | . | . |
  | X | X | X | {disc_example} | X | O | O | O | X | O | X | . |\n""")
     sleep(DELAY_TIME)
-    print("""   When you connect 4 in a line as shown above
+    print("""   When you connect 4 in a line (as shown above)
    or in any other direction, you win the game!\n""")
 
     sleep(DELAY_TIME)
