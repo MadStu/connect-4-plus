@@ -288,32 +288,58 @@ class letters:
     Character Codes for each letter
     """
     dict = {
-        "a": ["            ", "     /\     ", "    /  \    ", "   / /\ \   ", "  / ____ \  ", " /_/    \_\ "],
-        "b": ["  ____   ", " |  _ \  ", " | |_) | ", " |  _ <  ", " | |_) | ", " |____/  "],
-        "c": ["   _____  ", "  / ____| ", " | |      ", " | |      ", " | |____  ", "  \_____| "],
-        "d": ["  _____   ", " |  __ \  ", " | |  | | ", " | |  | | ", " | |__| | ", " |_____/  "],
-        "e": ["  ______  ", " |  ____| ", " | |__    ", " |  __|   ", " | |____  ", " |______| "],
-        "f": ["  ______  ", " |  ____| ", " | |__    ", " |  __|   ", " | |      ", " |_|      "],
-        "g": ["   _____  ", "  / ____| ", " | |  __  ", " | | |_ | ", " | |__| | ", "  \_____| "],
-        "h": ["  _    _  ", " | |  | | ", " | |__| | ", " |  __  | ", " | |  | | ", " |_|  |_| "],
-        "i": ["  _____  ", " |_   _| ", "   | |   ", "   | |   ", "  _| |_  ", " |_____| "],
-        "j": ["       _  ", "      | | ", "      | | ", "  _   | | ", " | |__| | ", "  \____/  "],
-        "k": ["  _  __ ", " | |/ / ", " | ' /  ", " |  <   ", " | . \  ", " |_|\_\ "],
-        "l": ["  _     ", "   | |      ", " | |      ", " | |      ", " | |____  ", " |______| "],
-        "m": ["  __  __  ", " |  \/  | ", " | \  / | ", " | |\/| | ", " | |  | | ", " |_|  |_| "],
-        "n": ["  _   _  ", " | \ | | ", " |  \| | ", " | . ` | ", " | |\  | ", " |_| \_| "],
-        "o": ["   ____   ", "  / __ \  ", " | |  | | ", " | |  | | ", " | |__| | ", "  \____/  "],
-        "p": ["  _____   ", " |  __ \  ", " | |__) | ", " |  ___/  ", " | |      ", " |_|      "],
-        "q": ["   ____   ", "  / __ \  ", " | |  | | ", " | |  | | ", " | |__| | ", "  \___\_\ "],
-        "r": ["  _____   ", " |  __ \  ", " | |__) | ", " |  _  /  ", " | | \ \  ", " |_|  \_\ "],
-        "s": ["   _____  ", "  / ____| ", " | (___   ", "  \___ \  ", "  ____) | ", " |_____/  "],
-        "t": ["  _______  ", " |__   __| ", "    | |    ", "    | |    ", "    | |    ", "    |_|    "],
-        "u": ["  _    _  ", " | |  | | ", " | |  | | ", " | |  | | ", " | |__| | ", "  \____/  "],
-        "v": [" __      __ ", " \ \    / / ", "  \ \  / /  ", "   \ \/ /   ", "    \  /    ", "     \/     "],
-        "w": [" __          __ ", " \ \        / / ", "  \ \  /\  / /  ", "   \ \/  \/ /   ", "    \  /\  /    ", "     \/  \/     "],
-        "x": [" __   __ ", " \ \ / / ", "  \ V /  ", "   > <   ", "  / . \  ", " /_/ \_\ "],
-        "y": [" __     __ ", " \ \   / / ", "  \ \_/ /  ", "   \   /   ", "    | |    ", "    |_|    "],
-        "z": ["  ______ ", " |___  / ", "    / /  ", "   / /   ", "  / /__  ", " /_____| "]
+        "a": ["            ", "     /\     ", "    /  \    ", "   / /\ \   ",
+              "  / ____ \  ", " /_/    \_\ "],
+        "b": ["  ____   ", " |  _ \  ", " | |_) | ", " |  _ <  ", " | |_) | ",
+              " |____/  "],
+        "c": ["   _____  ", "  / ____| ", " | |      ", " | |      ",
+              " | |____  ", "  \_____| "],
+        "d": ["  _____   ", " |  __ \  ", " | |  | | ", " | |  | | ",
+              " | |__| | ", " |_____/  "],
+        "e": ["  ______  ", " |  ____| ", " | |__    ", " |  __|   ",
+              " | |____  ", " |______| "],
+        "f": ["  ______  ", " |  ____| ", " | |__    ", " |  __|   ",
+              " | |      ", " |_|      "],
+        "g": ["   _____  ", "  / ____| ", " | |  __  ", " | | |_ | ",
+              " | |__| | ", "  \_____| "],
+        "h": ["  _    _  ", " | |  | | ", " | |__| | ", " |  __  | ",
+              " | |  | | ", " |_|  |_| "],
+        "i": ["  _____  ", " |_   _| ", "   | |   ", "   | |   ", "  _| |_  ",
+              " |_____| "],
+        "j": ["       _  ", "      | | ", "      | | ", "  _   | | ",
+              " | |__| | ", "  \____/  "],
+        "k": ["  _  __ ", " | |/ / ", " | ' /  ", " |  <   ", " | . \  ",
+              " |_|\_\ "],
+        "l": ["  _       ", " | |      ", " | |      ", " | |      ",
+              " | |____  ", " |______| "],
+        "m": ["  __  __  ", " |  \/  | ", " | \  / | ", " | |\/| | ",
+              " | |  | | ", " |_|  |_| "],
+        "n": ["  _   _  ", " | \ | | ", " |  \| | ", " | . ` | ", " | |\  | ",
+              " |_| \_| "],
+        "o": ["   ____   ", "  / __ \  ", " | |  | | ", " | |  | | ",
+              " | |__| | ", "  \____/  "],
+        "p": ["  _____   ", " |  __ \  ", " | |__) | ", " |  ___/  ",
+              " | |      ", " |_|      "],
+        "q": ["   ____   ", "  / __ \  ", " | |  | | ", " | |  | | ",
+              " | |__| | ", "  \___\_\ "],
+        "r": ["  _____   ", " |  __ \  ", " | |__) | ", " |  _  /  ",
+              " | | \ \  ", " |_|  \_\ "],
+        "s": ["   _____  ", "  / ____| ", " | (___   ", "  \___ \  ",
+              "  ____) | ", " |_____/  "],
+        "t": ["  _______  ", " |__   __| ", "    | |    ", "    | |    ",
+              "    | |    ", "    |_|    "],
+        "u": ["  _    _  ", " | |  | | ", " | |  | | ", " | |  | | ",
+              " | |__| | ", "  \____/  "],
+        "v": [" __      __ ", " \ \    / / ", "  \ \  / /  ", "   \ \/ /   ",
+              "    \  /    ", "     \/     "],
+        "w": [" __          __ ", " \ \        / / ", "  \ \  /\  / /  ",
+              "   \ \/  \/ /   ", "    \  /\  /    ", "     \/  \/     "],
+        "x": [" __   __ ", " \ \ / / ", "  \ V /  ", "   > <   ", "  / . \  ",
+              " /_/ \_\ "],
+        "y": [" __     __ ", " \ \   / / ", "  \ \_/ /  ", "   \   /   ",
+              "    | |    ", "    |_|    "],
+        "z": ["  ______ ", " |___  / ", "    / /  ", "   / /   ", "  / /__  ",
+              " /_____| "]
     }
 
 
@@ -330,8 +356,8 @@ def enter_name():
         input_text = "\n        Enter your 3 letter name (eg: STU):\n"
         name_input = input(input_text)
 
-        while not name_input.isalpha():
-            print("   Only letters A-Z are allowed...")
+        while not name_input.isalpha() or len(name_input) < 3:
+            print("   Only A-Z are allowed and 3 letters length...")
             sleep(DELAY_TIME*10)
             clear()
             logo()
@@ -356,7 +382,7 @@ def enter_name():
         check_name = input("                 [Y]es or [N]o?\n")
         if check_name.lower() == "y" or check_name.lower() == "yes":
             name_check = True
-            Game.player_name = name_input
+            Game.player_name = name_input[0:3].lower()
 
 
 def check_winner(disc):
@@ -545,7 +571,8 @@ def choose_mode():
     """
     Player chooses which game mode to play in. Hard or Easy!
     """
-    print("                Make your choice:")
+    p_name = Game.player_name.capitalize()
+    print(f"             Make your choice, {p_name}:")
     input_text = "             [H]ard mode [E]asy mode\n"
     mode_input = input(input_text)
     valid_input = False
@@ -555,7 +582,7 @@ def choose_mode():
             # Player wants to play with hard mode
             reset_game()
             game_board()
-            print("      HARD MODE!   YOU MANIAC!!!! :-o\n")
+            print(f"    HARD MODE! {p_name.upper()} YOU MANIAC!!!! :-o\n")
             sleep(DELAY_TIME*10)
             Game.hard_mode = True
             valid_input = True
@@ -571,7 +598,7 @@ def choose_mode():
             logo()
             reset_game()
             game_board()
-            print("                Make your choice:")
+            print(f"             Make your choice, {p_name}:")
             input_text = "             [H]ard mode [E]asy mode\n"
             mode_input = input(input_text)
 
@@ -690,12 +717,13 @@ def game_status():
     """
     Prints the status of the game
     """
+    p_name = Game.player_name.capitalize()
     space = "        " if Game.level < 10 else "       "
     status = f"\n    Level: {Game.level}{space}"
     hard_text = "HARD Mode   "
     easy_text = "Easy Mode   "
-    user_winn = "      You WON!!\n"
-    user_turn = "      Your Turn\n"
+    user_winn = f"      {p_name.upper()} WON!!\n"
+    user_turn = f"     {p_name}'s Turn\n"
     comp_winn = "   Computer Won\n"
     comp_turn = "Computer's Turn\n"
 
@@ -744,7 +772,7 @@ def enter_column_number():
             elif column_choice == 22222:
                 # Easy High level for dev purposes
                 game_board()
-                Game.level = 8
+                Game.level = WIN_LEVEL
                 print("   CHEATER!!")
                 sleep(DELAY_TIME*10)
                 game_board()
@@ -855,10 +883,10 @@ def play_again():
     game_board()
     mode_choice = False
 
-    input_text = "   Do you want to "
+    input_text = "   Would you like to "
 
     # Reset game level after they've won the game
-    if Game.level >= WIN_LEVEL and Game.winner:
+    if Game.level >= WIN_LEVEL and Game.winner and Game.player_turn:
         top_level()
         input_text += "play again?"
         mode_choice = True
@@ -923,13 +951,26 @@ def top_level():
     When player reaches top level they are told they've won the game
     and everything is reset
     """
-    game_board()
-    game_won = "               YOU BEAT THE GAME!!!\n"
+    clear()
+    logo()
+
+    i = 0
+    while i < 6:
+        name = NAME_TEXT + " " * 10
+        name += letters.dict[Game.player_name[0]][i]
+        name += letters.dict[Game.player_name[1]][i]
+        name += letters.dict[Game.player_name[2]][i]
+        name += GREEN_TEXT
+        print(name)
+        i += 1
+
+    game_won = "\n               YOU BEAT THE GAME!!!\n"
     game_won += "          VERY well done! I'm impressed!"
     print(game_won)
 
-    sleep(DELAY_TIME*10)
+    sleep(10)
     game_board()
+    reset_game()
     Game.winner = False
     Game.level = 1
     Game.width = BOARD_WIDTH
