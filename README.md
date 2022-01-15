@@ -149,3 +149,5 @@ You can also deploy to your own systems.
 - I got the Connect 4 logo text from this website: https://patorjk.com/software/taag/#p=display&f=Doom&t=Connect%204
 - I made the flowchart by using this website:  https://online.visual-paradigm.com/
 - I used a royalty free image of an old computer from: https://www.pikpng.com/
+- I included quotes from 2001: A Space Odyssey by Arthur C. Clarke
+- I included a quote from The Hitchhiker's Guide to the Galaxy by Douglas Adams
