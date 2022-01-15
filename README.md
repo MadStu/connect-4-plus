@@ -111,7 +111,9 @@ Some feedback I had was that the computer was too hard to beat on Easy mode so I
   - Solved by using a Try/Except block to handle it.
 - ~~Recursion Error when the program is checking winners and checking for next computer move.~~
   - Solved by increasing the recursion limit.
-- IndexError when resetting game after player has reached top level
+- ~~IndexError when resetting game after player has reached top level.~~
+  - Solved by adding if else in the reset_game function. It now checks to see if the level was at the top level or not.
+- Game difficulty not changing mode after the player selects it after winning at top level.
 
 ## Deployment
 
