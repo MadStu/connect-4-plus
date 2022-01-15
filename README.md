@@ -81,6 +81,12 @@ This helped massively at the beginning of the project to get the ball rolling an
 
 ![Score Board](https://github.com/MadStu/connect-4/raw/main/assets/images/score-board.png)
 
+- __Personalised Messages__
+
+  - The players name is known so we use it
+
+![Players Name](https://github.com/MadStu/connect-4/raw/main/assets/images/big-name.png)
+
 ### Features Left to Implement
 
 - ~~Implement a points system based on number of turns.~~
