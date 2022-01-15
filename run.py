@@ -2,6 +2,7 @@ from os import system, name
 from time import sleep
 import random
 import math
+import csv
 
 # Set Recursion limit higher for the AI
 from sys import setrecursionlimit
@@ -30,6 +31,33 @@ WIN_LEVEL = BOARD_WIDTH - 3
 # Multiplied by the game level
 BASE_POINTS = 2
 
+# Location of the .csv file for holding the top scores
+CSV = "scores.csv"
+
+
+class TopScores:
+    """
+    Handle the Top Scores Data
+    """
+    def read():
+        """
+        Read the top scores data and make a list 
+        """
+        with open(CSV, encoding="utf8") as f:
+            csv_reader = csv.reader(f)
+            for line_no, line in enumerate(csv_reader):
+                Game.top_scores.append(line)
+                Game.top_scores[line_no][0] = int(Game.top_scores[line_no][0])
+        Game.top_scores.sort(reverse = True)
+
+    def write():
+        """
+        Replace the top scores with latest data
+        """
+        with open(CSV, 'w', encoding='utf8', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerows(Game.top_scores)
+
 
 class Game:
     # This class carries the game state variables
@@ -44,6 +72,7 @@ class Game:
     disc_count = 0
     player_name = "hal"
     score = 0
+    top_scores = []
 
 
 class BoardCheck:
