@@ -20,6 +20,7 @@ DROP_SPEED = 0.06
 
 # Text Styles
 RED_TEXT = "\033[1;31;48m"
+YELLOW_TEXT = "\033[1;33;48m"
 GREEN_TEXT = "\033[1;32;48m"
 LOGO_TEXT = "\033[0;32;48m"
 NAME_TEXT = "\033[0;31;48m"
@@ -57,6 +58,28 @@ class TopScores:
         with open(CSV, 'w', encoding='utf8', newline='') as f:
             writer = csv.writer(f)
             writer.writerows(Game.top_scores)
+
+    def display():
+        """
+        Display the Top Scores!
+        """
+        TopScores.read()
+        clear()
+        logo()
+
+        test = f"""
+          1st   |   {Game.top_scores[0][0]} Points   |   {Game.top_scores[0][1]}
+          2nd   |   {Game.top_scores[1][0]} Points   |   {Game.top_scores[1][1]}
+          3rd   |   {Game.top_scores[2][0]} Points   |   {Game.top_scores[2][1]}
+          4th   |   {Game.top_scores[3][0]} Points   |   {Game.top_scores[3][1]}
+          5th   |   {Game.top_scores[4][0]} Points   |   {Game.top_scores[4][1]}
+          6th   |   {Game.top_scores[5][0]} Points   |   {Game.top_scores[5][1]}
+          7th   |   {Game.top_scores[6][0]} Points   |   {Game.top_scores[6][1]}
+          8th   |   {Game.top_scores[7][0]} Points   |   {Game.top_scores[7][1]}
+          9th   |   {Game.top_scores[8][0]} Points   |   {Game.top_scores[8][1]}
+         10th   |   {Game.top_scores[9][0]} Points   |   {Game.top_scores[9][1]}"""
+
+        print(test)
 
 
 class Game:
@@ -540,6 +563,10 @@ def welcome():
     choose_mode()
     sleep(DELAY_TIME)
     reset_game()
+    
+    TopScores.display()
+    sleep(10)
+
     game_board()
 
     # Begin the game!
@@ -931,7 +958,7 @@ def we_have_a_winner():
 
     win_text += user_win if Game.player_turn else comp_win
 
-    if Game.level < (BOARD_WIDTH - 2):
+    if Game.level < WIN_LEVEL:
         game_board()
         print(win_text)
         sleep(DELAY_TIME*10)
