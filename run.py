@@ -436,7 +436,7 @@ def reset_game():
     # game level and difficulty mode
     board_max = (BOARD_HEIGHT-1) * Game.width
     board_score = math.floor((board_max / 2) * (BASE_POINTS * Game.level))
-    board_score += board_score if Game.hard_mode else 0 
+    board_score += board_score if Game.hard_mode else 0
     Game.score += board_score
 
     # Reset Everything else
