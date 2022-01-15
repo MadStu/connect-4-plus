@@ -1019,7 +1019,8 @@ def play_again():
     else:
         input_text += "continue playing?"
 
-    input_text += " \n   [Y]es or [N]o\n"
+    input_text += " \n   [Y]es or [N]o"
+    input_text += f"        Your Score: {RED_TEXT}{Game.score}{GREEN_TEXT}\n"
     play_again_inp = input(input_text)
     valid_input = False
 

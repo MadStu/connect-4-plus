@@ -76,6 +76,7 @@ This helped massively at the beginning of the project and I used that to build t
 - __Score Board__
 
   - A score board shows the player the top ten scores.
+  - The player scores are kept in a local .csv file.
 
 ![Score Board](https://github.com/MadStu/connect-4/raw/main/assets/images/score-board.png)
 
@@ -146,7 +147,8 @@ I've deployed it on herokuapp.com and used the following method.
 You can also deploy to your own systems.
 
 - If you wish to deploy within your own Python3 environment:
-    - Download or copy the contents of run.py to your own system.
+    - Download or copy the contents of run.py and scores.csv to your own system.
+    - make sure the scores.csv has writeable permissions.
     - Run the game by typing: ***__python3 run.py__***
 
 ## Credits 
