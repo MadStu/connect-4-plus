@@ -235,12 +235,12 @@ I also asked friends and family to play with and try to produce errors or uninte
 
 Some feedback I had was that the computer was too hard to beat on Easy mode so I plan to make that mode a little easier.
 
-I also wrote a couple of extra column codes in for testing purposes:
+I also wrote a couple of extra dev codes in for testing purposes:
 
 - Typing "999" into the column entry section will quit the program cleanly so I could quit and retest things over and over after making small changes. Making testing as I go a whole lot easier.
 - Typing "22222" into the column entry section increases your game level up to the winning level so that I could test the behaviour when the user wins the game.
 
-These Dev codes can be disabled by changing the DEV_MODE to False in the configuration area at the top of run.py.
+These dev codes can be disabled by changing the DEV_MODE to False in the configuration area at the top of run.py.
 
 ## Validator Testing 
 
