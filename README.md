@@ -1,6 +1,7 @@
 # Connect 4
 - [Connect 4](#connect-4)
   - [Introduction](#introduction)
+- [How To Play](#how-to-play)
 - [Planning](#planning)
   - [Existing Features](#existing-features)
   - [Features Left to Implement](#features-left-to-implement)
@@ -23,6 +24,28 @@ This game is useful for people who spend a lot of time in terminals and allows t
 A deployed version may be found here: [Connect 4](http://my-connect-4.herokuapp.com/)
 
 ![Connect 4](https://github.com/MadStu/connect-4/raw/main/assets/images/web-page.png)
+
+# How To Play
+
+When you load the game, please enter i to read the instructions.
+
+This will give an example of how to win.
+
+Once you've entered your name and have chosen your difficulty level you'll be presented with a game board with a number of columns.
+
+You go first by entering the column number in which you'd like to drop your disc. Your discs are represented by the letter "O".
+
+Your opponent is named Hal and his discs are represented by the letter "X". You'll take it in turns with Hal to drop your discs into the columns and the first player to connect 4 (to get 4 discs in a line) wins that game!
+
+You'll then move to the next level. The board will narrow making the game slightly harder each time you level up.!
+
+If you get down to a board which is only 4 columns wide, and you win, then you win the whole game!
+
+Max points are given to you on each level, the number of points depends which level you're on and which difficulty setting you have. Hard mode gives you double the points!
+
+Each move you make decreases your points total, so the least amount of moves it takes to win, the more points you'll keep!
+
+Good luck and happy connect 4-ing!
 
 # Planning 
 
