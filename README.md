@@ -215,17 +215,17 @@ All the mutable game data is held within the Game class and is updated after eve
 
 I have used the following libraries:
 - __os__
-  - system and name are used for clearing the screen.
+  - "system" and "name" are used for clearing the screen.
 - __time__
-  - sleep is used for delaying the display of text, game boards and the disc drop animation.
+  - "sleep" is used for delaying the display of text, game boards and the disc drop animation.
 - __random__
-  - randint is used for the computer to choose a random column between 1 and whatever the current board width is.
+  - "randint" is used for the computer to choose a random column between 1 and whatever the current board width is.
 - __math__
-  - floor is used to make sure calculated points are rounded down to an integer.
+  - "floor" is used to make sure calculated points are rounded down to an integer.
 - __csv__
-  - open is used to read and write to a .csv file for saving the top scores.
+  - "open" is used to read and write to a .csv file for saving the top scores.
 - __sys__
-  - setrecursionlimit is used to change the recursion limit to a higher number than is standard. This is due to the high number of checks the computer has to make when looking for a potentially winning connect 4.
+  - "setrecursionlimit" is used to change the recursion limit to a higher number than is standard. This is due to the high number of checks the computer has to make when looking for a potentially winning connect 4.
 
 # Testing
 
