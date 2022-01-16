@@ -285,9 +285,9 @@ You can also deploy to your own systems.
 
 ## Final Notes
 
-I started this project as complete novice and now the I'm at the end I feel like I've come a huge distance. And while my skills may not yet be up to it, I know for sure that anything is possible with the right code in the right order.
+I started this project as complete python novice and now I'm at the end I feel like I've travelled a huge distance. And while my skills may not yet be up to it, I know for sure that anything is possible with the right code in the right order.
 
-It wasn't until I was coming to the end of the project and my python file was getting longer that I realised the benefits of using classes over just functions. I do have all of the logic being run within functions but have run out of time to refactor it all into the neat class > function > code heirarchial structure.
+It wasn't until I was coming to the end of the project and my python file was getting longer that I realised the benefits of using classes over just functions. I do have all of the logic being run within functions but with the deadline approaching I've run out of time to refactor it all into the neat class > function > code heirarchial structure.
 
 I hope anybody who plays this game will find it both enjoyable and challenging. Challenge your friends to beat your high score!
 
