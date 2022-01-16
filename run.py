@@ -3,38 +3,37 @@ from time import sleep
 import random
 import math
 import csv
-
-# Set Recursion limit higher for the AI
 from sys import setrecursionlimit
-setrecursionlimit(2500)
 
 #
-# User configurable options
+# User configurable options. Leave as default if you're
+# not sure what each variable does
 #
 
 # Board starting grid size. Height includes the top blank row
 # For the game to look nice, the max width should be 12
 # Be aware that more board squares = more recursions
+# (Default: BOARD_HEIGHT = 7 and BOARD_WIDTH = 12)
 BOARD_HEIGHT = 7
 BOARD_WIDTH = 12
 
-# Delay time of items being shown
+# Delay time of items being shown (Default: 0.15)
 DELAY_TIME = 0.15
 
-# Speed at which the disc drops down
+# Speed at which the disc drops down (Default: 0.06)
 DROP_SPEED = 0.06
 
 # Location of the .csv file for holding the top scores
 CSV = "scores.csv"
 
-# Winning game level
+# Winning game level(Default: BOARD_WIDTH - 3)
 WIN_LEVEL = BOARD_WIDTH - 3
 
 # How many points are deducted for each square
-# Multiplied by the game level
+# Multiplied by the game level (Default: 2)
 BASE_POINTS = 2
 
-# Is game in development?
+# Is game in development? (Default: False)
 DEV_MODE = True
 
 # Text Styles
@@ -1153,5 +1152,8 @@ def top_level():
     TopScores.add()
     TopScores.display()
 
+
+# Set Recursion limit higher for the AI
+setrecursionlimit(2500)
 
 welcome()
