@@ -112,7 +112,7 @@ This helped massively at the beginning of the project to get the ball rolling an
 - __Cheat Code__
 
   - The game includes a cheat code (88) which may give a hint to the player of the next column to try.
-  - If Hal hasn't found a potentially winning pattern the player is instead shown a message that cheaters never prosper.
+  - If Hal hasn't found a potentially winning pattern the player is instead shown a message that cheats never prosper.
   - There is a penalty for using the cheat code in terms of lost points.
 
 ![Cheat Message](https://github.com/MadStu/connect-4/raw/main/assets/images/cheat-message.png)
@@ -120,14 +120,14 @@ This helped massively at the beginning of the project to get the ball rolling an
 - __Score Board__
 
   - A score board shows the player the top ten scores.
-  - The player scores are kept in a local .csv file.
+  - The player scores are kept in a local .csv file so the top scores are saved permanently.
 
 ![Score Board](https://github.com/MadStu/connect-4/raw/main/assets/images/score-board.png)
 
 - __Personalised Messages__
 
-  - A 3 letter name is used to maintain text length and spacings consistency. It also harks back to top scores on retro arcade games producing a feeling of nostalgia and happiness.
-  - The players 3 letter name is known so we use it.
+  - A 3 letter name is used to maintain text length and spacing consistency. It also harks back to top scores on retro arcade games producing a feeling of nostalgia and happiness.
+  - The players 3 letter name is used in messages throughout the game.
 
 ![Players Name](https://github.com/MadStu/connect-4/raw/main/assets/images/big-name.png)
 
