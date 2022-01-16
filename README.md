@@ -5,6 +5,7 @@
   - [Existing Features](#existing-features)
   - [Features Left to Implement](#features-left-to-implement)
 - [Data Model](#data-model)
+  - [Logic Flow](#logic-flow)
 - [Testing](#testing)
   - [Validator Testing](#validator-testing)
   - [Bugs](#bugs)
@@ -97,7 +98,8 @@ This helped massively at the beginning of the project to get the ball rolling an
 
 - __Personalised Messages__
 
-  - The players name is known so we use it.
+  - A 3 letter name is used to maintain text length and spacings consistency. It also harks back to top scores on retro arcade games producing a feeling of nostalgia and happiness.
+  - The players 3 letter name is known so we use it.
 
 ![Players Name](https://github.com/MadStu/connect-4/raw/main/assets/images/big-name.png)
 
@@ -111,6 +113,36 @@ This helped massively at the beginning of the project to get the ball rolling an
 The run.py file includes user configurable options at the top of the file
 
 All the mutable game data is held within the Game class and is updated after every move. The main playing board is kept in the Game.db list and is a list of lists. Each list within Game.db is 1 game column starting from left to right.
+
+## Logic Flow
+
+The program begins by calling the welcome() function which displays the logo and asks the user if they'd like to being playing or want to read the instructions first.
+
+Input is validated and if the user wants to read the instructions, then that slide show of instructional screens is shown before rejoining the flow.
+
+The user is asked to input a 3 letter name, it's displayed back to the them and they then confirm or reject what was entered before moving on.
+
+The top 10 scores are then briefly shown before the main game board is loaded, including the logo and status bar.
+
+Maximum points are granted to the user based upon the amount of free squares in that board size, user level and whether they're playing in hard mode.
+
+A column number is then requested for input with error feedback given if the user does not enter an integer value, or if their integer doesn't fall within the range (depending on active number of columns).
+
+If that input is valid, the next check is to see if the requested column is available. The user is told if the column is full and requested to input again.
+
+Once a valid input and a free column is chosen, the animation of the disc drop is found. The animation also actively checks with each frame to see if the next square down is the bottom.
+
+Once the disc has reached the bottom, there is then a check to see if there is a connect 4 winner. This same check also checks for any lines of 3, and if in hard mode, also 2 discs which have the potential of winning.
+
+If there is a 2 or 3 potential winner, then one of the free squares is checked to see if it has a support disc underneath it (not an empty square under the potential winning square).
+
+If the empty square is found to have a supporting square then Hal (the computer player) remembers that square for his next move.
+
+Points are now deducted from the user's currect score. Every move they make will deduct BASE_POINTS * the current user level (multiplied by 2 if in hard mode).
+
+The updated game board with current points are displayed.
+
+
 
 # Testing
 
