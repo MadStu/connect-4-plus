@@ -278,7 +278,10 @@ These dev codes can be disabled by changing the DEV_MODE to False in the configu
 
 I've deployed it on herokuapp.com and used the following method.
 
-- The connect4 game can be deployed to herokuapp.com using a web interface terminal template. The steps to deploy are as follows: 
+- The connect4 game can be deployed to herokuapp.com using the web interface terminal template in this repository. The steps to deploy are as follows: 
+    - Sign up or log in to GitHub.com.
+    - Navigate to this repository page at https://github.com/MadStu/connect-4.
+    - Press the "Fork" button which will make a copy of this connect-4 repository in your own account.
     - Sign up or log in to herokuapp.com.
     - Click "New" then "Create new app".
     - Enter an app name, choose your region and then click "Create app".
@@ -287,8 +290,8 @@ I've deployed it on herokuapp.com and used the following method.
     - Click on "Add buildpack" again and add the nodejs build pack for the web interface to work. Be sure these 2 are in that order, Python first.
     - Click on the Deploy tab at the top, select GitHub and connect to your GitHub account.
     - Search for the repository name (connect-4) and click the "Connect" button.
-    - Scroll down to the Automatic deploys section and choose the main branch to deploy from.
-    - Click the "Enable Automatic Deploys" button which syncs the herokuapp.com files with your repository every so often.
+    - Scroll down to the Manual deploy section and choose the main branch to deploy from.
+    - Click the "Deploy Branch" button which syncs the herokuapp.com files with the repository.
 
 You can also deploy to your own systems.
 
@@ -300,7 +303,7 @@ You can also deploy to your own systems.
 # Credits 
 
 - First and foremost, the original Connect 4 game concept was invented in 1973 by Howard Wexler.
-- I used the Code Institute web template and terminal window to deploy the program.
+- I used the Code Institute web interface terminal template to deploy the program which is here: https://github.com/Code-Institute-Org/python-essentials-template
 - I initially used the check_winner function from https://github.com/justinvallely/Python-Connect-4/blob/master/connect4.py (Line 69).
 - I learned how to clear the terminal screen from this tutorial: https://www.geeksforgeeks.org/clear-screen-python/
 - I learned how to work with .csv files from this website: https://www.pythontutorial.net/python-basics/python-read-csv-file/
