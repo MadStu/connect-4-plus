@@ -28,6 +28,9 @@ WIN_LEVEL = BOARD_WIDTH - 3
 # Multiplied by the game level
 BASE_POINTS = 2
 
+# Is game in development?
+DEV_MODE = True
+
 # Text Styles
 RED_TEXT = "\033[1;31;48m"
 GREEN_TEXT = "\033[1;32;48m"
@@ -888,17 +891,17 @@ def enter_column_number():
             game_board()
 
         finally:
-            if column_choice == 999:
+            if column_choice == 999 and DEV_MODE:
                 # Easy quit game code for dev purposes
                 game_board()
-                print("Thanks for playing")
+                print("   Thanks for playing")
                 quit()
 
-            elif column_choice == 22222:
+            elif column_choice == 22222 and DEV_MODE:
                 # Easy High level for dev purposes
                 game_board()
                 Game.level = WIN_LEVEL
-                print("   CHEATER!!")
+                print(f"   Level increased to Level {WIN_LEVEL}")
                 sleep(DELAY_TIME*10)
                 game_board()
 
