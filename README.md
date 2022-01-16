@@ -27,17 +27,17 @@ A deployed version may be found here: [Connect 4](http://my-connect-4.herokuapp.
 
 # How To Play
 
-When you load the game, please enter i to read the instructions.
+When you load the game, please type "i" and hit enter to read the instructions. This will show you an example of how to win.
 
-This will give an example of how to win.
+Or to skip the instructions type "p" for play!
 
-Once you've entered your name and have chosen your difficulty level you'll be presented with a game board with a number of columns.
+Once you've entered your name and have chosen your difficulty level you'll be shown a game board with a number of columns.
 
 You go first by entering the column number in which you'd like to drop your disc. Your discs are represented by the letter "O".
 
 Your opponent is named Hal and his discs are represented by the letter "X". You'll take it in turns with Hal to drop your discs into the columns and the first player to connect 4 (to get 4 discs in a line) wins that game!
 
-You'll then move to the next level. The board will narrow making the game slightly harder each time you level up.!
+You'll then move to the next level and the board will narrow making the game slightly harder each time you level up.!
 
 If you get down to a board which is only 4 columns wide, and you win, then you win the whole game!
 
@@ -45,7 +45,11 @@ Max points are given to you on each level, the number of points depends which le
 
 Each move you make decreases your points total, so the least amount of moves it takes to win, the more points you'll keep!
 
+There is a cheat code you could use, I'm sure you'll find it if you look hard enough through this documentation, but be warned, it comes at a cost!
+
 Good luck and happy connect 4-ing!
+
+<sup>PS. Will you find the easter eggs?</sup>
 
 # Planning 
 
