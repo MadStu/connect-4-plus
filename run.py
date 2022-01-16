@@ -8,7 +8,13 @@ import csv
 from sys import setrecursionlimit
 setrecursionlimit(2500)
 
+#
+# User configurable options
+#
+
 # Board starting grid size. Height includes the top blank row
+# For the game to look nice, the max width should be 12
+# Be aware that more board squares = more recursions
 BOARD_HEIGHT = 7
 BOARD_WIDTH = 12
 
@@ -36,6 +42,10 @@ RED_TEXT = "\033[1;31;48m"
 GREEN_TEXT = "\033[1;32;48m"
 LOGO_TEXT = "\033[0;32;48m"
 NAME_TEXT = "\033[0;31;48m"
+
+#
+# Do not edit below.
+#
 
 
 class TopScores:
