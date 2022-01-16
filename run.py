@@ -125,7 +125,7 @@ class TopScores:
 
 
 class Game:
-    # This class carries the game state variables
+    # This class holds the mutable game state variables
     level = 1
     winner = False
     player_turn = True

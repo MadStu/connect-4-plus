@@ -1,14 +1,15 @@
 # Connect 4
 - [Connect 4](#connect-4)
   - [Introduction](#introduction)
-  - [Planning](#planning)
-    - [Existing Features](#existing-features)
-    - [Features Left to Implement](#features-left-to-implement)
-  - [Testing](#testing)
-    - [Validator Testing](#validator-testing)
-    - [Bugs](#bugs)
-  - [Deployment](#deployment)
-  - [Credits](#credits)
+- [Planning](#planning)
+  - [Existing Features](#existing-features)
+  - [Features Left to Implement](#features-left-to-implement)
+- [Data Model](#data-model)
+- [Testing](#testing)
+  - [Validator Testing](#validator-testing)
+  - [Bugs](#bugs)
+- [Deployment](#deployment)
+- [Credits](#credits)
   - [Final Notes](#final-notes)
 
 ## Introduction
@@ -21,7 +22,7 @@ A deployed version may be found here: [Connect 4](http://my-connect-4.herokuapp.
 
 ![Connect 4](https://github.com/MadStu/connect-4/raw/main/assets/images/web-page.png)
 
-## Planning 
+# Planning 
 
 I planned to make a python game that could run in any python3 terminal window and be challenging enough for the player to want to return to the game again and again.
 
@@ -33,7 +34,7 @@ This helped massively at the beginning of the project to get the ball rolling an
 
 ![Flow Chart](https://github.com/MadStu/connect-4/raw/main/assets/images/flow-chart.png)
 
-### Existing Features
+## Existing Features
 
 - __Text Based GUI__
 
@@ -57,13 +58,13 @@ This helped massively at the beginning of the project to get the ball rolling an
 
 - __Animated Disc Drop__
 
-  - Basic animation is included which shows both player discs falling as they're dropped into the column which gives helps towards giving the user a positive emotional response.
+  - Basic animation is included which shows both player discs falling as they're dropped into the column which helps towards giving the user a positive emotional response.
 
 ![Animated Disc Drop](https://github.com/MadStu/connect-4/raw/main/assets/images/animated-disc-drop.png)
 
 - __Status Bar__
 
-  - A status bar keeps the player informed with the level they're on, what game difficulty they're playing, who's turn it is and what their score is.
+  - A status bar keeps the player informed with their current level, what game difficulty they're playing, who's turn it is and what their score is.
 
 ![Status Bar](https://github.com/MadStu/connect-4/raw/main/assets/images/status-bar.png)
 
@@ -100,12 +101,18 @@ This helped massively at the beginning of the project to get the ball rolling an
 
 ![Players Name](https://github.com/MadStu/connect-4/raw/main/assets/images/big-name.png)
 
-### Features Left to Implement
+## Features Left to Implement
 
 - Add AI that learns and predicts the players next move based on their previous pattern of moves.
 - Make the Easy mode opponent easier to beat.
 
-## Testing
+# Data Model
+
+The run.py file includes user configurable options at the top of the file
+
+All the mutable game data is held within the Game class and is updated after every move. The main playing board is kept in the Game.db list and is a list of lists. Each list within Game.db is 1 game column starting from left to right.
+
+# Testing
 
 I've tested the code continuously as I've developed it, making sure all functionality works as it should and fix any typos or coding errors as and when they happen.
 
@@ -113,12 +120,12 @@ I also asked friends and family to play with and try to produce errors or uninte
 
 Some feedback I had was that the computer was too hard to beat on Easy mode so I plan to make that mode a little easier.
 
-### Validator Testing 
+## Validator Testing 
 
 - PEP8
   - No errors or warnings were returned when passing through [PEP8online.com](http://pep8online.com/).
 
-### Bugs
+## Bugs
 
 - ~~herokuapp.com not displaying underscores on the logo.~~
   - Solved by making the logo art text have a lighter weight.
@@ -145,7 +152,7 @@ Some feedback I had was that the computer was too hard to beat on Easy mode so I
 - ~~Scoreboard updates twice when player completes the game and doesn't continue playing.~~
   - Solved by checking the game level within the play_again function.
 
-## Deployment
+# Deployment
 
 I've deployed it on herokuapp.com and used the following method.
 
@@ -168,7 +175,7 @@ You can also deploy to your own systems.
     - make sure the scores.csv has writeable permissions.
     - Run the game by typing: ***__python3 run.py__***
 
-## Credits 
+# Credits 
 
 - First and foremost, the original Connect 4 game concept was invented in 1973 by Howard Wexler.
 - I used the Code Institute web template and terminal window to deploy the program.
