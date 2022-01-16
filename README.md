@@ -317,9 +317,11 @@ You can also deploy to your own systems.
 
 ## Final Notes
 
-I started this project as complete python novice and now I'm at the end I feel like I've travelled a huge distance. And while my skills may not yet be up to it, I know for sure that anything is possible with the right code in the right order.
+I started this project as complete python novice and now I'm at the end I feel like my knowledge and love of python has grown exponentially. And while my skills may not yet be up to it, I know for sure that anything is possible with the right code and in the right order.
 
-It wasn't until I was coming to the end of the project and my python file was getting longer that I realised the benefits of using classes over just functions. I do have all of the logic being run within functions but with the deadline approaching I've run out of time to refactor it all into the neat class > function > code heirarchial structure.
+It wasn't until I was coming to the end of the project with my python file getting longer and longer that I realised the benefits of using classes over just functions. I do have all of the logic being run within functions but with the deadline approaching I've run out of time to refactor it all into the neat class > function > code heirarchial structure.
+
+I look forward to learning much much more. And to getting better and better with every line of code that I type.
 
 Big thanks to my fellow student [David Bowers](https://www.linkedin.com/in/dnlbowers/) for pointing me in the right direction when it came to writing this readme. I thought I'd finished before he spent his own time to check it over, only to find I'd missed out some crucial information.
 
