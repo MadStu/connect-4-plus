@@ -89,8 +89,6 @@ This helped massively at the beginning of the project to get the ball rolling an
 
 ### Features Left to Implement
 
-- ~~Implement a points system based on number of turns.~~
-- ~~Add a high score board.~~
 - Add AI that learns and predicts the players next move based on their previous pattern of moves.
 - Make the Easy mode opponent easier to beat.
 
@@ -131,7 +129,7 @@ Some feedback I had was that the computer was too hard to beat on Easy mode so I
   - Solved, I'd missed adding the setting in the choose_mode function as the default mode was "easy" and only changed when player set mode to "hard".
 - ~~Score increments highly when you input invalid data when choosing difficulty mode before game starts.~~
   - Solved by removing the call to reset_game which is no longer required there.
-- ~~Scoreboard updates twice when player completes the game and doesn't continue the playing.~~
+- ~~Scoreboard updates twice when player completes the game and doesn't continue playing.~~
   - Solved by checking the game level within the play_again function.
 
 ## Deployment

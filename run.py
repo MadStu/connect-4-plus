@@ -667,7 +667,7 @@ def welcome_text():
  | X | X | X | {disc_example} | X | O | O | O | X | O | X | . |\n""")
     sleep(DELAY_TIME)
     print("""   When you connect 4 in a line (as shown above)
-   or in any other direction, you win the game!\n""")
+   in any direction, you win the game!\n""")
 
     sleep(DELAY_TIME)
     input("   Press Enter to continue...\n")
