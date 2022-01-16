@@ -1,4 +1,17 @@
 # Connect 4
+- [Connect 4](#connect-4)
+  - [Introduction](#introduction)
+  - [Planning](#planning)
+    - [Existing Features](#existing-features)
+    - [Features Left to Implement](#features-left-to-implement)
+  - [Testing](#testing)
+    - [Validator Testing](#validator-testing)
+    - [Bugs](#bugs)
+  - [Deployment](#deployment)
+  - [Credits](#credits)
+  - [Final Notes](#final-notes)
+
+## Introduction
 
 Connect 4 is a strategy game where the idea is to get 4 of your own discs in a line in any direction, horizontally, vertically or diagonally ( -- ¦ / \ ), hence you connect 4 together. You must also block your opponent, Hal (the computer), from connecting 4.
 
@@ -44,7 +57,7 @@ This helped massively at the beginning of the project to get the ball rolling an
 
 - __Animated Disc Drop__
 
-  - Basic animation is included which shows both player discs falling as they're dropped into the column which is visually satisfying.
+  - Basic animation is included which shows both player discs falling as they're dropped into the column which gives helps towards giving the user a positive emotional response.
 
 ![Animated Disc Drop](https://github.com/MadStu/connect-4/raw/main/assets/images/animated-disc-drop.png)
 
@@ -83,7 +96,7 @@ This helped massively at the beginning of the project to get the ball rolling an
 
 - __Personalised Messages__
 
-  - The players name is known so we use it
+  - The players name is known so we use it.
 
 ![Players Name](https://github.com/MadStu/connect-4/raw/main/assets/images/big-name.png)
 
@@ -157,6 +170,7 @@ You can also deploy to your own systems.
 
 ## Credits 
 
+- First and foremost, the original Connect 4 game concept was invented in 1973 by Howard Wexler.
 - I used the Code Institute web template and terminal window to deploy the program.
 - I initially used the check_winner function from https://github.com/justinvallely/Python-Connect-4/blob/master/connect4.py (Line 69).
 - I learned how to clear the terminal screen from this tutorial: https://www.geeksforgeeks.org/clear-screen-python/
@@ -166,3 +180,13 @@ You can also deploy to your own systems.
 - I used a royalty free image of an old computer from: https://www.pikpng.com/
 - I included quotes from 2001: A Space Odyssey by Arthur C. Clarke
 - I included a quote from The Hitchhiker's Guide to the Galaxy by Douglas Adams
+
+## Final Notes
+
+I started this project as complete novice and now the I'm at the end I feel like I've come a huge distance. And while my skills may not yet be up to it, I know for sure that anything is possible with the right code in the right order.
+
+It wasn't until I was coming to the end of the project and my python file was getting longer that I realised the benefits of using classes over just functions. I do have all of the logic being run within functions but have run out of time to refactor it all into the neat class > function > code heirarchial structure.
+
+I hope anybody who plays this game will find it both enjoyable and challenging. Challenge your friends to beat your high score!
+
+Happy Gaming! :)

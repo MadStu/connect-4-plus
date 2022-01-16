@@ -1117,7 +1117,7 @@ def top_level():
     """
     clear()
     logo()
-    name = Game.player_name.capitalize()
+    player_name = Game.player_name.capitalize()
 
     i = 0
     while i < 6:
@@ -1130,7 +1130,7 @@ def top_level():
         i += 1
 
     game_won = "\n                   YOU BEAT HAL!!!\n"
-    game_won += f"""   I'm afraid. I'm afraid, {name}. {name}, my mind is
+    game_won += f"""   I'm afraid. I'm afraid, {player_name}. {player_name}, my mind is
    going. I can feel it. I can feel it. My mind is
    going. There is no question about it. I can feel
    it. I can feel it. I can feel it. I'm a... fraid."""
