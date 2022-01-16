@@ -116,33 +116,72 @@ All the mutable game data is held within the Game class and is updated after eve
 
 ## Logic Flow
 
-The program begins by calling the welcome() function which displays the logo and asks the user if they'd like to being playing or want to read the instructions first.
+- The program begins by calling the welcome() function which displays the logo and asks the user if they'd like to being playing or want to read the instructions first.
 
-Input is validated and if the user wants to read the instructions, then that slide show of instructional screens is shown before rejoining the flow.
+- Input is validated and if the user wants to read the instructions, then that slide show of instructional screens is shown before rejoining the flow.
 
-The user is asked to input a 3 letter name, it's displayed back to the them and they then confirm or reject what was entered before moving on.
+- The user is asked to input a 3 letter name, it's displayed back to the them and they then confirm or reject what was entered before moving on.
 
-The top 10 scores are then briefly shown before the main game board is loaded, including the logo and status bar.
+- The top 10 scores are then briefly shown before the main game board is loaded, including the logo and status bar.
 
-Maximum points are granted to the user based upon the amount of free squares in that board size, user level and whether they're playing in hard mode.
+- Maximum points are granted to the user based upon the amount of free squares in that board size, user level and whether they're playing in hard mode.
 
-A column number is then requested for input with error feedback given if the user does not enter an integer value, or if their integer doesn't fall within the range (depending on active number of columns).
+- A column number is then requested for input with error feedback given if the user does not enter an integer value, or if their integer doesn't fall within the range (depending on active number of columns).
 
-If that input is valid, the next check is to see if the requested column is available. The user is told if the column is full and requested to input again.
+- If that input is valid, the next check is to see if the requested column is available. The user is told if the column is full and requested to input again.
 
-Once a valid input and a free column is chosen, the animation of the disc drop is found. The animation also actively checks with each frame to see if the next square down is the bottom.
+- Once a valid input and a free column is chosen, the animation of the disc drop is found. The animation also actively checks with each frame to see if the next square down is the bottom.
 
-Once the disc has reached the bottom, there is then a check to see if there is a connect 4 winner. This same check also checks for any lines of 3, and if in hard mode, also 2 discs which have the potential of winning.
+- When the disc has reached the bottom, there is then a check to see if there is a connect 4 winner. This same function also checks for 3 in a line of 4, and if in hard mode, 2 in a line of 4 discs which have the potential of winning.
 
-If there is a 2 or 3 potential winner, then one of the free squares is checked to see if it has a support disc underneath it (not an empty square under the potential winning square).
+- If there is a 2 or 3 potential winner, then one of the free squares is checked to see if it has a support disc underneath it (not an empty square under the potential winning square).
 
-If the empty square is found to have a supporting square then Hal (the computer player) remembers that square for his next move.
+- If the empty square is found to have a supporting square then Hal (the computer player) remembers that column for his next move.
 
-Points are now deducted from the user's currect score. Every move they make will deduct BASE_POINTS * the current user level (multiplied by 2 if in hard mode).
+- Points are now deducted from the user's currect score. Every move they make will deduct BASE_POINTS * the current user level (multiplied by 2 if in hard mode).
 
-The updated game board with current points are displayed.
+- The updated game board with current points are displayed.
 
+- The active player is then switched and the computer is called upon to take a turn.
 
+- Hal the computer will choose a random column unless a column has already been flagged as a potential connect 4.
+
+- Hal's turn then goes through the same process as the user. Checking if the column is empty, the disc animation, checking for the bottom, checking for winning lines and updating any potential connect 4's before handing back control to the user.
+
+- Users also have the option of using a cheat code. If they enter "88" as the column number then they'll be displayed one of two messages.
+  - If there hasn't been any potentially winning connect 4 lines:
+    - User is told that cheaters never prosper.
+    - Points are deducted from the user total.
+  - If a potential column HAS been found:
+    - User is told that column.
+    - Points are deducted from the user total.
+
+- The game loop continues until 1 of 3 things happens:
+  - Player Wins
+    - At this point the players current score is saved.
+    - The game level increases by 1.
+    - The board width decreases by 1.
+    - The computer level is checked to see if they have beaten the whole game.
+    - User is shown the top scores board and asked if they'd like to play again.
+      - If they say yes they continue on to the next level.
+      - If they say no the score is saved in the top scores board (if score is high enough) and the program is quit.
+  - Computer Wins
+    - The user score is reset to their previously saved score and is saved in the top scores board (if score is high enough).
+    - User is shown the top scores board and asked if they'd like to play again.
+      - If they say yes the whole board is reset and they start from the beginning.
+      - If they say no the program is quit.
+  - It's a Draw
+    - The user score is reset to their previously saved score.
+    - User is shown the top scores board and asked if they'd like to play again.
+      - If they say yes they continue and play the same level again.
+      - If they say no the score is saved in the top scores board (if score is high enough) and the program is quit.
+
+- If the user is found to have completed the whole game, the following happens:
+  - Top score board is updated(if they reached high enough points).
+  - Congratulatory message is shown.
+  - User is asked if they'd like to play again.
+    - If they say yes the whole board is reset, user is asked the game difficulty level they want and they start from the beginning.
+    - If they say no the program is quit.
 
 # Testing
 
