@@ -5,10 +5,11 @@ import math
 import csv
 from sys import setrecursionlimit
 
-#
+# Connect 4 by Stuart Raynor
+# Project page: https://github.com/MadStu/connect-4
+
 # User configurable options. Leave as default if you're
 # not sure what each variable does
-#
 
 # Board starting grid size. Height includes the top blank row
 # For the game to look nice, the max width should be 12
