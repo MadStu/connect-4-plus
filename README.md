@@ -21,7 +21,7 @@ Connect 4 is a strategy game where the idea is to get 4 of your own discs in a l
 
 This game is useful for people who spend a lot of time in terminals and allows them to let off steam. They can have a quick game lasting less than a minute, or continue playing until they've beaten Hal, so it's good for somebody to play whether they only have a free moment or lots of time to spare.
 
-A deployed version may be found here: [Connect 4](http://my-connect-4.herokuapp.com/)
+A deployed version may be found here: [Connect 4](https://my-connect-4.herokuapp.com/)
 
 ![Connect 4](https://github.com/MadStu/connect-4/raw/main/assets/images/web-page.png)
 
